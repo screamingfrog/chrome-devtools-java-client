@@ -48,6 +48,10 @@ public class InspectorIssueDetails {
 
   @Optional private AttributionReportingIssueDetails attributionReportingIssueDetails;
 
+  @Optional private QuirksModeIssueDetails quirksModeIssueDetails;
+
+  @Optional private NavigatorUserAgentIssueDetails navigatorUserAgentIssueDetails;
+
   public SameSiteCookieIssueDetails getSameSiteCookieIssueDetails() {
     return sameSiteCookieIssueDetails;
   }
@@ -132,5 +136,22 @@ public class InspectorIssueDetails {
   public void setAttributionReportingIssueDetails(
       AttributionReportingIssueDetails attributionReportingIssueDetails) {
     this.attributionReportingIssueDetails = attributionReportingIssueDetails;
+  }
+
+  public QuirksModeIssueDetails getQuirksModeIssueDetails() {
+    return quirksModeIssueDetails;
+  }
+
+  public void setQuirksModeIssueDetails(QuirksModeIssueDetails quirksModeIssueDetails) {
+    this.quirksModeIssueDetails = quirksModeIssueDetails;
+  }
+
+  public NavigatorUserAgentIssueDetails getNavigatorUserAgentIssueDetails() {
+    return navigatorUserAgentIssueDetails;
+  }
+
+  public void setNavigatorUserAgentIssueDetails(
+      NavigatorUserAgentIssueDetails navigatorUserAgentIssueDetails) {
+    this.navigatorUserAgentIssueDetails = navigatorUserAgentIssueDetails;
   }
 }

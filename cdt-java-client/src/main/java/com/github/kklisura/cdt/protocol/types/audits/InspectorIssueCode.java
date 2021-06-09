@@ -46,5 +46,9 @@ public enum InspectorIssueCode {
   @JsonProperty("CorsIssue")
   CORS_ISSUE,
   @JsonProperty("AttributionReportingIssue")
-  ATTRIBUTION_REPORTING_ISSUE
+  ATTRIBUTION_REPORTING_ISSUE,
+  @JsonProperty("QuirksModeIssue")
+  QUIRKS_MODE_ISSUE,
+  @JsonProperty("NavigatorUserAgentIssue")
+  NAVIGATOR_USER_AGENT_ISSUE
 }

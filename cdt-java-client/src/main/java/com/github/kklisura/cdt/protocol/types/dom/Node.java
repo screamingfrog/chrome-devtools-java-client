@@ -85,6 +85,8 @@ public class Node {
 
   @Optional private Boolean isSVG;
 
+  @Optional private CompatibilityMode compatibilityMode;
+
   /**
    * Node identifier that is passed into the rest of the DOM messages as the `nodeId`. Backend will
    * only push node with given `id` once. It is aware of all requested nodes and will only fire DOM
@@ -381,5 +383,13 @@ public class Node {
   /** Whether the node is SVG. */
   public void setIsSVG(Boolean isSVG) {
     this.isSVG = isSVG;
+  }
+
+  public CompatibilityMode getCompatibilityMode() {
+    return compatibilityMode;
+  }
+
+  public void setCompatibilityMode(CompatibilityMode compatibilityMode) {
+    this.compatibilityMode = compatibilityMode;
   }
 }

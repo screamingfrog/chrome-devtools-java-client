@@ -55,6 +55,8 @@ public class Frame {
 
   @Experimental private List<GatedAPIFeatures> gatedAPIFeatures;
 
+  @Experimental @Optional private List<OriginTrial> originTrials;
+
   /** Frame unique identifier. */
   public String getId() {
     return id;
@@ -208,5 +210,15 @@ public class Frame {
   /** Indicated which gated APIs / features are available. */
   public void setGatedAPIFeatures(List<GatedAPIFeatures> gatedAPIFeatures) {
     this.gatedAPIFeatures = gatedAPIFeatures;
+  }
+
+  /** Frame document's origin trials with at least one token present. */
+  public List<OriginTrial> getOriginTrials() {
+    return originTrials;
+  }
+
+  /** Frame document's origin trials with at least one token present. */
+  public void setOriginTrials(List<OriginTrial> originTrials) {
+    this.originTrials = originTrials;
   }
 }

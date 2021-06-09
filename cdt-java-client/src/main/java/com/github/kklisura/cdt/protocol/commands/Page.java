@@ -107,11 +107,14 @@ public interface Page {
    * @param worldName If specified, creates an isolated world with the given name and evaluates
    *     given script in it. This world name will be used as the ExecutionContextDescription::name
    *     when the corresponding event is emitted.
+   * @param includeCommandLineAPI Specifies whether command line API should be available to the
+   *     script, defaults to false.
    */
   @Returns("identifier")
   String addScriptToEvaluateOnNewDocument(
       @ParamName("source") String source,
-      @Experimental @Optional @ParamName("worldName") String worldName);
+      @Experimental @Optional @ParamName("worldName") String worldName,
+      @Experimental @Optional @ParamName("includeCommandLineAPI") Boolean includeCommandLineAPI);
 
   /** Brings page to front (activates tab). */
   void bringToFront();

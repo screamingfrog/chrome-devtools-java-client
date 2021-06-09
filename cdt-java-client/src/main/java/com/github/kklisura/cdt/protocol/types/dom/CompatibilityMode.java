@@ -1,4 +1,4 @@
-package com.github.kklisura.cdt.protocol.types.fetch;
+package com.github.kklisura.cdt.protocol.types.dom;
 
 /*-
  * #%L
@@ -22,13 +22,12 @@ package com.github.kklisura.cdt.protocol.types.fetch;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Stages of the request to handle. Request will intercept before the request is sent. Response will
- * intercept after the response is received (but before response body is received).
- */
-public enum RequestStage {
-  @JsonProperty("Request")
-  REQUEST,
-  @JsonProperty("Response")
-  RESPONSE
+/** Document compatibility mode. */
+public enum CompatibilityMode {
+  @JsonProperty("QuirksMode")
+  QUIRKS_MODE,
+  @JsonProperty("LimitedQuirksMode")
+  LIMITED_QUIRKS_MODE,
+  @JsonProperty("NoQuirksMode")
+  NO_QUIRKS_MODE
 }

@@ -20,6 +20,7 @@ package com.github.kklisura.cdt.protocol.types.css;
  * #L%
  */
 
+import com.github.kklisura.cdt.protocol.support.annotations.Experimental;
 import com.github.kklisura.cdt.protocol.support.annotations.Optional;
 import java.util.List;
 
@@ -35,6 +36,8 @@ public class CSSRule {
   private CSSStyle style;
 
   @Optional private List<CSSMedia> media;
+
+  @Experimental @Optional private List<CSSContainerQuery> containerQueries;
 
   /**
    * The css style sheet identifier (absent for user agent stylesheet and user-specified stylesheet
@@ -96,5 +99,21 @@ public class CSSRule {
    */
   public void setMedia(List<CSSMedia> media) {
     this.media = media;
+  }
+
+  /**
+   * Container query list array (for rules involving container queries). The array enumerates
+   * container queries starting with the innermost one, going outwards.
+   */
+  public List<CSSContainerQuery> getContainerQueries() {
+    return containerQueries;
+  }
+
+  /**
+   * Container query list array (for rules involving container queries). The array enumerates
+   * container queries starting with the innermost one, going outwards.
+   */
+  public void setContainerQueries(List<CSSContainerQuery> containerQueries) {
+    this.containerQueries = containerQueries;
   }
 }

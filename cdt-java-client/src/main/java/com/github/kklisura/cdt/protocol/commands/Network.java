@@ -32,6 +32,10 @@ import com.github.kklisura.cdt.protocol.events.network.ResourceChangedPriority;
 import com.github.kklisura.cdt.protocol.events.network.ResponseReceived;
 import com.github.kklisura.cdt.protocol.events.network.ResponseReceivedExtraInfo;
 import com.github.kklisura.cdt.protocol.events.network.SignedExchangeReceived;
+import com.github.kklisura.cdt.protocol.events.network.SubresourceWebBundleInnerResponseError;
+import com.github.kklisura.cdt.protocol.events.network.SubresourceWebBundleInnerResponseParsed;
+import com.github.kklisura.cdt.protocol.events.network.SubresourceWebBundleMetadataError;
+import com.github.kklisura.cdt.protocol.events.network.SubresourceWebBundleMetadataReceived;
 import com.github.kklisura.cdt.protocol.events.network.TrustTokenOperationDone;
 import com.github.kklisura.cdt.protocol.events.network.WebSocketClosed;
 import com.github.kklisura.cdt.protocol.events.network.WebSocketCreated;
@@ -613,4 +617,34 @@ public interface Network {
   @EventName("trustTokenOperationDone")
   @Experimental
   EventListener onTrustTokenOperationDone(EventHandler<TrustTokenOperationDone> eventListener);
+
+  /**
+   * Fired once when parsing the .wbn file has succeeded. The event contains the information about
+   * the web bundle contents.
+   */
+  @EventName("subresourceWebBundleMetadataReceived")
+  @Experimental
+  EventListener onSubresourceWebBundleMetadataReceived(
+      EventHandler<SubresourceWebBundleMetadataReceived> eventListener);
+
+  /** Fired once when parsing the .wbn file has failed. */
+  @EventName("subresourceWebBundleMetadataError")
+  @Experimental
+  EventListener onSubresourceWebBundleMetadataError(
+      EventHandler<SubresourceWebBundleMetadataError> eventListener);
+
+  /**
+   * Fired when handling requests for resources within a .wbn file. Note: this will only be fired
+   * for resources that are requested by the webpage.
+   */
+  @EventName("subresourceWebBundleInnerResponseParsed")
+  @Experimental
+  EventListener onSubresourceWebBundleInnerResponseParsed(
+      EventHandler<SubresourceWebBundleInnerResponseParsed> eventListener);
+
+  /** Fired when request for resources within a .wbn file failed. */
+  @EventName("subresourceWebBundleInnerResponseError")
+  @Experimental
+  EventListener onSubresourceWebBundleInnerResponseError(
+      EventHandler<SubresourceWebBundleInnerResponseError> eventListener);
 }

@@ -29,7 +29,9 @@ import java.util.List;
  */
 public class SameSiteCookieIssueDetails {
 
-  private AffectedCookie cookie;
+  @Optional private AffectedCookie cookie;
+
+  @Optional private String rawCookieLine;
 
   private List<SameSiteCookieWarningReason> cookieWarningReasons;
 
@@ -43,12 +45,30 @@ public class SameSiteCookieIssueDetails {
 
   @Optional private AffectedRequest request;
 
+  /**
+   * If AffectedCookie is not set then rawCookieLine contains the raw Set-Cookie header string. This
+   * hints at a problem where the cookie line is syntactically or semantically malformed in a way
+   * that no valid cookie could be created.
+   */
   public AffectedCookie getCookie() {
     return cookie;
   }
 
+  /**
+   * If AffectedCookie is not set then rawCookieLine contains the raw Set-Cookie header string. This
+   * hints at a problem where the cookie line is syntactically or semantically malformed in a way
+   * that no valid cookie could be created.
+   */
   public void setCookie(AffectedCookie cookie) {
     this.cookie = cookie;
+  }
+
+  public String getRawCookieLine() {
+    return rawCookieLine;
+  }
+
+  public void setRawCookieLine(String rawCookieLine) {
+    this.rawCookieLine = rawCookieLine;
   }
 
   public List<SameSiteCookieWarningReason> getCookieWarningReasons() {

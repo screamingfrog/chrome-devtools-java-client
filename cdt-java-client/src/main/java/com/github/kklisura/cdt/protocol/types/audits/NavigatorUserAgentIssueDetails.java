@@ -1,4 +1,4 @@
-package com.github.kklisura.cdt.protocol.types.fetch;
+package com.github.kklisura.cdt.protocol.types.audits;
 
 /*-
  * #%L
@@ -20,15 +20,27 @@ package com.github.kklisura.cdt.protocol.types.fetch;
  * #L%
  */
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.kklisura.cdt.protocol.support.annotations.Optional;
 
-/**
- * Stages of the request to handle. Request will intercept before the request is sent. Response will
- * intercept after the response is received (but before response body is received).
- */
-public enum RequestStage {
-  @JsonProperty("Request")
-  REQUEST,
-  @JsonProperty("Response")
-  RESPONSE
+public class NavigatorUserAgentIssueDetails {
+
+  private String url;
+
+  @Optional private SourceCodeLocation location;
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public SourceCodeLocation getLocation() {
+    return location;
+  }
+
+  public void setLocation(SourceCodeLocation location) {
+    this.location = location;
+  }
 }

@@ -73,5 +73,7 @@ public enum CorsError {
   @JsonProperty("RedirectContainsCredentials")
   REDIRECT_CONTAINS_CREDENTIALS,
   @JsonProperty("InsecurePrivateNetwork")
-  INSECURE_PRIVATE_NETWORK
+  INSECURE_PRIVATE_NETWORK,
+  @JsonProperty("NoCorsRedirectModeNotFollow")
+  NO_CORS_REDIRECT_MODE_NOT_FOLLOW
 }

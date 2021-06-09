@@ -24,13 +24,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * All Permissions Policy features. This enum should match the one defined in
- * renderer/core/feature_policy/feature_policy_features.json5.
+ * third_party/blink/renderer/core/permissions_policy/permissions_policy_features.json5.
  */
 public enum PermissionsPolicyFeature {
   @JsonProperty("accelerometer")
   ACCELEROMETER,
   @JsonProperty("ambient-light-sensor")
   AMBIENT_LIGHT_SENSOR,
+  @JsonProperty("attribution-reporting")
+  ATTRIBUTION_REPORTING,
   @JsonProperty("autoplay")
   AUTOPLAY,
   @JsonProperty("camera")
@@ -45,6 +47,8 @@ public enum PermissionsPolicyFeature {
   CH_ECT,
   @JsonProperty("ch-lang")
   CH_LANG,
+  @JsonProperty("ch-prefers-color-scheme")
+  CH_PREFERS_COLOR_SCHEME,
   @JsonProperty("ch-rtt")
   CH_RTT,
   @JsonProperty("ch-ua")
@@ -69,10 +73,10 @@ public enum PermissionsPolicyFeature {
   CLIPBOARD_READ,
   @JsonProperty("clipboard-write")
   CLIPBOARD_WRITE,
-  @JsonProperty("conversion-measurement")
-  CONVERSION_MEASUREMENT,
   @JsonProperty("cross-origin-isolated")
   CROSS_ORIGIN_ISOLATED,
+  @JsonProperty("direct-sockets")
+  DIRECT_SOCKETS,
   @JsonProperty("display-capture")
   DISPLAY_CAPTURE,
   @JsonProperty("document-domain")
@@ -119,6 +123,8 @@ public enum PermissionsPolicyFeature {
   SCREEN_WAKE_LOCK,
   @JsonProperty("serial")
   SERIAL,
+  @JsonProperty("shared-autofill")
+  SHARED_AUTOFILL,
   @JsonProperty("storage-access-api")
   STORAGE_ACCESS_API,
   @JsonProperty("sync-xhr")
@@ -131,6 +137,8 @@ public enum PermissionsPolicyFeature {
   VERTICAL_SCROLL,
   @JsonProperty("web-share")
   WEB_SHARE,
+  @JsonProperty("window-placement")
+  WINDOW_PLACEMENT,
   @JsonProperty("xr-spatial-tracking")
   XR_SPATIAL_TRACKING
 }

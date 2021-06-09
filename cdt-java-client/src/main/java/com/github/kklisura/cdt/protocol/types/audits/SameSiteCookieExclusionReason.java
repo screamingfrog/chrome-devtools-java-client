@@ -30,5 +30,7 @@ public enum SameSiteCookieExclusionReason {
   @JsonProperty("ExcludeSameSiteLax")
   EXCLUDE_SAME_SITE_LAX,
   @JsonProperty("ExcludeSameSiteStrict")
-  EXCLUDE_SAME_SITE_STRICT
+  EXCLUDE_SAME_SITE_STRICT,
+  @JsonProperty("ExcludeInvalidSameParty")
+  EXCLUDE_INVALID_SAME_PARTY
 }
