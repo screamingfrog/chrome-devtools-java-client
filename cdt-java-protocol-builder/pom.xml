@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.kklisura.cdt</groupId>
+        <groupId>uk.co.screamingfrog.cdt</groupId>
         <artifactId>ctd-java-client-root</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -38,7 +38,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.kklisura.cdt</groupId>
+            <groupId>uk.co.screamingfrog.cdt</groupId>
             <artifactId>cdt-protocol-parser</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -177,7 +177,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.github.kklisura.cdt.definition.builder.Application</mainClass>
+                            <mainClass>uk.co.screamingfrog.cdt.definition.builder.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

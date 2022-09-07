@@ -5,9 +5,9 @@
     <!-- NOTE(kklisura): Do not add parent tag here, since it gets deployed (via mvn deploy)[at least on snapshot repo],
          so clients won't be able to pull it unless parent is also deployed -->
 
-    <groupId>com.github.kklisura.cdt</groupId>
+    <groupId>uk.co.screamingfrog.cdt</groupId>
     <artifactId>cdt-java-client</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.0-sf1</version>
     <packaging>jar</packaging>
 
     <name>cdt-java-client</name>
@@ -41,13 +41,10 @@
     </scm>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>github-chrome-devtools-java-client</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/screamingfrog/chrome-devtools-java-client</url>
         </repository>
     </distributionManagement>
 

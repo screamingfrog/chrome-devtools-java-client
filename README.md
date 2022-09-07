@@ -22,7 +22,7 @@ Add the following dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-  <groupId>com.github.kklisura.cdt</groupId>
+  <groupId>uk.co.screamingfrog.cdt</groupId>
   <artifactId>cdt-java-client</artifactId>
   <version>4.0.0</version>
 </dependency>
@@ -31,14 +31,14 @@ Add the following dependency to your `pom.xml`:
 You can use following code, taken from, `LogRequestsExample`:
 
 ```java
-package com.github.kklisura.cdt.examples;
+package uk.co.screamingfrog.cdt.examples;
 
-import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.Network;
-import com.github.kklisura.cdt.protocol.commands.Page;
-import com.github.kklisura.cdt.services.ChromeDevToolsService;
-import com.github.kklisura.cdt.services.ChromeService;
-import com.github.kklisura.cdt.services.types.ChromeTab;
+import uk.co.screamingfrog.cdt.launch.ChromeLauncher;
+import uk.co.screamingfrog.cdt.protocol.commands.Network;
+import uk.co.screamingfrog.cdt.protocol.commands.Page;
+import uk.co.screamingfrog.cdt.services.ChromeDevToolsService;
+import uk.co.screamingfrog.cdt.services.ChromeService;
+import uk.co.screamingfrog.cdt.services.types.ChromeTab;
 
 /**
  * Log requests example with DevTools java client.
@@ -107,7 +107,7 @@ For more examples, see [examples](cdt-examples/src/main/java/com/github/kklisura
 
 ## Debugging chrome
 
-In order to debug chrome when using this library, set the logger `com.github.kklisura.cdt.launch.chrome.output` to `DEBUG` level. See [ChromeLoggingExample](cdt-examples/src/main/java/com/github/kklisura/cdt/examples/ChromeLoggingExample.java) for more information. Be sure to remove or turn the logger off, when done.
+In order to debug chrome when using this library, set the logger `uk.co.screamingfrog.cdt.launch.chrome.output` to `DEBUG` level. See [ChromeLoggingExample](cdt-examples/src/main/java/com/github/kklisura/cdt/examples/ChromeLoggingExample.java) for more information. Be sure to remove or turn the logger off, when done.
 
 ## Running unit tests
 

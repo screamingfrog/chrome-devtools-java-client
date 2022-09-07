@@ -179,3 +179,6 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 
 # End of https://www.gitignore.io/api/java,maven,intellij,intellij+all,intellij+iml
+
+.DS_Store
+.vscode
