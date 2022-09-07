@@ -10,9 +10,9 @@ JAVA_PROTOCOL_BUILDER_JAR="$(JAVA_PROTOCOL_BUILDER_DIR)/target/cdt-java-protocol
 PROTOCOL_PARSER=cdt-protocol-parser
 
 JAVA_CLIENT_DIR=cdt-java-client
-JAVA_CLIENT_PACKAGE=com/github/kklisura/cdt/protocol
+JAVA_CLIENT_PACKAGE=uk/co/screamingfrog/cdt/protocol
 
-PACKAGE_NAME=com.github.kklisura.cdt.protocol
+PACKAGE_NAME=uk.co.screamingfrog.cdt.protocol
 JS_PROTOCOL_JSON_FILE=./js_protocol.json
 BROWSER_PROTOCOL_JSON_FILE=./browser_protocol.json
 

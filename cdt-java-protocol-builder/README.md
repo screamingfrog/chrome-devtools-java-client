@@ -13,12 +13,12 @@ To build jar file either run:
 ## Running
 
 ```
-java -jar target/cdt-java-protocol-builder.jar --base-package="com.github.kklisura.cdt.protocol" \
+java -jar target/cdt-java-protocol-builder.jar --base-package="uk.co.screamingfrog.cdt.protocol" \
   --output=../cdt-java-client \
   --protocol=../protocol.json
 ```
 
-This would parse `./protocol.json` file and it would create classes, interfaces, enums in `../cdt-java-client` with a package name of `com.github.kklisura.cdt.protocol`.
+This would parse `./protocol.json` file and it would create classes, interfaces, enums in `../cdt-java-client` with a package name of `uk.co.screamingfrog.cdt.protocol`.
 
 ## Running unit tests
 
