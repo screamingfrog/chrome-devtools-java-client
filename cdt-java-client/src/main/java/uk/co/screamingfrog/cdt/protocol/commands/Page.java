@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,6 @@ import uk.co.screamingfrog.cdt.protocol.events.page.JavascriptDialogOpening;
 import uk.co.screamingfrog.cdt.protocol.events.page.LifecycleEvent;
 import uk.co.screamingfrog.cdt.protocol.events.page.LoadEventFired;
 import uk.co.screamingfrog.cdt.protocol.events.page.NavigatedWithinDocument;
-import uk.co.screamingfrog.cdt.protocol.events.page.PrerenderAttemptCompleted;
 import uk.co.screamingfrog.cdt.protocol.events.page.ScreencastFrame;
 import uk.co.screamingfrog.cdt.protocol.events.page.ScreencastVisibilityChanged;
 import uk.co.screamingfrog.cdt.protocol.events.page.WindowOpen;
@@ -57,8 +56,10 @@ import uk.co.screamingfrog.cdt.protocol.support.annotations.Returns;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventHandler;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.debugger.SearchMatch;
+import uk.co.screamingfrog.cdt.protocol.types.page.AdScriptId;
 import uk.co.screamingfrog.cdt.protocol.types.page.AppId;
 import uk.co.screamingfrog.cdt.protocol.types.page.AppManifest;
+import uk.co.screamingfrog.cdt.protocol.types.page.AutoResponseMode;
 import uk.co.screamingfrog.cdt.protocol.types.page.CaptureScreenshotFormat;
 import uk.co.screamingfrog.cdt.protocol.types.page.CaptureSnapshotFormat;
 import uk.co.screamingfrog.cdt.protocol.types.page.CompilationCacheParams;
@@ -78,7 +79,6 @@ import uk.co.screamingfrog.cdt.protocol.types.page.ReferrerPolicy;
 import uk.co.screamingfrog.cdt.protocol.types.page.ResourceContent;
 import uk.co.screamingfrog.cdt.protocol.types.page.ScriptFontFamilies;
 import uk.co.screamingfrog.cdt.protocol.types.page.SetDownloadBehaviorBehavior;
-import uk.co.screamingfrog.cdt.protocol.types.page.SetSPCTransactionModeMode;
 import uk.co.screamingfrog.cdt.protocol.types.page.SetWebLifecycleStateState;
 import uk.co.screamingfrog.cdt.protocol.types.page.StartScreencastFormat;
 import uk.co.screamingfrog.cdt.protocol.types.page.TransitionType;
@@ -137,6 +137,8 @@ public interface Page {
    * @param fromSurface Capture the screenshot from the surface, rather than the view. Defaults to
    *     true.
    * @param captureBeyondViewport Capture the screenshot beyond the viewport. Defaults to false.
+   * @param optimizeForSpeed Optimize image encoding for speed, not for resulting size (defaults to
+   *     false)
    */
   @Returns("data")
   String captureScreenshot(
@@ -144,7 +146,8 @@ public interface Page {
       @Optional @ParamName("quality") Integer quality,
       @Optional @ParamName("clip") Viewport clip,
       @Experimental @Optional @ParamName("fromSurface") Boolean fromSurface,
-      @Experimental @Optional @ParamName("captureBeyondViewport") Boolean captureBeyondViewport);
+      @Experimental @Optional @ParamName("captureBeyondViewport") Boolean captureBeyondViewport,
+      @Experimental @Optional @ParamName("optimizeForSpeed") Boolean optimizeForSpeed);
 
   /**
    * Returns a snapshot of the page as a string. For MHTML format, the serialization includes
@@ -199,6 +202,11 @@ public interface Page {
   @ReturnTypeParameter(InstallabilityError.class)
   List<InstallabilityError> getInstallabilityErrors();
 
+  /**
+   * Deprecated because it's not guaranteed that the returned icon is in fact the one used for PWA
+   * installation.
+   */
+  @Deprecated
   @Experimental
   @Returns("primaryIcon")
   String getManifestIcons();
@@ -209,6 +217,11 @@ public interface Page {
    */
   @Experimental
   AppId getAppId();
+
+  /** @param frameId */
+  @Experimental
+  @Returns("adScriptId")
+  AdScriptId getAdScriptId(@ParamName("frameId") String frameId);
 
   /** Returns present frame tree structure. */
   @Returns("frameTree")
@@ -592,7 +605,16 @@ public interface Page {
    * @param mode
    */
   @Experimental
-  void setSPCTransactionMode(@ParamName("mode") SetSPCTransactionModeMode mode);
+  void setSPCTransactionMode(@ParamName("mode") AutoResponseMode mode);
+
+  /**
+   * Extensions for Custom Handlers API:
+   * https://html.spec.whatwg.org/multipage/system-state.html#rph-automation
+   *
+   * @param mode
+   */
+  @Experimental
+  void setRPHRegistrationMode(@ParamName("mode") AutoResponseMode mode);
 
   /**
    * Generates a report for testing.
@@ -738,11 +760,6 @@ public interface Page {
   @EventName("backForwardCacheNotUsed")
   @Experimental
   EventListener onBackForwardCacheNotUsed(EventHandler<BackForwardCacheNotUsed> eventListener);
-
-  /** Fired when a prerender attempt is completed. */
-  @EventName("prerenderAttemptCompleted")
-  @Experimental
-  EventListener onPrerenderAttemptCompleted(EventHandler<PrerenderAttemptCompleted> eventListener);
 
   @EventName("loadEventFired")
   EventListener onLoadEventFired(EventHandler<LoadEventFired> eventListener);

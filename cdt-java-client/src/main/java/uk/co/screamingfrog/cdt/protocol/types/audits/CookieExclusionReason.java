@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.audits;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,5 +36,7 @@ public enum CookieExclusionReason {
   @JsonProperty("ExcludeSamePartyCrossPartyContext")
   EXCLUDE_SAME_PARTY_CROSS_PARTY_CONTEXT,
   @JsonProperty("ExcludeDomainNonASCII")
-  EXCLUDE_DOMAIN_NON_ASCII
+  EXCLUDE_DOMAIN_NON_ASCII,
+  @JsonProperty("ExcludeThirdPartyCookieBlockedInFirstPartySet")
+  EXCLUDE_THIRD_PARTY_COOKIE_BLOCKED_IN_FIRST_PARTY_SET
 }

@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.cachestorage;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,8 @@ public class Cache {
 
   private String securityOrigin;
 
+  private String storageKey;
+
   private String cacheName;
 
   /** An opaque unique id of the cache. */
@@ -47,6 +49,16 @@ public class Cache {
   /** Security origin of the cache. */
   public void setSecurityOrigin(String securityOrigin) {
     this.securityOrigin = securityOrigin;
+  }
+
+  /** Storage key of the cache. */
+  public String getStorageKey() {
+    return storageKey;
+  }
+
+  /** Storage key of the cache. */
+  public void setStorageKey(String storageKey) {
+    this.storageKey = storageKey;
   }
 
   /** The name of the cache. */

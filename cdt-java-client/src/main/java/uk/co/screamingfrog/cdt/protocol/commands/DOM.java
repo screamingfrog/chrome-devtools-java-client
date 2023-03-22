@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,9 +48,11 @@ import uk.co.screamingfrog.cdt.protocol.types.dom.BoxModel;
 import uk.co.screamingfrog.cdt.protocol.types.dom.CSSComputedStyleProperty;
 import uk.co.screamingfrog.cdt.protocol.types.dom.EnableIncludeWhitespace;
 import uk.co.screamingfrog.cdt.protocol.types.dom.FrameOwner;
+import uk.co.screamingfrog.cdt.protocol.types.dom.LogicalAxes;
 import uk.co.screamingfrog.cdt.protocol.types.dom.Node;
 import uk.co.screamingfrog.cdt.protocol.types.dom.NodeForLocation;
 import uk.co.screamingfrog.cdt.protocol.types.dom.PerformSearch;
+import uk.co.screamingfrog.cdt.protocol.types.dom.PhysicalAxes;
 import uk.co.screamingfrog.cdt.protocol.types.dom.Rect;
 import uk.co.screamingfrog.cdt.protocol.types.runtime.RemoteObject;
 import uk.co.screamingfrog.cdt.protocol.types.runtime.StackTrace;
@@ -248,12 +250,16 @@ public interface DOM {
       @Optional @ParamName("backendNodeId") Integer backendNodeId,
       @Optional @ParamName("objectId") String objectId);
 
-  /** Returns the root DOM node (and optionally the subtree) to the caller. */
+  /**
+   * Returns the root DOM node (and optionally the subtree) to the caller. Implicitly enables the
+   * DOM domain events for the current target.
+   */
   @Returns("root")
   Node getDocument();
 
   /**
-   * Returns the root DOM node (and optionally the subtree) to the caller.
+   * Returns the root DOM node (and optionally the subtree) to the caller. Implicitly enables the
+   * DOM domain events for the current target.
    *
    * @param depth The maximum depth at which children should be retrieved, defaults to 1. Use -1 for
    *     the entire subtree or provide an integer larger than 0.
@@ -690,9 +696,9 @@ public interface DOM {
   FrameOwner getFrameOwner(@ParamName("frameId") String frameId);
 
   /**
-   * Returns the container of the given node based on container query conditions. If containerName
-   * is given, it will find the nearest container with a matching name; otherwise it will find the
-   * nearest container regardless of its container name.
+   * Returns the query container of the given node based on container query conditions:
+   * containerName, physical, and logical axes. If no axes are provided, the style container is
+   * returned, which is the direct parent or the closest element with a matching container-name.
    *
    * @param nodeId
    */
@@ -701,18 +707,22 @@ public interface DOM {
   Integer getContainerForNode(@ParamName("nodeId") Integer nodeId);
 
   /**
-   * Returns the container of the given node based on container query conditions. If containerName
-   * is given, it will find the nearest container with a matching name; otherwise it will find the
-   * nearest container regardless of its container name.
+   * Returns the query container of the given node based on container query conditions:
+   * containerName, physical, and logical axes. If no axes are provided, the style container is
+   * returned, which is the direct parent or the closest element with a matching container-name.
    *
    * @param nodeId
    * @param containerName
+   * @param physicalAxes
+   * @param logicalAxes
    */
   @Experimental
   @Returns("nodeId")
   Integer getContainerForNode(
       @ParamName("nodeId") Integer nodeId,
-      @Optional @ParamName("containerName") String containerName);
+      @Optional @ParamName("containerName") String containerName,
+      @Optional @ParamName("physicalAxes") PhysicalAxes physicalAxes,
+      @Optional @ParamName("logicalAxes") LogicalAxes logicalAxes);
 
   /**
    * Returns the descendants of a container query container that have container queries against this

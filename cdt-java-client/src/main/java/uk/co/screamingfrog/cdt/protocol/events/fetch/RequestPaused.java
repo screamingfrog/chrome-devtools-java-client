@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.events.fetch;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ package uk.co.screamingfrog.cdt.protocol.events.fetch;
  */
 
 import java.util.List;
+import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.types.fetch.HeaderEntry;
 import uk.co.screamingfrog.cdt.protocol.types.network.ErrorReason;
@@ -53,6 +54,8 @@ public class RequestPaused {
   @Optional private List<HeaderEntry> responseHeaders;
 
   @Optional private String networkId;
+
+  @Experimental @Optional private String redirectedRequestId;
 
   /** Each request the page makes will have a unique id. */
   public String getRequestId() {
@@ -148,5 +151,21 @@ public class RequestPaused {
    */
   public void setNetworkId(String networkId) {
     this.networkId = networkId;
+  }
+
+  /**
+   * If the request is due to a redirect response from the server, the id of the request that has
+   * caused the redirect.
+   */
+  public String getRedirectedRequestId() {
+    return redirectedRequestId;
+  }
+
+  /**
+   * If the request is due to a redirect response from the server, the id of the request that has
+   * caused the redirect.
+   */
+  public void setRedirectedRequestId(String redirectedRequestId) {
+    this.redirectedRequestId = redirectedRequestId;
   }
 }

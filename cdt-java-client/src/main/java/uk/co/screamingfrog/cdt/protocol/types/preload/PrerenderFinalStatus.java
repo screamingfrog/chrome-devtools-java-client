@@ -1,10 +1,10 @@
-package uk.co.screamingfrog.cdt.protocol.types.page;
+package uk.co.screamingfrog.cdt.protocol.types.preload;
 
 /*-
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,6 @@ public enum PrerenderFinalStatus {
   DESTROYED,
   @JsonProperty("LowEndDevice")
   LOW_END_DEVICE,
-  @JsonProperty("CrossOriginRedirect")
-  CROSS_ORIGIN_REDIRECT,
-  @JsonProperty("CrossOriginNavigation")
-  CROSS_ORIGIN_NAVIGATION,
   @JsonProperty("InvalidSchemeRedirect")
   INVALID_SCHEME_REDIRECT,
   @JsonProperty("InvalidSchemeNavigation")
@@ -84,8 +80,6 @@ public enum PrerenderFinalStatus {
   MIXED_CONTENT,
   @JsonProperty("TriggerBackgrounded")
   TRIGGER_BACKGROUNDED,
-  @JsonProperty("EmbedderTriggeredAndSameOriginRedirected")
-  EMBEDDER_TRIGGERED_AND_SAME_ORIGIN_REDIRECTED,
   @JsonProperty("EmbedderTriggeredAndCrossOriginRedirected")
   EMBEDDER_TRIGGERED_AND_CROSS_ORIGIN_REDIRECTED,
   @JsonProperty("MemoryLimitExceeded")
@@ -95,5 +89,55 @@ public enum PrerenderFinalStatus {
   @JsonProperty("DataSaverEnabled")
   DATA_SAVER_ENABLED,
   @JsonProperty("HasEffectiveUrl")
-  HAS_EFFECTIVE_URL
+  HAS_EFFECTIVE_URL,
+  @JsonProperty("ActivatedBeforeStarted")
+  ACTIVATED_BEFORE_STARTED,
+  @JsonProperty("InactivePageRestriction")
+  INACTIVE_PAGE_RESTRICTION,
+  @JsonProperty("StartFailed")
+  START_FAILED,
+  @JsonProperty("TimeoutBackgrounded")
+  TIMEOUT_BACKGROUNDED,
+  @JsonProperty("CrossSiteRedirectInInitialNavigation")
+  CROSS_SITE_REDIRECT_IN_INITIAL_NAVIGATION,
+  @JsonProperty("CrossSiteNavigationInInitialNavigation")
+  CROSS_SITE_NAVIGATION_IN_INITIAL_NAVIGATION,
+  @JsonProperty("SameSiteCrossOriginRedirectNotOptInInInitialNavigation")
+  SAME_SITE_CROSS_ORIGIN_REDIRECT_NOT_OPT_IN_IN_INITIAL_NAVIGATION,
+  @JsonProperty("SameSiteCrossOriginNavigationNotOptInInInitialNavigation")
+  SAME_SITE_CROSS_ORIGIN_NAVIGATION_NOT_OPT_IN_IN_INITIAL_NAVIGATION,
+  @JsonProperty("ActivationNavigationParameterMismatch")
+  ACTIVATION_NAVIGATION_PARAMETER_MISMATCH,
+  @JsonProperty("ActivatedInBackground")
+  ACTIVATED_IN_BACKGROUND,
+  @JsonProperty("EmbedderHostDisallowed")
+  EMBEDDER_HOST_DISALLOWED,
+  @JsonProperty("ActivationNavigationDestroyedBeforeSuccess")
+  ACTIVATION_NAVIGATION_DESTROYED_BEFORE_SUCCESS,
+  @JsonProperty("TabClosedByUserGesture")
+  TAB_CLOSED_BY_USER_GESTURE,
+  @JsonProperty("TabClosedWithoutUserGesture")
+  TAB_CLOSED_WITHOUT_USER_GESTURE,
+  @JsonProperty("PrimaryMainFrameRendererProcessCrashed")
+  PRIMARY_MAIN_FRAME_RENDERER_PROCESS_CRASHED,
+  @JsonProperty("PrimaryMainFrameRendererProcessKilled")
+  PRIMARY_MAIN_FRAME_RENDERER_PROCESS_KILLED,
+  @JsonProperty("ActivationFramePolicyNotCompatible")
+  ACTIVATION_FRAME_POLICY_NOT_COMPATIBLE,
+  @JsonProperty("PreloadingDisabled")
+  PRELOADING_DISABLED,
+  @JsonProperty("BatterySaverEnabled")
+  BATTERY_SAVER_ENABLED,
+  @JsonProperty("ActivatedDuringMainFrameNavigation")
+  ACTIVATED_DURING_MAIN_FRAME_NAVIGATION,
+  @JsonProperty("PreloadingUnsupportedByWebContents")
+  PRELOADING_UNSUPPORTED_BY_WEB_CONTENTS,
+  @JsonProperty("CrossSiteRedirectInMainFrameNavigation")
+  CROSS_SITE_REDIRECT_IN_MAIN_FRAME_NAVIGATION,
+  @JsonProperty("CrossSiteNavigationInMainFrameNavigation")
+  CROSS_SITE_NAVIGATION_IN_MAIN_FRAME_NAVIGATION,
+  @JsonProperty("SameSiteCrossOriginRedirectNotOptInInMainFrameNavigation")
+  SAME_SITE_CROSS_ORIGIN_REDIRECT_NOT_OPT_IN_IN_MAIN_FRAME_NAVIGATION,
+  @JsonProperty("SameSiteCrossOriginNavigationNotOptInInMainFrameNavigation")
+  SAME_SITE_CROSS_ORIGIN_NAVIGATION_NOT_OPT_IN_IN_MAIN_FRAME_NAVIGATION
 }

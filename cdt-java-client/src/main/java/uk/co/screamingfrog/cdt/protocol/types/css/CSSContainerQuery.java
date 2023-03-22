@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.css;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ package uk.co.screamingfrog.cdt.protocol.types.css;
 
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
+import uk.co.screamingfrog.cdt.protocol.types.dom.LogicalAxes;
+import uk.co.screamingfrog.cdt.protocol.types.dom.PhysicalAxes;
 
 /** CSS container query rule descriptor. */
 @Experimental
@@ -34,6 +36,10 @@ public class CSSContainerQuery {
   @Optional private String styleSheetId;
 
   @Optional private String name;
+
+  @Optional private PhysicalAxes physicalAxes;
+
+  @Optional private LogicalAxes logicalAxes;
 
   /** Container query text. */
   public String getText() {
@@ -73,5 +79,25 @@ public class CSSContainerQuery {
   /** Optional name for the container. */
   public void setName(String name) {
     this.name = name;
+  }
+
+  /** Optional physical axes queried for the container. */
+  public PhysicalAxes getPhysicalAxes() {
+    return physicalAxes;
+  }
+
+  /** Optional physical axes queried for the container. */
+  public void setPhysicalAxes(PhysicalAxes physicalAxes) {
+    this.physicalAxes = physicalAxes;
+  }
+
+  /** Optional logical axes queried for the container. */
+  public LogicalAxes getLogicalAxes() {
+    return logicalAxes;
+  }
+
+  /** Optional logical axes queried for the container. */
+  public void setLogicalAxes(LogicalAxes logicalAxes) {
+    this.logicalAxes = logicalAxes;
   }
 }

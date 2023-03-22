@@ -1,10 +1,10 @@
-package uk.co.screamingfrog.cdt.protocol.types.page;
+package uk.co.screamingfrog.cdt.protocol.events.fedcm;
 
 /*-
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,28 @@ package uk.co.screamingfrog.cdt.protocol.types.page;
  * #L%
  */
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import uk.co.screamingfrog.cdt.protocol.types.fedcm.Account;
 
-public enum SetSPCTransactionModeMode {
-  @JsonProperty("none")
-  NONE,
-  @JsonProperty("autoaccept")
-  AUTOACCEPT,
-  @JsonProperty("autoreject")
-  AUTOREJECT
+public class DialogShown {
+
+  private String dialogId;
+
+  private List<Account> accounts;
+
+  public String getDialogId() {
+    return dialogId;
+  }
+
+  public void setDialogId(String dialogId) {
+    this.dialogId = dialogId;
+  }
+
+  public List<Account> getAccounts() {
+    return accounts;
+  }
+
+  public void setAccounts(List<Account> accounts) {
+    this.accounts = accounts;
+  }
 }

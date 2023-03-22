@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import uk.co.screamingfrog.cdt.protocol.events.storage.CacheStorageListUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.storage.IndexedDBContentUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.storage.IndexedDBListUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.storage.InterestGroupAccessed;
+import uk.co.screamingfrog.cdt.protocol.events.storage.SharedStorageAccessed;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.EventName;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
@@ -37,6 +38,8 @@ import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.network.Cookie;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookieParam;
 import uk.co.screamingfrog.cdt.protocol.types.storage.InterestGroupDetails;
+import uk.co.screamingfrog.cdt.protocol.types.storage.SharedStorageEntry;
+import uk.co.screamingfrog.cdt.protocol.types.storage.SharedStorageMetadata;
 import uk.co.screamingfrog.cdt.protocol.types.storage.TrustTokens;
 import uk.co.screamingfrog.cdt.protocol.types.storage.UsageAndQuota;
 
@@ -148,6 +151,13 @@ public interface Storage {
   void trackCacheStorageForOrigin(@ParamName("origin") String origin);
 
   /**
+   * Registers storage key to be notified when an update occurs to its cache storage list.
+   *
+   * @param storageKey Storage key.
+   */
+  void trackCacheStorageForStorageKey(@ParamName("storageKey") String storageKey);
+
+  /**
    * Registers origin to be notified when an update occurs to its IndexedDB.
    *
    * @param origin Security origin.
@@ -167,6 +177,13 @@ public interface Storage {
    * @param origin Security origin.
    */
   void untrackCacheStorageForOrigin(@ParamName("origin") String origin);
+
+  /**
+   * Unregisters storage key from receiving notifications for cache storage.
+   *
+   * @param storageKey Storage key.
+   */
+  void untrackCacheStorageForStorageKey(@ParamName("storageKey") String storageKey);
 
   /**
    * Unregisters origin from receiving notifications for IndexedDB.
@@ -217,6 +234,88 @@ public interface Storage {
   @Experimental
   void setInterestGroupTracking(@ParamName("enable") Boolean enable);
 
+  /**
+   * Gets metadata for an origin's shared storage.
+   *
+   * @param ownerOrigin
+   */
+  @Experimental
+  @Returns("metadata")
+  SharedStorageMetadata getSharedStorageMetadata(@ParamName("ownerOrigin") String ownerOrigin);
+
+  /**
+   * Gets the entries in an given origin's shared storage.
+   *
+   * @param ownerOrigin
+   */
+  @Experimental
+  @Returns("entries")
+  @ReturnTypeParameter(SharedStorageEntry.class)
+  List<SharedStorageEntry> getSharedStorageEntries(@ParamName("ownerOrigin") String ownerOrigin);
+
+  /**
+   * Sets entry with `key` and `value` for a given origin's shared storage.
+   *
+   * @param ownerOrigin
+   * @param key
+   * @param value
+   */
+  @Experimental
+  void setSharedStorageEntry(
+      @ParamName("ownerOrigin") String ownerOrigin,
+      @ParamName("key") String key,
+      @ParamName("value") String value);
+
+  /**
+   * Sets entry with `key` and `value` for a given origin's shared storage.
+   *
+   * @param ownerOrigin
+   * @param key
+   * @param value
+   * @param ignoreIfPresent If `ignoreIfPresent` is included and true, then only sets the entry if
+   *     `key` doesn't already exist.
+   */
+  @Experimental
+  void setSharedStorageEntry(
+      @ParamName("ownerOrigin") String ownerOrigin,
+      @ParamName("key") String key,
+      @ParamName("value") String value,
+      @Optional @ParamName("ignoreIfPresent") Boolean ignoreIfPresent);
+
+  /**
+   * Deletes entry for `key` (if it exists) for a given origin's shared storage.
+   *
+   * @param ownerOrigin
+   * @param key
+   */
+  @Experimental
+  void deleteSharedStorageEntry(
+      @ParamName("ownerOrigin") String ownerOrigin, @ParamName("key") String key);
+
+  /**
+   * Clears all entries for a given origin's shared storage.
+   *
+   * @param ownerOrigin
+   */
+  @Experimental
+  void clearSharedStorageEntries(@ParamName("ownerOrigin") String ownerOrigin);
+
+  /**
+   * Resets the budget for `ownerOrigin` by clearing all budget withdrawals.
+   *
+   * @param ownerOrigin
+   */
+  @Experimental
+  void resetSharedStorageBudget(@ParamName("ownerOrigin") String ownerOrigin);
+
+  /**
+   * Enables/disables issuing of sharedStorageAccessed events.
+   *
+   * @param enable
+   */
+  @Experimental
+  void setSharedStorageTracking(@ParamName("enable") Boolean enable);
+
   /** A cache's contents have been modified. */
   @EventName("cacheStorageContentUpdated")
   EventListener onCacheStorageContentUpdated(
@@ -237,4 +336,11 @@ public interface Storage {
   /** One of the interest groups was accessed by the associated page. */
   @EventName("interestGroupAccessed")
   EventListener onInterestGroupAccessed(EventHandler<InterestGroupAccessed> eventListener);
+
+  /**
+   * Shared storage was accessed by the associated page. The following parameters are included in
+   * all events.
+   */
+  @EventName("sharedStorageAccessed")
+  EventListener onSharedStorageAccessed(EventHandler<SharedStorageAccessed> eventListener);
 }

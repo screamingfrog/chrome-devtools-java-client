@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.events.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,6 +46,8 @@ public class RequestWillBeSentExtraInfo {
   @Experimental private ConnectTiming connectTiming;
 
   @Optional private ClientSecurityState clientSecurityState;
+
+  @Optional private Boolean siteHasCookieInOtherPartition;
 
   /** Request identifier. Used to match this information to an existing requestWillBeSent event. */
   public String getRequestId() {
@@ -103,5 +105,19 @@ public class RequestWillBeSentExtraInfo {
   /** The client security state set for the request. */
   public void setClientSecurityState(ClientSecurityState clientSecurityState) {
     this.clientSecurityState = clientSecurityState;
+  }
+
+  /**
+   * Whether the site has partitioned cookies stored in a partition different than the current one.
+   */
+  public Boolean getSiteHasCookieInOtherPartition() {
+    return siteHasCookieInOtherPartition;
+  }
+
+  /**
+   * Whether the site has partitioned cookies stored in a partition different than the current one.
+   */
+  public void setSiteHasCookieInOtherPartition(Boolean siteHasCookieInOtherPartition) {
+    this.siteHasCookieInOtherPartition = siteHasCookieInOtherPartition;
   }
 }

@@ -1,10 +1,10 @@
-package uk.co.screamingfrog.cdt.protocol.types.profiler;
+package uk.co.screamingfrog.cdt.protocol.types.preload;
 
 /*-
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,21 +20,15 @@ package uk.co.screamingfrog.cdt.protocol.types.profiler;
  * #L%
  */
 
-import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Describes a type collected during runtime. */
-@Experimental
-public class TypeObject {
-
-  private String name;
-
-  /** Name of a type collected with type profiling. */
-  public String getName() {
-    return name;
-  }
-
-  /** Name of a type collected with type profiling. */
-  public void setName(String name) {
-    this.name = name;
-  }
+/**
+ * The type of preloading attempted. It corresponds to mojom::SpeculationAction (although
+ * PrefetchWithSubresources is omitted as it isn't being used by clients).
+ */
+public enum SpeculationAction {
+  @JsonProperty("Prefetch")
+  PREFETCH,
+  @JsonProperty("Prerender")
+  PRERENDER
 }

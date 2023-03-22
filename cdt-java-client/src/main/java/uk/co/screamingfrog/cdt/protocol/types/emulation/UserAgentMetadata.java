@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.emulation;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,18 +51,22 @@ public class UserAgentMetadata {
 
   @Optional private Boolean wow64;
 
+  /** Brands appearing in Sec-CH-UA. */
   public List<UserAgentBrandVersion> getBrands() {
     return brands;
   }
 
+  /** Brands appearing in Sec-CH-UA. */
   public void setBrands(List<UserAgentBrandVersion> brands) {
     this.brands = brands;
   }
 
+  /** Brands appearing in Sec-CH-UA-Full-Version-List. */
   public List<UserAgentBrandVersion> getFullVersionList() {
     return fullVersionList;
   }
 
+  /** Brands appearing in Sec-CH-UA-Full-Version-List. */
   public void setFullVersionList(List<UserAgentBrandVersion> fullVersionList) {
     this.fullVersionList = fullVersionList;
   }

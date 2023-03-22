@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -171,6 +171,7 @@ public interface Target {
    * @param newWindow Whether to create a new Window or Tab (chrome-only, false by default).
    * @param background Whether to create the target in background or foreground (chrome-only, false
    *     by default).
+   * @param forTab Whether to create the target of type "tab".
    */
   @Returns("targetId")
   String createTarget(
@@ -180,7 +181,8 @@ public interface Target {
       @Experimental @Optional @ParamName("browserContextId") String browserContextId,
       @Experimental @Optional @ParamName("enableBeginFrameControl") Boolean enableBeginFrameControl,
       @Optional @ParamName("newWindow") Boolean newWindow,
-      @Optional @ParamName("background") Boolean background);
+      @Optional @ParamName("background") Boolean background,
+      @Experimental @Optional @ParamName("forTab") Boolean forTab);
 
   /** Detaches session with given id. */
   void detachFromTarget();

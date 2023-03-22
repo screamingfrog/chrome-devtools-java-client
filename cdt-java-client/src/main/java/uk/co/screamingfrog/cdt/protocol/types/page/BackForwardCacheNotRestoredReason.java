@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.page;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -154,8 +154,6 @@ public enum BackForwardCacheNotRestoredReason {
   OUTSTANDING_NETWORK_REQUEST_OTHERS,
   @JsonProperty("OutstandingIndexedDBTransaction")
   OUTSTANDING_INDEXED_DB_TRANSACTION,
-  @JsonProperty("RequestedNotificationsPermission")
-  REQUESTED_NOTIFICATIONS_PERMISSION,
   @JsonProperty("RequestedMIDIPermission")
   REQUESTED_MIDI_PERMISSION,
   @JsonProperty("RequestedAudioCapturePermission")
@@ -216,8 +214,14 @@ public enum BackForwardCacheNotRestoredReason {
   INJECTED_JAVASCRIPT,
   @JsonProperty("InjectedStyleSheet")
   INJECTED_STYLE_SHEET,
+  @JsonProperty("KeepaliveRequest")
+  KEEPALIVE_REQUEST,
+  @JsonProperty("IndexedDBEvent")
+  INDEXED_DB_EVENT,
   @JsonProperty("Dummy")
   DUMMY,
+  @JsonProperty("AuthorizationHeader")
+  AUTHORIZATION_HEADER,
   @JsonProperty("ContentSecurityHandler")
   CONTENT_SECURITY_HANDLER,
   @JsonProperty("ContentWebAuthenticationAPI")

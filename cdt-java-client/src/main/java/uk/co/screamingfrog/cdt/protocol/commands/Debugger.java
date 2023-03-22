@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -423,8 +423,8 @@ public interface Debugger {
   void setBreakpointsActive(@ParamName("active") Boolean active);
 
   /**
-   * Defines pause on exceptions state. Can be set to stop on all exceptions, uncaught exceptions or
-   * no exceptions. Initial pause on exceptions state is `none`.
+   * Defines pause on exceptions state. Can be set to stop on all exceptions, uncaught exceptions,
+   * or caught exceptions, no exceptions. Initial pause on exceptions state is `none`.
    *
    * @param state Pause on exceptions mode.
    */

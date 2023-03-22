@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.events.storage;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ public class CacheStorageListUpdated {
 
   private String origin;
 
+  private String storageKey;
+
   /** Origin to update. */
   public String getOrigin() {
     return origin;
@@ -33,5 +35,15 @@ public class CacheStorageListUpdated {
   /** Origin to update. */
   public void setOrigin(String origin) {
     this.origin = origin;
+  }
+
+  /** Storage key to update. */
+  public String getStorageKey() {
+    return storageKey;
+  }
+
+  /** Storage key to update. */
+  public void setStorageKey(String storageKey) {
+    this.storageKey = storageKey;
   }
 }

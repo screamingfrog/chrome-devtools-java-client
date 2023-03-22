@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,16 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  */
 
 import java.util.List;
+import uk.co.screamingfrog.cdt.protocol.events.webauthn.CredentialAdded;
+import uk.co.screamingfrog.cdt.protocol.events.webauthn.CredentialAsserted;
+import uk.co.screamingfrog.cdt.protocol.support.annotations.EventName;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.ParamName;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.ReturnTypeParameter;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Returns;
+import uk.co.screamingfrog.cdt.protocol.support.types.EventHandler;
+import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.webauthn.Credential;
 import uk.co.screamingfrog.cdt.protocol.types.webauthn.VirtualAuthenticatorOptions;
 
@@ -60,6 +65,30 @@ public interface WebAuthn {
    */
   @Returns("authenticatorId")
   String addVirtualAuthenticator(@ParamName("options") VirtualAuthenticatorOptions options);
+
+  /**
+   * Resets parameters isBogusSignature, isBadUV, isBadUP to false if they are not present.
+   *
+   * @param authenticatorId
+   */
+  void setResponseOverrideBits(@ParamName("authenticatorId") String authenticatorId);
+
+  /**
+   * Resets parameters isBogusSignature, isBadUV, isBadUP to false if they are not present.
+   *
+   * @param authenticatorId
+   * @param isBogusSignature If isBogusSignature is set, overrides the signature in the
+   *     authenticator response to be zero. Defaults to false.
+   * @param isBadUV If isBadUV is set, overrides the UV bit in the flags in the authenticator
+   *     response to be zero. Defaults to false.
+   * @param isBadUP If isBadUP is set, overrides the UP bit in the flags in the authenticator
+   *     response to be zero. Defaults to false.
+   */
+  void setResponseOverrideBits(
+      @ParamName("authenticatorId") String authenticatorId,
+      @Optional @ParamName("isBogusSignature") Boolean isBogusSignature,
+      @Optional @ParamName("isBadUV") Boolean isBadUV,
+      @Optional @ParamName("isBadUP") Boolean isBadUP);
 
   /**
    * Removes the given authenticator.
@@ -135,4 +164,12 @@ public interface WebAuthn {
    */
   void setAutomaticPresenceSimulation(
       @ParamName("authenticatorId") String authenticatorId, @ParamName("enabled") Boolean enabled);
+
+  /** Triggered when a credential is added to an authenticator. */
+  @EventName("credentialAdded")
+  EventListener onCredentialAdded(EventHandler<CredentialAdded> eventListener);
+
+  /** Triggered when a credential is used in a webauthn assertion. */
+  @EventName("credentialAsserted")
+  EventListener onCredentialAsserted(EventHandler<CredentialAsserted> eventListener);
 }

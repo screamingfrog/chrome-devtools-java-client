@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -246,8 +246,9 @@ public interface Network {
 
   /**
    * Returns all browser cookies. Depending on the backend support, will return detailed cookie
-   * information in the `cookies` field.
+   * information in the `cookies` field. Deprecated. Use Storage.getCookies instead.
    */
+  @Deprecated
   @Returns("cookies")
   @ReturnTypeParameter(Cookie.class)
   List<Cookie> getAllCookies();

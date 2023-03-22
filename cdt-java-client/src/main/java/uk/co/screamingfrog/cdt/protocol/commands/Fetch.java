@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,7 +119,9 @@ public interface Fetch {
    * @param method If set, the request method is overridden.
    * @param postData If set, overrides the post data in the request. (Encoded as a base64 string
    *     when passed over JSON)
-   * @param headers If set, overrides the request headers.
+   * @param headers If set, overrides the request headers. Note that the overrides do not extend to
+   *     subsequent redirect hops, if a redirect happens. Another override may be applied to a
+   *     different request produced by a redirect.
    * @param interceptResponse If set, overrides response interception behavior for this request.
    */
   void continueRequest(

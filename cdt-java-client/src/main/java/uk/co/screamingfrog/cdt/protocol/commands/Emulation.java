@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -197,7 +197,8 @@ public interface Emulation {
   /**
    * Emulates the given vision deficiency.
    *
-   * @param type Vision deficiency to emulate.
+   * @param type Vision deficiency to emulate. Order: best-effort emulations come first, followed by
+   *     any physiologically accurate emulations for medically recognized color vision deficiencies.
    */
   @Experimental
   void setEmulatedVisionDeficiency(@ParamName("type") SetEmulatedVisionDeficiencyType type);

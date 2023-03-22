@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,9 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #L%
  */
 
-import uk.co.screamingfrog.cdt.protocol.events.headlessexperimental.NeedsBeginFramesChanged;
-import uk.co.screamingfrog.cdt.protocol.support.annotations.EventName;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.ParamName;
-import uk.co.screamingfrog.cdt.protocol.support.types.EventHandler;
-import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.headlessexperimental.BeginFrame;
 import uk.co.screamingfrog.cdt.protocol.types.headlessexperimental.ScreenshotParams;
 
@@ -67,17 +63,10 @@ public interface HeadlessExperimental {
       @Optional @ParamName("screenshot") ScreenshotParams screenshot);
 
   /** Disables headless events for the target. */
+  @Deprecated
   void disable();
 
   /** Enables headless events for the target. */
-  void enable();
-
-  /**
-   * Issued when the target starts or stops needing BeginFrames. Deprecated. Issue beginFrame
-   * unconditionally instead and use result from beginFrame to detect whether the frames were
-   * suppressed.
-   */
-  @EventName("needsBeginFramesChanged")
   @Deprecated
-  EventListener onNeedsBeginFramesChanged(EventHandler<NeedsBeginFramesChanged> eventListener);
+  void enable();
 }

@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.events.page;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,7 @@ package uk.co.screamingfrog.cdt.protocol.events.page;
  * #L%
  */
 
-import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
-import uk.co.screamingfrog.cdt.protocol.types.page.AdScriptId;
 import uk.co.screamingfrog.cdt.protocol.types.runtime.StackTrace;
 
 /** Fired when frame has been attached to its parent. */
@@ -33,8 +31,6 @@ public class FrameAttached {
   private String parentFrameId;
 
   @Optional private StackTrace stack;
-
-  @Experimental @Optional private AdScriptId adScriptId;
 
   /** Id of the frame that has been attached. */
   public String getFrameId() {
@@ -64,21 +60,5 @@ public class FrameAttached {
   /** JavaScript stack trace of when frame was attached, only set if frame initiated from script. */
   public void setStack(StackTrace stack) {
     this.stack = stack;
-  }
-
-  /**
-   * Identifies the bottom-most script which caused the frame to be labelled as an ad. Only sent if
-   * frame is labelled as an ad and id is available.
-   */
-  public AdScriptId getAdScriptId() {
-    return adScriptId;
-  }
-
-  /**
-   * Identifies the bottom-most script which caused the frame to be labelled as an ad. Only sent if
-   * frame is labelled as an ad and id is available.
-   */
-  public void setAdScriptId(AdScriptId adScriptId) {
-    this.adScriptId = adScriptId;
   }
 }

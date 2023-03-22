@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.audits;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,5 +42,15 @@ public enum AttributionReportingIssueType {
   @JsonProperty("SourceIgnored")
   SOURCE_IGNORED,
   @JsonProperty("TriggerIgnored")
-  TRIGGER_IGNORED
+  TRIGGER_IGNORED,
+  @JsonProperty("OsSourceIgnored")
+  OS_SOURCE_IGNORED,
+  @JsonProperty("OsTriggerIgnored")
+  OS_TRIGGER_IGNORED,
+  @JsonProperty("InvalidRegisterOsSourceHeader")
+  INVALID_REGISTER_OS_SOURCE_HEADER,
+  @JsonProperty("InvalidRegisterOsTriggerHeader")
+  INVALID_REGISTER_OS_TRIGGER_HEADER,
+  @JsonProperty("WebAndOsHeaders")
+  WEB_AND_OS_HEADERS
 }

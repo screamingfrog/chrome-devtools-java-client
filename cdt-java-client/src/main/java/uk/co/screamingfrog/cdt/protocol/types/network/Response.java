@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ package uk.co.screamingfrog.cdt.protocol.types.network;
  */
 
 import java.util.Map;
+import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.types.security.SecurityState;
 
@@ -68,6 +69,8 @@ public class Response {
   @Optional private String cacheStorageCacheName;
 
   @Optional private String protocol;
+
+  @Experimental @Optional private AlternateProtocolUsage alternateProtocolUsage;
 
   private SecurityState securityState;
 
@@ -294,6 +297,16 @@ public class Response {
   /** Protocol used to fetch this request. */
   public void setProtocol(String protocol) {
     this.protocol = protocol;
+  }
+
+  /** The reason why Chrome uses a specific transport protocol for HTTP semantics. */
+  public AlternateProtocolUsage getAlternateProtocolUsage() {
+    return alternateProtocolUsage;
+  }
+
+  /** The reason why Chrome uses a specific transport protocol for HTTP semantics. */
+  public void setAlternateProtocolUsage(AlternateProtocolUsage alternateProtocolUsage) {
+    this.alternateProtocolUsage = alternateProtocolUsage;
   }
 
   /** Security state of the request resource. */

@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -188,7 +188,7 @@ public interface Browser {
    *
    * @param query Requested substring in name. Only histograms which have query as a substring in
    *     their name are extracted. An empty or absent query returns all histograms.
-   * @param delta If true, retrieve delta since last call.
+   * @param delta If true, retrieve delta since last delta call.
    */
   @Experimental
   @Returns("histograms")
@@ -209,7 +209,7 @@ public interface Browser {
    * Get a Chrome histogram by name.
    *
    * @param name Requested histogram name.
-   * @param delta If true, retrieve delta since last call.
+   * @param delta If true, retrieve delta since last delta call.
    */
   @Experimental
   @Returns("histogram")

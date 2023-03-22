@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.webauthn;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,8 @@ public class VirtualAuthenticatorOptions {
   @Optional private Boolean hasCredBlob;
 
   @Optional private Boolean hasMinPinLength;
+
+  @Optional private Boolean hasPrf;
 
   @Optional private Boolean automaticPresenceSimulation;
 
@@ -140,6 +142,22 @@ public class VirtualAuthenticatorOptions {
    */
   public void setHasMinPinLength(Boolean hasMinPinLength) {
     this.hasMinPinLength = hasMinPinLength;
+  }
+
+  /**
+   * If set to true, the authenticator will support the prf extension.
+   * https://w3c.github.io/webauthn/#prf-extension Defaults to false.
+   */
+  public Boolean getHasPrf() {
+    return hasPrf;
+  }
+
+  /**
+   * If set to true, the authenticator will support the prf extension.
+   * https://w3c.github.io/webauthn/#prf-extension Defaults to false.
+   */
+  public void setHasPrf(Boolean hasPrf) {
+    this.hasPrf = hasPrf;
   }
 
   /**

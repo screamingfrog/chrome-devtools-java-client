@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -314,7 +314,7 @@ public interface CSS {
 
   /**
    * Stop tracking rule usage and return the list of rules that were used since last call to
-   * `takeCoverageDelta` (or since start of coverage instrumentation)
+   * `takeCoverageDelta` (or since start of coverage instrumentation).
    */
   @Returns("ruleUsage")
   @ReturnTypeParameter(RuleUsage.class)
@@ -322,7 +322,7 @@ public interface CSS {
 
   /**
    * Obtain list of rules that became used since last call to this method (or since start of
-   * coverage instrumentation)
+   * coverage instrumentation).
    */
   TakeCoverageDelta takeCoverageDelta();
 
@@ -336,7 +336,7 @@ public interface CSS {
 
   /**
    * Fires whenever a web font is updated. A non-empty font parameter indicates a successfully
-   * loaded web font
+   * loaded web font.
    */
   @EventName("fontsUpdated")
   EventListener onFontsUpdated(EventHandler<FontsUpdated> eventListener);

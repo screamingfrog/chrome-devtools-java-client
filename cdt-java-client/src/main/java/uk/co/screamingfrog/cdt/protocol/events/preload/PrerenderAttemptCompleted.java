@@ -1,10 +1,10 @@
-package uk.co.screamingfrog.cdt.protocol.events.page;
+package uk.co.screamingfrog.cdt.protocol.events.preload;
 
 /*-
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,10 @@ package uk.co.screamingfrog.cdt.protocol.events.page;
  * #L%
  */
 
-import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
-import uk.co.screamingfrog.cdt.protocol.types.page.PrerenderFinalStatus;
+import uk.co.screamingfrog.cdt.protocol.types.preload.PrerenderFinalStatus;
 
 /** Fired when a prerender attempt is completed. */
-@Experimental
 public class PrerenderAttemptCompleted {
 
   private String initiatingFrameId;
@@ -34,7 +32,7 @@ public class PrerenderAttemptCompleted {
 
   private PrerenderFinalStatus finalStatus;
 
-  @Optional private String reasonDetails;
+  @Optional private String disallowedApiMethod;
 
   /** The frame id of the frame initiating prerendering. */
   public String getInitiatingFrameId() {
@@ -63,18 +61,18 @@ public class PrerenderAttemptCompleted {
   }
 
   /**
-   * This is used to give users more information about the cancellation details, and this will be
-   * formatted for display.
+   * This is used to give users more information about the name of the API call that is incompatible
+   * with prerender and has caused the cancellation of the attempt
    */
-  public String getReasonDetails() {
-    return reasonDetails;
+  public String getDisallowedApiMethod() {
+    return disallowedApiMethod;
   }
 
   /**
-   * This is used to give users more information about the cancellation details, and this will be
-   * formatted for display.
+   * This is used to give users more information about the name of the API call that is incompatible
+   * with prerender and has caused the cancellation of the attempt
    */
-  public void setReasonDetails(String reasonDetails) {
-    this.reasonDetails = reasonDetails;
+  public void setDisallowedApiMethod(String disallowedApiMethod) {
+    this.disallowedApiMethod = disallowedApiMethod;
   }
 }

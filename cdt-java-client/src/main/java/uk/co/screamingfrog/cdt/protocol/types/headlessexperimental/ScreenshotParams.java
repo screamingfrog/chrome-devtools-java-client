@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.headlessexperimental;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,8 @@ public class ScreenshotParams {
 
   @Optional private Integer quality;
 
+  @Optional private Boolean optimizeForSpeed;
+
   /** Image compression format (defaults to png). */
   public ScreenshotParamsFormat getFormat() {
     return format;
@@ -47,5 +49,15 @@ public class ScreenshotParams {
   /** Compression quality from range [0..100] (jpeg only). */
   public void setQuality(Integer quality) {
     this.quality = quality;
+  }
+
+  /** Optimize image encoding for speed, not for resulting size (defaults to false) */
+  public Boolean getOptimizeForSpeed() {
+    return optimizeForSpeed;
+  }
+
+  /** Optimize image encoding for speed, not for resulting size (defaults to false) */
+  public void setOptimizeForSpeed(Boolean optimizeForSpeed) {
+    this.optimizeForSpeed = optimizeForSpeed;
   }
 }

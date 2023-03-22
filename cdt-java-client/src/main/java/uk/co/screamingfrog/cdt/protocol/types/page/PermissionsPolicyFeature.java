@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.page;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,8 @@ public enum PermissionsPolicyFeature {
   CH_ECT,
   @JsonProperty("ch-prefers-color-scheme")
   CH_PREFERS_COLOR_SCHEME,
+  @JsonProperty("ch-prefers-reduced-motion")
+  CH_PREFERS_REDUCED_MOTION,
   @JsonProperty("ch-rtt")
   CH_RTT,
   @JsonProperty("ch-save-data")
@@ -89,6 +91,8 @@ public enum PermissionsPolicyFeature {
   CLIPBOARD_READ,
   @JsonProperty("clipboard-write")
   CLIPBOARD_WRITE,
+  @JsonProperty("compute-pressure")
+  COMPUTE_PRESSURE,
   @JsonProperty("cross-origin-isolated")
   CROSS_ORIGIN_ISOLATED,
   @JsonProperty("direct-sockets")
@@ -103,8 +107,6 @@ public enum PermissionsPolicyFeature {
   EXECUTION_WHILE_OUT_OF_VIEWPORT,
   @JsonProperty("execution-while-not-rendered")
   EXECUTION_WHILE_NOT_RENDERED,
-  @JsonProperty("federated-credentials")
-  FEDERATED_CREDENTIALS,
   @JsonProperty("focus-without-user-activation")
   FOCUS_WITHOUT_USER_ACTIVATION,
   @JsonProperty("fullscreen")
@@ -119,6 +121,8 @@ public enum PermissionsPolicyFeature {
   GYROSCOPE,
   @JsonProperty("hid")
   HID,
+  @JsonProperty("identity-credentials-get")
+  IDENTITY_CREDENTIALS_GET,
   @JsonProperty("idle-detection")
   IDLE_DETECTION,
   @JsonProperty("interest-cohort")
@@ -141,6 +145,8 @@ public enum PermissionsPolicyFeature {
   PAYMENT,
   @JsonProperty("picture-in-picture")
   PICTURE_IN_PICTURE,
+  @JsonProperty("private-aggregation")
+  PRIVATE_AGGREGATION,
   @JsonProperty("publickey-credentials-get")
   PUBLICKEY_CREDENTIALS_GET,
   @JsonProperty("run-ad-auction")
@@ -153,6 +159,10 @@ public enum PermissionsPolicyFeature {
   SHARED_AUTOFILL,
   @JsonProperty("shared-storage")
   SHARED_STORAGE,
+  @JsonProperty("shared-storage-select-url")
+  SHARED_STORAGE_SELECT_URL,
+  @JsonProperty("smart-card")
+  SMART_CARD,
   @JsonProperty("storage-access")
   STORAGE_ACCESS,
   @JsonProperty("sync-xhr")
@@ -167,6 +177,8 @@ public enum PermissionsPolicyFeature {
   VERTICAL_SCROLL,
   @JsonProperty("web-share")
   WEB_SHARE,
+  @JsonProperty("window-management")
+  WINDOW_MANAGEMENT,
   @JsonProperty("window-placement")
   WINDOW_PLACEMENT,
   @JsonProperty("xr-spatial-tracking")

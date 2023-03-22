@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.audits;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,22 +32,24 @@ public enum FederatedAuthRequestIssueReason {
   SHOULD_EMBARGO,
   @JsonProperty("TooManyRequests")
   TOO_MANY_REQUESTS,
-  @JsonProperty("ManifestListHttpNotFound")
-  MANIFEST_LIST_HTTP_NOT_FOUND,
-  @JsonProperty("ManifestListNoResponse")
-  MANIFEST_LIST_NO_RESPONSE,
-  @JsonProperty("ManifestListInvalidResponse")
-  MANIFEST_LIST_INVALID_RESPONSE,
-  @JsonProperty("ManifestNotInManifestList")
-  MANIFEST_NOT_IN_MANIFEST_LIST,
-  @JsonProperty("ManifestListTooBig")
-  MANIFEST_LIST_TOO_BIG,
-  @JsonProperty("ManifestHttpNotFound")
-  MANIFEST_HTTP_NOT_FOUND,
-  @JsonProperty("ManifestNoResponse")
-  MANIFEST_NO_RESPONSE,
-  @JsonProperty("ManifestInvalidResponse")
-  MANIFEST_INVALID_RESPONSE,
+  @JsonProperty("WellKnownHttpNotFound")
+  WELL_KNOWN_HTTP_NOT_FOUND,
+  @JsonProperty("WellKnownNoResponse")
+  WELL_KNOWN_NO_RESPONSE,
+  @JsonProperty("WellKnownInvalidResponse")
+  WELL_KNOWN_INVALID_RESPONSE,
+  @JsonProperty("WellKnownListEmpty")
+  WELL_KNOWN_LIST_EMPTY,
+  @JsonProperty("ConfigNotInWellKnown")
+  CONFIG_NOT_IN_WELL_KNOWN,
+  @JsonProperty("WellKnownTooBig")
+  WELL_KNOWN_TOO_BIG,
+  @JsonProperty("ConfigHttpNotFound")
+  CONFIG_HTTP_NOT_FOUND,
+  @JsonProperty("ConfigNoResponse")
+  CONFIG_NO_RESPONSE,
+  @JsonProperty("ConfigInvalidResponse")
+  CONFIG_INVALID_RESPONSE,
   @JsonProperty("ClientMetadataHttpNotFound")
   CLIENT_METADATA_HTTP_NOT_FOUND,
   @JsonProperty("ClientMetadataNoResponse")
@@ -66,6 +68,8 @@ public enum FederatedAuthRequestIssueReason {
   ACCOUNTS_NO_RESPONSE,
   @JsonProperty("AccountsInvalidResponse")
   ACCOUNTS_INVALID_RESPONSE,
+  @JsonProperty("AccountsListEmpty")
+  ACCOUNTS_LIST_EMPTY,
   @JsonProperty("IdTokenHttpNotFound")
   ID_TOKEN_HTTP_NOT_FOUND,
   @JsonProperty("IdTokenNoResponse")

@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ import uk.co.screamingfrog.cdt.protocol.support.types.EventHandler;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.profiler.Profile;
 import uk.co.screamingfrog.cdt.protocol.types.profiler.ScriptCoverage;
-import uk.co.screamingfrog.cdt.protocol.types.profiler.ScriptTypeProfile;
 import uk.co.screamingfrog.cdt.protocol.types.profiler.TakePreciseCoverage;
 
 public interface Profiler {
@@ -83,10 +82,6 @@ public interface Profiler {
       @Optional @ParamName("detailed") Boolean detailed,
       @Optional @ParamName("allowTriggeredUpdates") Boolean allowTriggeredUpdates);
 
-  /** Enable type profile. */
-  @Experimental
-  void startTypeProfile();
-
   @Returns("profile")
   Profile stop();
 
@@ -96,21 +91,11 @@ public interface Profiler {
    */
   void stopPreciseCoverage();
 
-  /** Disable type profile. Disabling releases type profile data collected so far. */
-  @Experimental
-  void stopTypeProfile();
-
   /**
    * Collect coverage data for the current isolate, and resets execution counters. Precise code
    * coverage needs to have started.
    */
   TakePreciseCoverage takePreciseCoverage();
-
-  /** Collect type profile. */
-  @Experimental
-  @Returns("result")
-  @ReturnTypeParameter(ScriptTypeProfile.class)
-  List<ScriptTypeProfile> takeTypeProfile();
 
   @EventName("consoleProfileFinished")
   EventListener onConsoleProfileFinished(EventHandler<ConsoleProfileFinished> eventListener);

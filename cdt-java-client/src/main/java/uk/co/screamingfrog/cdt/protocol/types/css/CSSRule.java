@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.css;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,8 @@ public class CSSRule {
   @Optional private String styleSheetId;
 
   private SelectorList selectorList;
+
+  @Experimental @Optional private List<String> nestingSelectors;
 
   private StyleSheetOrigin origin;
 
@@ -69,6 +71,16 @@ public class CSSRule {
   /** Rule selector data. */
   public void setSelectorList(SelectorList selectorList) {
     this.selectorList = selectorList;
+  }
+
+  /** Array of selectors from ancestor style rules, sorted by distance from the current rule. */
+  public List<String> getNestingSelectors() {
+    return nestingSelectors;
+  }
+
+  /** Array of selectors from ancestor style rules, sorted by distance from the current rule. */
+  public void setNestingSelectors(List<String> nestingSelectors) {
+    this.nestingSelectors = nestingSelectors;
   }
 
   /** Parent stylesheet's origin. */

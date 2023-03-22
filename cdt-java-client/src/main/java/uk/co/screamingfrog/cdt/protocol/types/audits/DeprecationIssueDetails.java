@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.audits;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ public class DeprecationIssueDetails {
 
   private SourceCodeLocation sourceCodeLocation;
 
-  private DeprecationIssueType type;
+  private String type;
 
   public AffectedFrame getAffectedFrame() {
     return affectedFrame;
@@ -50,11 +50,19 @@ public class DeprecationIssueDetails {
     this.sourceCodeLocation = sourceCodeLocation;
   }
 
-  public DeprecationIssueType getType() {
+  /**
+   * One of the deprecation names from
+   * third_party/blink/renderer/core/frame/deprecation/deprecation.json5
+   */
+  public String getType() {
     return type;
   }
 
-  public void setType(DeprecationIssueType type) {
+  /**
+   * One of the deprecation names from
+   * third_party/blink/renderer/core/frame/deprecation/deprecation.json5
+   */
+  public void setType(String type) {
     this.type = type;
   }
 }

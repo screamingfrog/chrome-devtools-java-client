@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -108,6 +108,11 @@ public interface Runtime {
    *     objectGroup is not specified and objectId is, objectGroup will be inherited from object.
    * @param throwOnSideEffect Whether to throw an exception if side effect cannot be ruled out
    *     during evaluation.
+   * @param uniqueContextId An alternative way to specify the execution context to call function on.
+   *     Compared to contextId that may be reused across processes, this is guaranteed to be
+   *     system-unique, so it can be used to prevent accidental function call in context different
+   *     than intended (e.g. as a result of navigation across process boundaries). This is mutually
+   *     exclusive with `executionContextId`.
    * @param generateWebDriverValue Whether the result should contain `webDriverValue`, serialized
    *     according to https://w3c.github.io/webdriver-bidi. This is mutually exclusive with
    *     `returnByValue`, but resulting `objectId` is still provided.
@@ -124,6 +129,7 @@ public interface Runtime {
       @Optional @ParamName("executionContextId") Integer executionContextId,
       @Optional @ParamName("objectGroup") String objectGroup,
       @Experimental @Optional @ParamName("throwOnSideEffect") Boolean throwOnSideEffect,
+      @Experimental @Optional @ParamName("uniqueContextId") String uniqueContextId,
       @Experimental @Optional @ParamName("generateWebDriverValue") Boolean generateWebDriverValue);
 
   /**

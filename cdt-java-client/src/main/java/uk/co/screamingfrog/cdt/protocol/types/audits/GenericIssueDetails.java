@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.audits;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,8 @@ public class GenericIssueDetails {
 
   @Optional private String frameId;
 
+  @Optional private Integer violatingNodeId;
+
   /** Issues with the same errorType are aggregated in the frontend. */
   public GenericIssueErrorType getErrorType() {
     return errorType;
@@ -45,5 +47,13 @@ public class GenericIssueDetails {
 
   public void setFrameId(String frameId) {
     this.frameId = frameId;
+  }
+
+  public Integer getViolatingNodeId() {
+    return violatingNodeId;
+  }
+
+  public void setViolatingNodeId(Integer violatingNodeId) {
+    this.violatingNodeId = violatingNodeId;
   }
 }

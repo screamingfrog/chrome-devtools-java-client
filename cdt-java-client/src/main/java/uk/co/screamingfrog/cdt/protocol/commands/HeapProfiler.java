@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,8 +77,25 @@ public interface HeapProfiler {
   /**
    * @param samplingInterval Average sample interval in bytes. Poisson distribution is used for the
    *     intervals. The default value is 32768 bytes.
+   * @param includeObjectsCollectedByMajorGC By default, the sampling heap profiler reports only
+   *     objects which are still alive when the profile is returned via getSamplingProfile or
+   *     stopSampling, which is useful for determining what functions contribute the most to
+   *     steady-state memory usage. This flag instructs the sampling heap profiler to also include
+   *     information about objects discarded by major GC, which will show which functions cause
+   *     large temporary memory usage or long GC pauses.
+   * @param includeObjectsCollectedByMinorGC By default, the sampling heap profiler reports only
+   *     objects which are still alive when the profile is returned via getSamplingProfile or
+   *     stopSampling, which is useful for determining what functions contribute the most to
+   *     steady-state memory usage. This flag instructs the sampling heap profiler to also include
+   *     information about objects discarded by minor GC, which is useful when tuning a
+   *     latency-sensitive application for minimal GC activity.
    */
-  void startSampling(@Optional @ParamName("samplingInterval") Double samplingInterval);
+  void startSampling(
+      @Optional @ParamName("samplingInterval") Double samplingInterval,
+      @Optional @ParamName("includeObjectsCollectedByMajorGC")
+          Boolean includeObjectsCollectedByMajorGC,
+      @Optional @ParamName("includeObjectsCollectedByMinorGC")
+          Boolean includeObjectsCollectedByMinorGC);
 
   void startTrackingHeapObjects();
 

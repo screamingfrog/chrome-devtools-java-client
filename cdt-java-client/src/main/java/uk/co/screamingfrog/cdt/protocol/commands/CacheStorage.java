@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,14 +49,23 @@ public interface CacheStorage {
    */
   void deleteEntry(@ParamName("cacheId") String cacheId, @ParamName("request") String request);
 
+  /** Requests cache names. */
+  @Returns("caches")
+  @ReturnTypeParameter(Cache.class)
+  List<Cache> requestCacheNames();
+
   /**
    * Requests cache names.
    *
-   * @param securityOrigin Security origin.
+   * @param securityOrigin At least and at most one of securityOrigin, storageKey must be specified.
+   *     Security origin.
+   * @param storageKey Storage key.
    */
   @Returns("caches")
   @ReturnTypeParameter(Cache.class)
-  List<Cache> requestCacheNames(@ParamName("securityOrigin") String securityOrigin);
+  List<Cache> requestCacheNames(
+      @Optional @ParamName("securityOrigin") String securityOrigin,
+      @Optional @ParamName("storageKey") String storageKey);
 
   /**
    * Fetches cache entry.

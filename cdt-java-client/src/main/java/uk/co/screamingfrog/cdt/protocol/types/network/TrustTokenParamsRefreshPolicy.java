@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ package uk.co.screamingfrog.cdt.protocol.types.network;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Only set for "token-redemption" type and determine whether to request a fresh SRR or use a still
- * valid cached SRR.
+ * Only set for "token-redemption" operation and determine whether to request a fresh SRR or use a
+ * still valid cached SRR.
  */
 public enum TrustTokenParamsRefreshPolicy {
   @JsonProperty("UseCached")

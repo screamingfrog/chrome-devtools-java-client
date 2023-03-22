@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,11 @@ import uk.co.screamingfrog.cdt.protocol.commands.DOMSnapshot;
 import uk.co.screamingfrog.cdt.protocol.commands.DOMStorage;
 import uk.co.screamingfrog.cdt.protocol.commands.Database;
 import uk.co.screamingfrog.cdt.protocol.commands.Debugger;
+import uk.co.screamingfrog.cdt.protocol.commands.DeviceAccess;
 import uk.co.screamingfrog.cdt.protocol.commands.DeviceOrientation;
 import uk.co.screamingfrog.cdt.protocol.commands.Emulation;
 import uk.co.screamingfrog.cdt.protocol.commands.EventBreakpoints;
+import uk.co.screamingfrog.cdt.protocol.commands.FedCm;
 import uk.co.screamingfrog.cdt.protocol.commands.Fetch;
 import uk.co.screamingfrog.cdt.protocol.commands.HeadlessExperimental;
 import uk.co.screamingfrog.cdt.protocol.commands.HeapProfiler;
@@ -54,6 +56,7 @@ import uk.co.screamingfrog.cdt.protocol.commands.Overlay;
 import uk.co.screamingfrog.cdt.protocol.commands.Page;
 import uk.co.screamingfrog.cdt.protocol.commands.Performance;
 import uk.co.screamingfrog.cdt.protocol.commands.PerformanceTimeline;
+import uk.co.screamingfrog.cdt.protocol.commands.Preload;
 import uk.co.screamingfrog.cdt.protocol.commands.Profiler;
 import uk.co.screamingfrog.cdt.protocol.commands.Runtime;
 import uk.co.screamingfrog.cdt.protocol.commands.Schema;
@@ -206,4 +209,13 @@ public interface ChromeDevTools {
 
   /** Returns the Media command. */
   Media getMedia();
+
+  /** Returns the DeviceAccess command. */
+  DeviceAccess getDeviceAccess();
+
+  /** Returns the Preload command. */
+  Preload getPreload();
+
+  /** Returns the FedCm command. */
+  FedCm getFedCm();
 }
