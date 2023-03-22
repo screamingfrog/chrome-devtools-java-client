@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.services.impl;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -134,7 +134,8 @@ public class ChromeServiceImpl implements ChromeService {
 
   @Override
   public ChromeTab createTab(String tab) throws ChromeServiceException {
-    return request(ChromeTab.class, "http://%s:%d/%s?%s", host, port, CREATE_TAB, tab);
+    return requestWithMethod(
+        "PUT", ChromeTab.class, "http://%s:%d/%s?%s", host, port, CREATE_TAB, tab);
   }
 
   @Override
@@ -263,12 +264,19 @@ public class ChromeServiceImpl implements ChromeService {
    */
   private static <T> T request(Class<T> responseType, String path, Object... params)
       throws ChromeServiceException {
+    return requestWithMethod("GET", responseType, path, params);
+  }
+
+  private static <T> T requestWithMethod(
+      String method, Class<T> responseType, String path, Object... params)
+      throws ChromeServiceException {
     HttpURLConnection connection = null;
     InputStream inputStream = null;
 
     try {
       URL uri = new URL(String.format(path, params));
       connection = (HttpURLConnection) uri.openConnection();
+      connection.setRequestMethod(method);
 
       int responseCode = connection.getResponseCode();
       if (HttpURLConnection.HTTP_OK == responseCode) {

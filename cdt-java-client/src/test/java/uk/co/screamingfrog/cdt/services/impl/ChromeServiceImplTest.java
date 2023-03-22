@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.services.impl;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2022 Kenan Klisura
+ * Copyright (C) 2018 - 2023 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,7 +138,7 @@ public class ChromeServiceImplTest extends EasyMockSupport {
 
     RecordedRequest request = server.takeRequest();
     assertEquals(1, server.getRequestCount());
-    assertEquals("GET /json/new?some-tab-name HTTP/1.1", request.getRequestLine());
+    assertEquals("PUT /json/new?some-tab-name HTTP/1.1", request.getRequestLine());
 
     assertEquals("", tab.getDescription());
     assertEquals(
@@ -174,7 +174,7 @@ public class ChromeServiceImplTest extends EasyMockSupport {
 
     RecordedRequest request = server.takeRequest();
     assertEquals(1, server.getRequestCount());
-    assertEquals("GET /json/new?about:blank HTTP/1.1", request.getRequestLine());
+    assertEquals("PUT /json/new?about:blank HTTP/1.1", request.getRequestLine());
 
     assertEquals("", tab.getDescription());
     assertEquals(
