@@ -18,7 +18,7 @@ Add the following dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-  <groupId>com.github.kklisura.cdt</groupId>
+  <groupId>uk.co.screamingfrog.cdt</groupId>
   <artifactId>cdt-java-client</artifactId>
   <version>2.1.0</version>
 </dependency>
@@ -27,14 +27,14 @@ Add the following dependency to your `pom.xml`:
 You can use following code, taken from, `LogRequestsExample`:
 
 ```java
-package com.github.kklisura.cdt.examples;
+package uk.co.screamingfrog.cdt.examples;
 
-import com.github.kklisura.cdt.launch.ChromeLauncher;
-import com.github.kklisura.cdt.protocol.commands.Network;
-import com.github.kklisura.cdt.protocol.commands.Page;
-import com.github.kklisura.cdt.services.ChromeDevToolsService;
-import com.github.kklisura.cdt.services.ChromeService;
-import com.github.kklisura.cdt.services.types.ChromeTab;
+import uk.co.screamingfrog.cdt.launch.ChromeLauncher;
+import uk.co.screamingfrog.cdt.protocol.commands.Network;
+import uk.co.screamingfrog.cdt.protocol.commands.Page;
+import uk.co.screamingfrog.cdt.services.ChromeDevToolsService;
+import uk.co.screamingfrog.cdt.services.ChromeService;
+import uk.co.screamingfrog.cdt.services.types.ChromeTab;
 
 /**
  * Log requests example with DevTools java client.

@@ -2,7 +2,13 @@ MVN=mvn
 RM=rm
 JAVA=java
 CP=cp
-RUN_JAR=$(JAVA) -jar
+RUN_JAR=$(JAVA) \
+	--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED \
+	--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED \
+	--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED \
+	--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
+	--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED \
+ 	-jar
 
 PROTOCOL_PARSER_DIR=cdt-protocol-parser
 JAVA_PROTOCOL_BUILDER_DIR=cdt-java-protocol-builder
@@ -10,9 +16,9 @@ JAVA_PROTOCOL_BUILDER_JAR="$(JAVA_PROTOCOL_BUILDER_DIR)/target/cdt-java-protocol
 PROTOCOL_PARSER=cdt-protocol-parser
 
 JAVA_CLIENT_DIR=cdt-java-client
-JAVA_CLIENT_PACKAGE=com/github/kklisura/cdt/protocol
+JAVA_CLIENT_PACKAGE=uk/co/screamingfrog/cdt/protocol
 
-PACKAGE_NAME=com.github.kklisura.cdt.protocol
+PACKAGE_NAME=uk.co.screamingfrog.cdt.protocol
 JS_PROTOCOL_JSON_FILE=./js_protocol.json
 BROWSER_PROTOCOL_JSON_FILE=./browser_protocol.json
 
@@ -52,7 +58,8 @@ upgrade-protocol: copy-protocol-files-to-test-resources build-all-modules clean-
 		--js-protocol=$(JS_PROTOCOL_JSON_FILE) \
 		--browser-protocol=$(BROWSER_PROTOCOL_JSON_FILE)
 	# Apply the formatting on the codebase
-	$(MVN) com.coveo:fmt-maven-plugin:format
+	$(MVN) com.spotify.fmt:fmt-maven-plugin:format
+
 
 update-protocol: upgrade-protocol
 	# Updated protocol on cdt-java-client
@@ -61,7 +68,7 @@ update-protocol: upgrade-protocol
 update-copyright-license-header:
 	$(MVN) clean license:update-file-header
 	# Apply the formatting on the codebase
-	$(MVN) com.coveo:fmt-maven-plugin:format
+	$(MVN) com.spotify.fmt:fmt-maven-plugin:format
 
 sonar-analysis:
 	# Running sonar analysis

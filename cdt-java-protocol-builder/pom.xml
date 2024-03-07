@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.kklisura.cdt</groupId>
+        <groupId>uk.co.screamingfrog.cdt</groupId>
         <artifactId>ctd-java-client-root</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -18,27 +18,27 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
 
-        <java.parser.core.version>3.5.11</java.parser.core.version>
-        <jackson.version>2.11.3</jackson.version>
-        <apache.collections.version>4.1</apache.collections.version>
-        <apache.lang3.version>3.7</apache.lang3.version>
-        <lombok.version>1.18.2</lombok.version>
-        <logback.version>1.2.3</logback.version>
-        <args4j.version>2.33</args4j.version>
-        <google.java.format.version>1.5</google.java.format.version>
+        <java.parser.core.version>3.25.9</java.parser.core.version>
+        <jackson.version>2.17.0-rc1</jackson.version>
+        <apache.collections.version>4.4</apache.collections.version>
+        <apache.lang3.version>3.14.0</apache.lang3.version>
+        <lombok.version>1.18.30</lombok.version>
+        <logback.version>1.5.3</logback.version>
+        <args4j.version>2.37</args4j.version>
+        <google.java.format.version>1.21.0</google.java.format.version>
 
-        <junit.version>4.13.1</junit.version>
-        <jacoco.version>0.8.0</jacoco.version>
-        <easy.mock.version>3.4</easy.mock.version>
-        <jsonassert.version>1.5.0</jsonassert.version>
+        <junit.version>4.13.2</junit.version>
+        <jacoco.version>0.8.11</jacoco.version>
+        <easy.mock.version>5.2.0</easy.mock.version>
+        <jsonassert.version>1.5.1</jsonassert.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.github.kklisura.cdt</groupId>
+            <groupId>uk.co.screamingfrog.cdt</groupId>
             <artifactId>cdt-protocol-parser</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -141,12 +141,27 @@
         </resources>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <argLine>
+                        --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
+                        --add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+                        --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED
+                        --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+                        --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+                    </argLine>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>com.coveo</groupId>
+                <groupId>com.spotify.fmt</groupId>
                 <artifactId>fmt-maven-plugin</artifactId>
+                <version>2.22.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -171,13 +186,13 @@
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.3.0</version>
                 <configuration>
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.github.kklisura.cdt.definition.builder.Application</mainClass>
+                            <mainClass>uk.co.screamingfrog.cdt.definition.builder.Application</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
