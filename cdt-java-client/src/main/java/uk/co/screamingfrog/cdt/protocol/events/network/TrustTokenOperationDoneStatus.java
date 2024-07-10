@@ -40,8 +40,8 @@ public enum TrustTokenOperationDoneStatus {
   RESOURCE_EXHAUSTED,
   @JsonProperty("AlreadyExists")
   ALREADY_EXISTS,
-  @JsonProperty("Unavailable")
-  UNAVAILABLE,
+  @JsonProperty("ResourceLimited")
+  RESOURCE_LIMITED,
   @JsonProperty("Unauthorized")
   UNAUTHORIZED,
   @JsonProperty("BadResponse")

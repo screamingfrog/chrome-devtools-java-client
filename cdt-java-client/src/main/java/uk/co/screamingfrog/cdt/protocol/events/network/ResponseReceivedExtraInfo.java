@@ -25,6 +25,7 @@ import java.util.Map;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.types.network.BlockedSetCookieWithReason;
+import uk.co.screamingfrog.cdt.protocol.types.network.CookiePartitionKey;
 import uk.co.screamingfrog.cdt.protocol.types.network.ExemptedSetCookieWithReason;
 import uk.co.screamingfrog.cdt.protocol.types.network.IPAddressSpace;
 
@@ -48,7 +49,7 @@ public class ResponseReceivedExtraInfo {
 
   @Optional private String headersText;
 
-  @Optional private String cookiePartitionKey;
+  @Experimental @Optional private CookiePartitionKey cookiePartitionKey;
 
   @Optional private Boolean cookiePartitionKeyOpaque;
 
@@ -148,7 +149,7 @@ public class ResponseReceivedExtraInfo {
    * The cookie partition key that will be used to store partitioned cookies set in this response.
    * Only sent when partitioned cookies are enabled.
    */
-  public String getCookiePartitionKey() {
+  public CookiePartitionKey getCookiePartitionKey() {
     return cookiePartitionKey;
   }
 
@@ -156,7 +157,7 @@ public class ResponseReceivedExtraInfo {
    * The cookie partition key that will be used to store partitioned cookies set in this response.
    * Only sent when partitioned cookies are enabled.
    */
-  public void setCookiePartitionKey(String cookiePartitionKey) {
+  public void setCookiePartitionKey(CookiePartitionKey cookiePartitionKey) {
     this.cookiePartitionKey = cookiePartitionKey;
   }
 

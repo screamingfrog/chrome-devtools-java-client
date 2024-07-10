@@ -21,6 +21,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  */
 
 import java.util.List;
+import java.util.Map;
 import uk.co.screamingfrog.cdt.protocol.events.storage.AttributionReportingSourceRegistered;
 import uk.co.screamingfrog.cdt.protocol.events.storage.AttributionReportingTriggerRegistered;
 import uk.co.screamingfrog.cdt.protocol.events.storage.CacheStorageContentUpdated;
@@ -43,7 +44,7 @@ import uk.co.screamingfrog.cdt.protocol.support.types.EventHandler;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.network.Cookie;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookieParam;
-import uk.co.screamingfrog.cdt.protocol.types.storage.InterestGroupDetails;
+import uk.co.screamingfrog.cdt.protocol.types.storage.RelatedWebsiteSet;
 import uk.co.screamingfrog.cdt.protocol.types.storage.SharedStorageEntry;
 import uk.co.screamingfrog.cdt.protocol.types.storage.SharedStorageMetadata;
 import uk.co.screamingfrog.cdt.protocol.types.storage.StorageBucket;
@@ -230,7 +231,7 @@ public interface Storage {
    */
   @Experimental
   @Returns("details")
-  InterestGroupDetails getInterestGroupDetails(
+  Map<String, Object> getInterestGroupDetails(
       @ParamName("ownerOrigin") String ownerOrigin, @ParamName("name") String name);
 
   /**
@@ -371,6 +372,22 @@ public interface Storage {
    */
   @Experimental
   void setAttributionReportingTracking(@ParamName("enable") Boolean enable);
+
+  /**
+   * Sends all pending Attribution Reports immediately, regardless of their scheduled report time.
+   */
+  @Experimental
+  @Returns("numSent")
+  Integer sendPendingAttributionReports();
+
+  /**
+   * Returns the effective Related Website Sets in use by this profile for the browser session. The
+   * effective Related Website Sets will not change during a browser session.
+   */
+  @Experimental
+  @Returns("sets")
+  @ReturnTypeParameter(RelatedWebsiteSet.class)
+  List<RelatedWebsiteSet> getRelatedWebsiteSets();
 
   /** A cache's contents have been modified. */
   @EventName("cacheStorageContentUpdated")

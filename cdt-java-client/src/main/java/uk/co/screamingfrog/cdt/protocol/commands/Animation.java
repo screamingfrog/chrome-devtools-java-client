@@ -24,6 +24,7 @@ import java.util.List;
 import uk.co.screamingfrog.cdt.protocol.events.animation.AnimationCanceled;
 import uk.co.screamingfrog.cdt.protocol.events.animation.AnimationCreated;
 import uk.co.screamingfrog.cdt.protocol.events.animation.AnimationStarted;
+import uk.co.screamingfrog.cdt.protocol.events.animation.AnimationUpdated;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.EventName;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.ParamName;
@@ -117,4 +118,8 @@ public interface Animation {
   /** Event for animation that has been started. */
   @EventName("animationStarted")
   EventListener onAnimationStarted(EventHandler<AnimationStarted> eventListener);
+
+  /** Event for animation that has been updated. */
+  @EventName("animationUpdated")
+  EventListener onAnimationUpdated(EventHandler<AnimationUpdated> eventListener);
 }

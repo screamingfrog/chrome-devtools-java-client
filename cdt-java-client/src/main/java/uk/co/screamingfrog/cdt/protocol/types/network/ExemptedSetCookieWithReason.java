@@ -31,6 +31,8 @@ public class ExemptedSetCookieWithReason {
 
   private CookieExemptionReason exemptionReason;
 
+  private String cookieLine;
+
   private Cookie cookie;
 
   /** The reason the cookie was exempted. */
@@ -41,6 +43,16 @@ public class ExemptedSetCookieWithReason {
   /** The reason the cookie was exempted. */
   public void setExemptionReason(CookieExemptionReason exemptionReason) {
     this.exemptionReason = exemptionReason;
+  }
+
+  /** The string representing this individual cookie as it would appear in the header. */
+  public String getCookieLine() {
+    return cookieLine;
+  }
+
+  /** The string representing this individual cookie as it would appear in the header. */
+  public void setCookieLine(String cookieLine) {
+    this.cookieLine = cookieLine;
   }
 
   /** The cookie object representing the cookie. */

@@ -66,5 +66,7 @@ public enum InspectorIssueCode {
   @JsonProperty("FederatedAuthUserInfoRequestIssue")
   FEDERATED_AUTH_USER_INFO_REQUEST_ISSUE,
   @JsonProperty("PropertyRuleIssue")
-  PROPERTY_RULE_ISSUE
+  PROPERTY_RULE_ISSUE,
+  @JsonProperty("SharedDictionaryIssue")
+  SHARED_DICTIONARY_ISSUE
 }

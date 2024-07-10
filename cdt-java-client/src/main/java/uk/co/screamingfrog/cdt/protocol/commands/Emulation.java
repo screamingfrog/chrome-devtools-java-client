@@ -149,7 +149,7 @@ public interface Emulation {
    * @param displayFeature If set, the display feature of a multi-segment screen. If not set,
    *     multi-segment support is turned-off.
    * @param devicePosture If set, the posture of a foldable device. If not set the posture is set to
-   *     continuous.
+   *     continuous. Deprecated, use Emulation.setDevicePostureOverride.
    */
   void setDeviceMetricsOverride(
       @ParamName("width") Integer width,
@@ -165,7 +165,24 @@ public interface Emulation {
       @Optional @ParamName("screenOrientation") ScreenOrientation screenOrientation,
       @Experimental @Optional @ParamName("viewport") Viewport viewport,
       @Experimental @Optional @ParamName("displayFeature") DisplayFeature displayFeature,
-      @Experimental @Optional @ParamName("devicePosture") DevicePosture devicePosture);
+      @Deprecated @Experimental @Optional @ParamName("devicePosture") DevicePosture devicePosture);
+
+  /**
+   * Start reporting the given posture value to the Device Posture API. This override can also be
+   * set in setDeviceMetricsOverride().
+   *
+   * @param posture
+   */
+  @Experimental
+  void setDevicePostureOverride(@ParamName("posture") DevicePosture posture);
+
+  /**
+   * Clears a device posture override set with either setDeviceMetricsOverride() or
+   * setDevicePostureOverride() and starts using posture information from the platform again. Does
+   * nothing if no override is set.
+   */
+  @Experimental
+  void clearDevicePostureOverride();
 
   /**
    * @param hidden Whether scrollbars should be always hidden.

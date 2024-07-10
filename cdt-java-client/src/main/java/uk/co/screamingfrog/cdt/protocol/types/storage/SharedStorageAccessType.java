@@ -38,6 +38,8 @@ public enum SharedStorageAccessType {
   DOCUMENT_DELETE,
   @JsonProperty("documentClear")
   DOCUMENT_CLEAR,
+  @JsonProperty("documentGet")
+  DOCUMENT_GET,
   @JsonProperty("workletSet")
   WORKLET_SET,
   @JsonProperty("workletAppend")
@@ -55,5 +57,13 @@ public enum SharedStorageAccessType {
   @JsonProperty("workletLength")
   WORKLET_LENGTH,
   @JsonProperty("workletRemainingBudget")
-  WORKLET_REMAINING_BUDGET
+  WORKLET_REMAINING_BUDGET,
+  @JsonProperty("headerSet")
+  HEADER_SET,
+  @JsonProperty("headerAppend")
+  HEADER_APPEND,
+  @JsonProperty("headerDelete")
+  HEADER_DELETE,
+  @JsonProperty("headerClear")
+  HEADER_CLEAR
 }

@@ -37,7 +37,7 @@ public class Request {
 
   private Map<String, Object> headers;
 
-  @Optional private String postData;
+  @Deprecated @Optional private String postData;
 
   @Optional private Boolean hasPostData;
 
@@ -95,12 +95,12 @@ public class Request {
     this.headers = headers;
   }
 
-  /** HTTP POST request data. */
+  /** HTTP POST request data. Use postDataEntries instead. */
   public String getPostData() {
     return postData;
   }
 
-  /** HTTP POST request data. */
+  /** HTTP POST request data. Use postDataEntries instead. */
   public void setPostData(String postData) {
     this.postData = postData;
   }
@@ -121,12 +121,12 @@ public class Request {
     this.hasPostData = hasPostData;
   }
 
-  /** Request body elements. This will be converted from base64 to binary */
+  /** Request body elements (post data broken into individual entries). */
   public List<PostDataEntry> getPostDataEntries() {
     return postDataEntries;
   }
 
-  /** Request body elements. This will be converted from base64 to binary */
+  /** Request body elements (post data broken into individual entries). */
   public void setPostDataEntries(List<PostDataEntry> postDataEntries) {
     this.postDataEntries = postDataEntries;
   }

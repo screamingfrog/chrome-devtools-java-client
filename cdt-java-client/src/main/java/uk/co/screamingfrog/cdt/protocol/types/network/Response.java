@@ -60,6 +60,8 @@ public class Response {
 
   @Optional private Boolean fromPrefetchCache;
 
+  @Optional private Boolean fromEarlyHints;
+
   @Experimental @Optional private ServiceWorkerRouterInfo serviceWorkerRouterInfo;
 
   private Double encodedDataLength;
@@ -252,12 +254,30 @@ public class Response {
     this.fromPrefetchCache = fromPrefetchCache;
   }
 
-  /** Information about how Service Worker Static Router was used. */
+  /** Specifies that the request was served from the prefetch cache. */
+  public Boolean getFromEarlyHints() {
+    return fromEarlyHints;
+  }
+
+  /** Specifies that the request was served from the prefetch cache. */
+  public void setFromEarlyHints(Boolean fromEarlyHints) {
+    this.fromEarlyHints = fromEarlyHints;
+  }
+
+  /**
+   * Information about how ServiceWorker Static Router API was used. If this field is set with
+   * `matchedSourceType` field, a matching rule is found. If this field is set without
+   * `matchedSource`, no matching rule is found. Otherwise, the API is not used.
+   */
   public ServiceWorkerRouterInfo getServiceWorkerRouterInfo() {
     return serviceWorkerRouterInfo;
   }
 
-  /** Information about how Service Worker Static Router was used. */
+  /**
+   * Information about how ServiceWorker Static Router API was used. If this field is set with
+   * `matchedSourceType` field, a matching rule is found. If this field is set without
+   * `matchedSource`, no matching rule is found. Otherwise, the API is not used.
+   */
   public void setServiceWorkerRouterInfo(ServiceWorkerRouterInfo serviceWorkerRouterInfo) {
     this.serviceWorkerRouterInfo = serviceWorkerRouterInfo;
   }

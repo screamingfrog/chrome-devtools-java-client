@@ -40,7 +40,9 @@ public class MatchedStylesForNode {
 
   @Optional private List<CSSKeyframesRule> cssKeyframesRules;
 
-  @Optional private List<CSSPositionFallbackRule> cssPositionFallbackRules;
+  @Deprecated @Optional private List<CSSPositionFallbackRule> cssPositionFallbackRules;
+
+  @Optional private List<CSSPositionTryRule> cssPositionTryRules;
 
   @Optional private List<CSSPropertyRule> cssPropertyRules;
 
@@ -135,6 +137,22 @@ public class MatchedStylesForNode {
   /** A list of CSS position fallbacks matching this node. */
   public void setCssPositionFallbackRules(List<CSSPositionFallbackRule> cssPositionFallbackRules) {
     this.cssPositionFallbackRules = cssPositionFallbackRules;
+  }
+
+  /**
+   * A list of CSS @position-try rules matching this node, based on the position-try-fallbacks
+   * property.
+   */
+  public List<CSSPositionTryRule> getCssPositionTryRules() {
+    return cssPositionTryRules;
+  }
+
+  /**
+   * A list of CSS @position-try rules matching this node, based on the position-try-fallbacks
+   * property.
+   */
+  public void setCssPositionTryRules(List<CSSPositionTryRule> cssPositionTryRules) {
+    this.cssPositionTryRules = cssPositionTryRules;
   }
 
   /** A list of CSS at-property rules matching this node. */

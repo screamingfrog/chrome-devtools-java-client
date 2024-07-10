@@ -26,6 +26,7 @@ import uk.co.screamingfrog.cdt.protocol.events.network.DataReceived;
 import uk.co.screamingfrog.cdt.protocol.events.network.EventSourceMessageReceived;
 import uk.co.screamingfrog.cdt.protocol.events.network.LoadingFailed;
 import uk.co.screamingfrog.cdt.protocol.events.network.LoadingFinished;
+import uk.co.screamingfrog.cdt.protocol.events.network.PolicyUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.network.ReportingApiEndpointsChangedForOrigin;
 import uk.co.screamingfrog.cdt.protocol.events.network.ReportingApiReportAdded;
 import uk.co.screamingfrog.cdt.protocol.events.network.ReportingApiReportUpdated;
@@ -35,6 +36,7 @@ import uk.co.screamingfrog.cdt.protocol.events.network.RequestWillBeSent;
 import uk.co.screamingfrog.cdt.protocol.events.network.RequestWillBeSentExtraInfo;
 import uk.co.screamingfrog.cdt.protocol.events.network.ResourceChangedPriority;
 import uk.co.screamingfrog.cdt.protocol.events.network.ResponseReceived;
+import uk.co.screamingfrog.cdt.protocol.events.network.ResponseReceivedEarlyHints;
 import uk.co.screamingfrog.cdt.protocol.events.network.ResponseReceivedExtraInfo;
 import uk.co.screamingfrog.cdt.protocol.events.network.SignedExchangeReceived;
 import uk.co.screamingfrog.cdt.protocol.events.network.SubresourceWebBundleInnerResponseError;
@@ -66,6 +68,7 @@ import uk.co.screamingfrog.cdt.protocol.types.network.ConnectionType;
 import uk.co.screamingfrog.cdt.protocol.types.network.ContentEncoding;
 import uk.co.screamingfrog.cdt.protocol.types.network.Cookie;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookieParam;
+import uk.co.screamingfrog.cdt.protocol.types.network.CookiePartitionKey;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookiePriority;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookieSameSite;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookieSourceScheme;
@@ -183,14 +186,14 @@ public interface Network {
    * @param domain If specified, deletes only cookies with the exact domain.
    * @param path If specified, deletes only cookies with the exact path.
    * @param partitionKey If specified, deletes only cookies with the the given name and partitionKey
-   *     where domain matches provided URL.
+   *     where all partition key attributes match the cookie partition key attribute.
    */
   void deleteCookies(
       @ParamName("name") String name,
       @Optional @ParamName("url") String url,
       @Optional @ParamName("domain") String domain,
       @Optional @ParamName("path") String path,
-      @Optional @ParamName("partitionKey") String partitionKey);
+      @Experimental @Optional @ParamName("partitionKey") CookiePartitionKey partitionKey);
 
   /** Disables network tracking, prevents network events from being sent to the client. */
   void disable();
@@ -221,13 +224,21 @@ public interface Network {
    * @param uploadThroughput Maximal aggregated upload throughput (bytes/sec). -1 disables upload
    *     throttling.
    * @param connectionType Connection type if known.
+   * @param packetLoss WebRTC packet loss (percent, 0-100). 0 disables packet loss emulation, 100
+   *     drops all the packets.
+   * @param packetQueueLength WebRTC packet queue length (packet). 0 removes any queue length
+   *     limitations.
+   * @param packetReordering WebRTC packetReordering feature.
    */
   void emulateNetworkConditions(
       @ParamName("offline") Boolean offline,
       @ParamName("latency") Double latency,
       @ParamName("downloadThroughput") Double downloadThroughput,
       @ParamName("uploadThroughput") Double uploadThroughput,
-      @Optional @ParamName("connectionType") ConnectionType connectionType);
+      @Optional @ParamName("connectionType") ConnectionType connectionType,
+      @Experimental @Optional @ParamName("packetLoss") Double packetLoss,
+      @Experimental @Optional @ParamName("packetQueueLength") Integer packetQueueLength,
+      @Experimental @Optional @ParamName("packetReordering") Boolean packetReordering);
 
   /** Enables network tracking, network events will now be delivered to the client. */
   void enable();
@@ -414,9 +425,8 @@ public interface Network {
    *     unspecified port. An unspecified port value allows protocol clients to emulate legacy
    *     cookie scope for the port. This is a temporary ability and it will be removed in the
    *     future.
-   * @param partitionKey Cookie partition key. The site of the top-level URL the browser was
-   *     visiting at the start of the request to the endpoint that set the cookie. If not set, the
-   *     cookie will be set as not partitioned.
+   * @param partitionKey Cookie partition key. If not set, the cookie will be set as not
+   *     partitioned.
    */
   @Returns("success")
   Boolean setCookie(
@@ -433,7 +443,7 @@ public interface Network {
       @Experimental @Optional @ParamName("sameParty") Boolean sameParty,
       @Experimental @Optional @ParamName("sourceScheme") CookieSourceScheme sourceScheme,
       @Experimental @Optional @ParamName("sourcePort") Integer sourcePort,
-      @Experimental @Optional @ParamName("partitionKey") String partitionKey);
+      @Experimental @Optional @ParamName("partitionKey") CookiePartitionKey partitionKey);
 
   /**
    * Sets given cookies.
@@ -640,6 +650,16 @@ public interface Network {
   EventListener onResponseReceivedExtraInfo(EventHandler<ResponseReceivedExtraInfo> eventListener);
 
   /**
+   * Fired when 103 Early Hints headers is received in addition to the common response. Not every
+   * responseReceived event will have an responseReceivedEarlyHints fired. Only one
+   * responseReceivedEarlyHints may be fired for eached responseReceived event.
+   */
+  @EventName("responseReceivedEarlyHints")
+  @Experimental
+  EventListener onResponseReceivedEarlyHints(
+      EventHandler<ResponseReceivedEarlyHints> eventListener);
+
+  /**
    * Fired exactly once for each Trust Token operation. Depending on the type of the operation and
    * whether the operation succeeded or failed, the event is fired before the corresponding request
    * was sent or after the response was received.
@@ -647,6 +667,11 @@ public interface Network {
   @EventName("trustTokenOperationDone")
   @Experimental
   EventListener onTrustTokenOperationDone(EventHandler<TrustTokenOperationDone> eventListener);
+
+  /** Fired once security policy has been updated. */
+  @EventName("policyUpdated")
+  @Experimental
+  EventListener onPolicyUpdated(EventHandler<PolicyUpdated> eventListener);
 
   /**
    * Fired once when parsing the .wbn file has succeeded. The event contains the information about

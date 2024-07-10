@@ -21,27 +21,56 @@ package uk.co.screamingfrog.cdt.protocol.types.network;
  */
 
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
+import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 
 @Experimental
 public class ServiceWorkerRouterInfo {
 
-  private Integer ruleIdMatched;
+  @Optional private Integer ruleIdMatched;
 
-  private ServiceWorkerRouterSource matchedSourceType;
+  @Optional private ServiceWorkerRouterSource matchedSourceType;
 
+  @Optional private ServiceWorkerRouterSource actualSourceType;
+
+  /**
+   * ID of the rule matched. If there is a matched rule, this field will be set, otherwiser no value
+   * will be set.
+   */
   public Integer getRuleIdMatched() {
     return ruleIdMatched;
   }
 
+  /**
+   * ID of the rule matched. If there is a matched rule, this field will be set, otherwiser no value
+   * will be set.
+   */
   public void setRuleIdMatched(Integer ruleIdMatched) {
     this.ruleIdMatched = ruleIdMatched;
   }
 
+  /**
+   * The router source of the matched rule. If there is a matched rule, this field will be set,
+   * otherwise no value will be set.
+   */
   public ServiceWorkerRouterSource getMatchedSourceType() {
     return matchedSourceType;
   }
 
+  /**
+   * The router source of the matched rule. If there is a matched rule, this field will be set,
+   * otherwise no value will be set.
+   */
   public void setMatchedSourceType(ServiceWorkerRouterSource matchedSourceType) {
     this.matchedSourceType = matchedSourceType;
+  }
+
+  /** The actual router source used. */
+  public ServiceWorkerRouterSource getActualSourceType() {
+    return actualSourceType;
+  }
+
+  /** The actual router source used. */
+  public void setActualSourceType(ServiceWorkerRouterSource actualSourceType) {
+    this.actualSourceType = actualSourceType;
   }
 }

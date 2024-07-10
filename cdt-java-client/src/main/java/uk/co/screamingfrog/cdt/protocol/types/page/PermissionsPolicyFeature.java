@@ -73,8 +73,8 @@ public enum PermissionsPolicyFeature {
   CH_UA_MODEL,
   @JsonProperty("ch-ua-mobile")
   CH_UA_MOBILE,
-  @JsonProperty("ch-ua-form-factor")
-  CH_UA_FORM_FACTOR,
+  @JsonProperty("ch-ua-form-factors")
+  CH_UA_FORM_FACTORS,
   @JsonProperty("ch-ua-full-version")
   CH_UA_FULL_VERSION,
   @JsonProperty("ch-ua-full-version-list")
@@ -97,6 +97,10 @@ public enum PermissionsPolicyFeature {
   COMPUTE_PRESSURE,
   @JsonProperty("cross-origin-isolated")
   CROSS_ORIGIN_ISOLATED,
+  @JsonProperty("deferred-fetch")
+  DEFERRED_FETCH,
+  @JsonProperty("digital-credentials-get")
+  DIGITAL_CREDENTIALS_GET,
   @JsonProperty("direct-sockets")
   DIRECT_SOCKETS,
   @JsonProperty("display-capture")
@@ -193,8 +197,6 @@ public enum PermissionsPolicyFeature {
   WEB_SHARE,
   @JsonProperty("window-management")
   WINDOW_MANAGEMENT,
-  @JsonProperty("window-placement")
-  WINDOW_PLACEMENT,
   @JsonProperty("xr-spatial-tracking")
   XR_SPATIAL_TRACKING
 }

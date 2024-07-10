@@ -40,8 +40,10 @@ import uk.co.screamingfrog.cdt.protocol.commands.DeviceAccess;
 import uk.co.screamingfrog.cdt.protocol.commands.DeviceOrientation;
 import uk.co.screamingfrog.cdt.protocol.commands.Emulation;
 import uk.co.screamingfrog.cdt.protocol.commands.EventBreakpoints;
+import uk.co.screamingfrog.cdt.protocol.commands.Extensions;
 import uk.co.screamingfrog.cdt.protocol.commands.FedCm;
 import uk.co.screamingfrog.cdt.protocol.commands.Fetch;
+import uk.co.screamingfrog.cdt.protocol.commands.FileSystem;
 import uk.co.screamingfrog.cdt.protocol.commands.HeadlessExperimental;
 import uk.co.screamingfrog.cdt.protocol.commands.HeapProfiler;
 import uk.co.screamingfrog.cdt.protocol.commands.IO;
@@ -54,6 +56,7 @@ import uk.co.screamingfrog.cdt.protocol.commands.Media;
 import uk.co.screamingfrog.cdt.protocol.commands.Memory;
 import uk.co.screamingfrog.cdt.protocol.commands.Network;
 import uk.co.screamingfrog.cdt.protocol.commands.Overlay;
+import uk.co.screamingfrog.cdt.protocol.commands.PWA;
 import uk.co.screamingfrog.cdt.protocol.commands.Page;
 import uk.co.screamingfrog.cdt.protocol.commands.Performance;
 import uk.co.screamingfrog.cdt.protocol.commands.PerformanceTimeline;
@@ -99,6 +102,9 @@ public interface ChromeDevTools {
 
   /** Returns the Audits command. */
   Audits getAudits();
+
+  /** Returns the Extensions command. */
+  Extensions getExtensions();
 
   /** Returns the Autofill command. */
   Autofill getAutofill();
@@ -147,6 +153,9 @@ public interface ChromeDevTools {
 
   /** Returns the IO command. */
   IO getIO();
+
+  /** Returns the FileSystem command. */
+  FileSystem getFileSystem();
 
   /** Returns the IndexedDB command. */
   IndexedDB getIndexedDB();
@@ -222,4 +231,7 @@ public interface ChromeDevTools {
 
   /** Returns the FedCm command. */
   FedCm getFedCm();
+
+  /** Returns the PWA command. */
+  PWA getPWA();
 }

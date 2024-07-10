@@ -69,6 +69,8 @@ public class InspectorIssueDetails {
   @Optional
   private FederatedAuthUserInfoRequestIssueDetails federatedAuthUserInfoRequestIssueDetails;
 
+  @Optional private SharedDictionaryIssueDetails sharedDictionaryIssueDetails;
+
   public CookieIssueDetails getCookieIssueDetails() {
     return cookieIssueDetails;
   }
@@ -237,5 +239,14 @@ public class InspectorIssueDetails {
   public void setFederatedAuthUserInfoRequestIssueDetails(
       FederatedAuthUserInfoRequestIssueDetails federatedAuthUserInfoRequestIssueDetails) {
     this.federatedAuthUserInfoRequestIssueDetails = federatedAuthUserInfoRequestIssueDetails;
+  }
+
+  public SharedDictionaryIssueDetails getSharedDictionaryIssueDetails() {
+    return sharedDictionaryIssueDetails;
+  }
+
+  public void setSharedDictionaryIssueDetails(
+      SharedDictionaryIssueDetails sharedDictionaryIssueDetails) {
+    this.sharedDictionaryIssueDetails = sharedDictionaryIssueDetails;
   }
 }

@@ -32,11 +32,41 @@ public class CookieDeprecationMetadataIssueDetails {
 
   private List<String> allowedSites;
 
+  private Double optOutPercentage;
+
+  private Boolean isOptOutTopLevel;
+
+  private CookieOperation operation;
+
   public List<String> getAllowedSites() {
     return allowedSites;
   }
 
   public void setAllowedSites(List<String> allowedSites) {
     this.allowedSites = allowedSites;
+  }
+
+  public Double getOptOutPercentage() {
+    return optOutPercentage;
+  }
+
+  public void setOptOutPercentage(Double optOutPercentage) {
+    this.optOutPercentage = optOutPercentage;
+  }
+
+  public Boolean getIsOptOutTopLevel() {
+    return isOptOutTopLevel;
+  }
+
+  public void setIsOptOutTopLevel(Boolean isOptOutTopLevel) {
+    this.isOptOutTopLevel = isOptOutTopLevel;
+  }
+
+  public CookieOperation getOperation() {
+    return operation;
+  }
+
+  public void setOperation(CookieOperation operation) {
+    this.operation = operation;
   }
 }

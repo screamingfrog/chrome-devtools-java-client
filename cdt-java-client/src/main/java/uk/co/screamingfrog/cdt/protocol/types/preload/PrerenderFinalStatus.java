@@ -153,5 +153,11 @@ public enum PrerenderFinalStatus {
   @JsonProperty("RedirectedPrerenderingUrlHasEffectiveUrl")
   REDIRECTED_PRERENDERING_URL_HAS_EFFECTIVE_URL,
   @JsonProperty("ActivationUrlHasEffectiveUrl")
-  ACTIVATION_URL_HAS_EFFECTIVE_URL
+  ACTIVATION_URL_HAS_EFFECTIVE_URL,
+  @JsonProperty("JavaScriptInterfaceAdded")
+  JAVA_SCRIPT_INTERFACE_ADDED,
+  @JsonProperty("JavaScriptInterfaceRemoved")
+  JAVA_SCRIPT_INTERFACE_REMOVED,
+  @JsonProperty("AllPrerenderingCanceled")
+  ALL_PRERENDERING_CANCELED
 }

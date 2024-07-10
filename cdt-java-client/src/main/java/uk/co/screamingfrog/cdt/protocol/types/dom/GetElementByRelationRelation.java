@@ -1,4 +1,4 @@
-package uk.co.screamingfrog.cdt.protocol.types.storage;
+package uk.co.screamingfrog.cdt.protocol.types.dom;
 
 /*-
  * #%L
@@ -20,28 +20,10 @@ package uk.co.screamingfrog.cdt.protocol.types.storage;
  * #L%
  */
 
-import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Ad advertising element inside an interest group. */
-public class InterestGroupAd {
-
-  private String renderURL;
-
-  @Optional private String metadata;
-
-  public String getRenderURL() {
-    return renderURL;
-  }
-
-  public void setRenderURL(String renderURL) {
-    this.renderURL = renderURL;
-  }
-
-  public String getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(String metadata) {
-    this.metadata = metadata;
-  }
+/** Type of relation to get. */
+public enum GetElementByRelationRelation {
+  @JsonProperty("PopoverTarget")
+  POPOVER_TARGET
 }

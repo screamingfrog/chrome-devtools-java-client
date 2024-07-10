@@ -38,6 +38,8 @@ public enum PseudoType {
   BACKDROP,
   @JsonProperty("selection")
   SELECTION,
+  @JsonProperty("search-text")
+  SEARCH_TEXT,
   @JsonProperty("target-text")
   TARGET_TEXT,
   @JsonProperty("spelling-error")
@@ -48,6 +50,10 @@ public enum PseudoType {
   HIGHLIGHT,
   @JsonProperty("first-line-inherited")
   FIRST_LINE_INHERITED,
+  @JsonProperty("scroll-marker")
+  SCROLL_MARKER,
+  @JsonProperty("scroll-marker-group")
+  SCROLL_MARKER_GROUP,
   @JsonProperty("scrollbar")
   SCROLLBAR,
   @JsonProperty("scrollbar-thumb")

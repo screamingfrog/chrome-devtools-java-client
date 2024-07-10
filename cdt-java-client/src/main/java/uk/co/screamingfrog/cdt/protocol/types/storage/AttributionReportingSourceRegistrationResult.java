@@ -46,5 +46,9 @@ public enum AttributionReportingSourceRegistrationResult {
   @JsonProperty("reportingOriginsPerSiteLimitReached")
   REPORTING_ORIGINS_PER_SITE_LIMIT_REACHED,
   @JsonProperty("exceedsMaxChannelCapacity")
-  EXCEEDS_MAX_CHANNEL_CAPACITY
+  EXCEEDS_MAX_CHANNEL_CAPACITY,
+  @JsonProperty("exceedsMaxTriggerStateCardinality")
+  EXCEEDS_MAX_TRIGGER_STATE_CARDINALITY,
+  @JsonProperty("destinationPerDayReportingLimitReached")
+  DESTINATION_PER_DAY_REPORTING_LIMIT_REACHED
 }

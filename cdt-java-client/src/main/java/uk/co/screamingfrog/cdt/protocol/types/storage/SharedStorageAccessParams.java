@@ -105,8 +105,9 @@ public class SharedStorageAccessParams {
    * Key for a specific entry in an origin's shared storage. Present only for
    * SharedStorageAccessType.documentSet, SharedStorageAccessType.documentAppend,
    * SharedStorageAccessType.documentDelete, SharedStorageAccessType.workletSet,
-   * SharedStorageAccessType.workletAppend, SharedStorageAccessType.workletDelete, and
-   * SharedStorageAccessType.workletGet.
+   * SharedStorageAccessType.workletAppend, SharedStorageAccessType.workletDelete,
+   * SharedStorageAccessType.workletGet, SharedStorageAccessType.headerSet,
+   * SharedStorageAccessType.headerAppend, and SharedStorageAccessType.headerDelete.
    */
   public String getKey() {
     return key;
@@ -116,8 +117,9 @@ public class SharedStorageAccessParams {
    * Key for a specific entry in an origin's shared storage. Present only for
    * SharedStorageAccessType.documentSet, SharedStorageAccessType.documentAppend,
    * SharedStorageAccessType.documentDelete, SharedStorageAccessType.workletSet,
-   * SharedStorageAccessType.workletAppend, SharedStorageAccessType.workletDelete, and
-   * SharedStorageAccessType.workletGet.
+   * SharedStorageAccessType.workletAppend, SharedStorageAccessType.workletDelete,
+   * SharedStorageAccessType.workletGet, SharedStorageAccessType.headerSet,
+   * SharedStorageAccessType.headerAppend, and SharedStorageAccessType.headerDelete.
    */
   public void setKey(String key) {
     this.key = key;
@@ -126,7 +128,8 @@ public class SharedStorageAccessParams {
   /**
    * Value for a specific entry in an origin's shared storage. Present only for
    * SharedStorageAccessType.documentSet, SharedStorageAccessType.documentAppend,
-   * SharedStorageAccessType.workletSet, and SharedStorageAccessType.workletAppend.
+   * SharedStorageAccessType.workletSet, SharedStorageAccessType.workletAppend,
+   * SharedStorageAccessType.headerSet, and SharedStorageAccessType.headerAppend.
    */
   public String getValue() {
     return value;
@@ -135,7 +138,8 @@ public class SharedStorageAccessParams {
   /**
    * Value for a specific entry in an origin's shared storage. Present only for
    * SharedStorageAccessType.documentSet, SharedStorageAccessType.documentAppend,
-   * SharedStorageAccessType.workletSet, and SharedStorageAccessType.workletAppend.
+   * SharedStorageAccessType.workletSet, SharedStorageAccessType.workletAppend,
+   * SharedStorageAccessType.headerSet, and SharedStorageAccessType.headerAppend.
    */
   public void setValue(String value) {
     this.value = value;
@@ -143,7 +147,8 @@ public class SharedStorageAccessParams {
 
   /**
    * Whether or not to set an entry for a key if that key is already present. Present only for
-   * SharedStorageAccessType.documentSet and SharedStorageAccessType.workletSet.
+   * SharedStorageAccessType.documentSet, SharedStorageAccessType.workletSet, and
+   * SharedStorageAccessType.headerSet.
    */
   public Boolean getIgnoreIfPresent() {
     return ignoreIfPresent;
@@ -151,7 +156,8 @@ public class SharedStorageAccessParams {
 
   /**
    * Whether or not to set an entry for a key if that key is already present. Present only for
-   * SharedStorageAccessType.documentSet and SharedStorageAccessType.workletSet.
+   * SharedStorageAccessType.documentSet, SharedStorageAccessType.workletSet, and
+   * SharedStorageAccessType.headerSet.
    */
   public void setIgnoreIfPresent(Boolean ignoreIfPresent) {
     this.ignoreIfPresent = ignoreIfPresent;

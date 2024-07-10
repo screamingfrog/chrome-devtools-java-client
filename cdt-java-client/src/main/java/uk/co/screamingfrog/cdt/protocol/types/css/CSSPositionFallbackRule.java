@@ -23,6 +23,7 @@ package uk.co.screamingfrog.cdt.protocol.types.css;
 import java.util.List;
 
 /** CSS position-fallback rule representation. */
+@Deprecated
 public class CSSPositionFallbackRule {
 
   private Value name;

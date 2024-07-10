@@ -198,7 +198,21 @@ public interface Page {
   /** Enables page domain notifications. */
   void enable();
 
+  /**
+   * Gets the processed manifest for this current document. This API always waits for the manifest
+   * to be loaded. If manifestId is provided, and it does not match the manifest of the current
+   * document, this API errors out. If there is not a loaded page, this API errors out immediately.
+   */
   AppManifest getAppManifest();
+
+  /**
+   * Gets the processed manifest for this current document. This API always waits for the manifest
+   * to be loaded. If manifestId is provided, and it does not match the manifest of the current
+   * document, this API errors out. If there is not a loaded page, this API errors out immediately.
+   *
+   * @param manifestId
+   */
+  AppManifest getAppManifest(@Optional @ParamName("manifestId") String manifestId);
 
   @Experimental
   @Returns("installabilityErrors")
@@ -368,10 +382,14 @@ public interface Page {
    * @param ignoreCache If true, browser cache is ignored (as if the user pressed Shift+refresh).
    * @param scriptToEvaluateOnLoad If set, the script will be injected into all frames of the
    *     inspected page after reload. Argument will be ignored if reloading dataURL origin.
+   * @param loaderId If set, an error will be thrown if the target page's main frame's loader id
+   *     does not match the provided id. This prevents accidentally reloading an unintended target
+   *     in case there's a racing navigation.
    */
   void reload(
       @Optional @ParamName("ignoreCache") Boolean ignoreCache,
-      @Optional @ParamName("scriptToEvaluateOnLoad") String scriptToEvaluateOnLoad);
+      @Optional @ParamName("scriptToEvaluateOnLoad") String scriptToEvaluateOnLoad,
+      @Experimental @Optional @ParamName("loaderId") String loaderId);
 
   /**
    * Deprecated, please use removeScriptToEvaluateOnNewDocument instead.

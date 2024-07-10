@@ -138,6 +138,16 @@ public enum BackForwardCacheNotRestoredReason {
   COOKIE_FLUSHED,
   @JsonProperty("BroadcastChannelOnMessage")
   BROADCAST_CHANNEL_ON_MESSAGE,
+  @JsonProperty("WebViewSettingsChanged")
+  WEB_VIEW_SETTINGS_CHANGED,
+  @JsonProperty("WebViewJavaScriptObjectChanged")
+  WEB_VIEW_JAVA_SCRIPT_OBJECT_CHANGED,
+  @JsonProperty("WebViewMessageListenerInjected")
+  WEB_VIEW_MESSAGE_LISTENER_INJECTED,
+  @JsonProperty("WebViewSafeBrowsingAllowlistChanged")
+  WEB_VIEW_SAFE_BROWSING_ALLOWLIST_CHANGED,
+  @JsonProperty("WebViewDocumentStartJavascriptChanged")
+  WEB_VIEW_DOCUMENT_START_JAVASCRIPT_CHANGED,
   @JsonProperty("WebSocket")
   WEB_SOCKET,
   @JsonProperty("WebTransport")
@@ -287,5 +297,7 @@ public enum BackForwardCacheNotRestoredReason {
   @JsonProperty("EmbedderExtensionMessagingForOpenPort")
   EMBEDDER_EXTENSION_MESSAGING_FOR_OPEN_PORT,
   @JsonProperty("EmbedderExtensionSentMessageToCachedFrame")
-  EMBEDDER_EXTENSION_SENT_MESSAGE_TO_CACHED_FRAME
+  EMBEDDER_EXTENSION_SENT_MESSAGE_TO_CACHED_FRAME,
+  @JsonProperty("RequestedByWebViewClient")
+  REQUESTED_BY_WEB_VIEW_CLIENT
 }

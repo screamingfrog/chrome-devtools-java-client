@@ -29,6 +29,8 @@ public class AttributionReportingAggregatableValueDictEntry {
 
   private Double value;
 
+  private String filteringId;
+
   public String getKey() {
     return key;
   }
@@ -45,5 +47,13 @@ public class AttributionReportingAggregatableValueDictEntry {
   /** number instead of integer because not all uint32 can be represented by int */
   public void setValue(Double value) {
     this.value = value;
+  }
+
+  public String getFilteringId() {
+    return filteringId;
+  }
+
+  public void setFilteringId(String filteringId) {
+    this.filteringId = filteringId;
   }
 }

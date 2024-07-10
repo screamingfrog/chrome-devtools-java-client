@@ -52,7 +52,7 @@ public class CookieParam {
 
   @Experimental @Optional private Integer sourcePort;
 
-  @Experimental @Optional private String partitionKey;
+  @Experimental @Optional private CookiePartitionKey partitionKey;
 
   /** Cookie name. */
   public String getName() {
@@ -198,21 +198,13 @@ public class CookieParam {
     this.sourcePort = sourcePort;
   }
 
-  /**
-   * Cookie partition key. The site of the top-level URL the browser was visiting at the start of
-   * the request to the endpoint that set the cookie. If not set, the cookie will be set as not
-   * partitioned.
-   */
-  public String getPartitionKey() {
+  /** Cookie partition key. If not set, the cookie will be set as not partitioned. */
+  public CookiePartitionKey getPartitionKey() {
     return partitionKey;
   }
 
-  /**
-   * Cookie partition key. The site of the top-level URL the browser was visiting at the start of
-   * the request to the endpoint that set the cookie. If not set, the cookie will be set as not
-   * partitioned.
-   */
-  public void setPartitionKey(String partitionKey) {
+  /** Cookie partition key. If not set, the cookie will be set as not partitioned. */
+  public void setPartitionKey(CookiePartitionKey partitionKey) {
     this.partitionKey = partitionKey;
   }
 }

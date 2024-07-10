@@ -7,7 +7,7 @@
 
     <groupId>uk.co.screamingfrog.cdt</groupId>
     <artifactId>cdt-java-client</artifactId>
-    <version>7.0.0-sf1</version>
+    <version>8.0.0-sf1</version>
     <packaging>jar</packaging>
 
     <name>cdt-java-client</name>
