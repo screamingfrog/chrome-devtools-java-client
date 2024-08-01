@@ -615,7 +615,7 @@ public interface Page {
    * navigation.
    *
    * @param url
-   * @param data Base64-encoded data (Encoded as a base64 string when passed over JSON)
+   * @param data Base64-encoded data
    */
   @Experimental
   void addCompilationCache(@ParamName("url") String url, @ParamName("data") String data);

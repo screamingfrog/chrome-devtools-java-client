@@ -43,7 +43,5 @@ public enum CookieExemptionReason {
   @JsonProperty("TopLevelStorageAccess")
   TOP_LEVEL_STORAGE_ACCESS,
   @JsonProperty("CorsOptIn")
-  CORS_OPT_IN,
-  @JsonProperty("Scheme")
-  SCHEME
+  CORS_OPT_IN
 }

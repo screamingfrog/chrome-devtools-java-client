@@ -20,13 +20,10 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #L%
  */
 
-import java.util.List;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.ParamName;
-import uk.co.screamingfrog.cdt.protocol.support.annotations.ReturnTypeParameter;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Returns;
-import uk.co.screamingfrog.cdt.protocol.types.pwa.DisplayMode;
 import uk.co.screamingfrog.cdt.protocol.types.pwa.OsAppState;
 
 /** This domain allows interacting with the browser to control PWAs. */
@@ -76,7 +73,7 @@ public interface PWA {
       @Optional @ParamName("installUrlOrBundleUrl") String installUrlOrBundleUrl);
 
   /**
-   * Uninstalls the given manifest_id and closes any opened app windows.
+   * Uninstals the given manifest_id and closes any opened app windows.
    *
    * @param manifestId
    */
@@ -84,8 +81,8 @@ public interface PWA {
 
   /**
    * Launches the installed web app, or an url in the same web app instead of the default start url
-   * if it is provided. Returns a page Target.TargetID which can be used to attach to via
-   * Target.attachToTarget or similar APIs.
+   * if it is provided. Returns a tab / web contents based Target.TargetID which can be used to
+   * attach to via Target.attachToTarget or similar APIs.
    *
    * @param manifestId
    */
@@ -94,83 +91,12 @@ public interface PWA {
 
   /**
    * Launches the installed web app, or an url in the same web app instead of the default start url
-   * if it is provided. Returns a page Target.TargetID which can be used to attach to via
-   * Target.attachToTarget or similar APIs.
+   * if it is provided. Returns a tab / web contents based Target.TargetID which can be used to
+   * attach to via Target.attachToTarget or similar APIs.
    *
    * @param manifestId
    * @param url
    */
   @Returns("targetId")
   String launch(@ParamName("manifestId") String manifestId, @Optional @ParamName("url") String url);
-
-  /**
-   * Opens one or more local files from an installed web app identified by its manifestId. The web
-   * app needs to have file handlers registered to process the files. The API returns one or more
-   * page Target.TargetIDs which can be used to attach to via Target.attachToTarget or similar APIs.
-   * If some files in the parameters cannot be handled by the web app, they will be ignored. If none
-   * of the files can be handled, this API returns an error. If no files are provided as the
-   * parameter, this API also returns an error.
-   *
-   * <p>According to the definition of the file handlers in the manifest file, one Target.TargetID
-   * may represent a page handling one or more files. The order of the returned Target.TargetIDs is
-   * not guaranteed.
-   *
-   * <p>TODO(crbug.com/339454034): Check the existences of the input files.
-   *
-   * @param manifestId
-   * @param files
-   */
-  @Returns("targetIds")
-  @ReturnTypeParameter(String.class)
-  List<String> launchFilesInApp(
-      @ParamName("manifestId") String manifestId, @ParamName("files") List<String> files);
-
-  /**
-   * Opens the current page in its web app identified by the manifest id, needs to be called on a
-   * page target. This function returns immediately without waiting for the app to finish loading.
-   *
-   * @param manifestId
-   */
-  void openCurrentPageInApp(@ParamName("manifestId") String manifestId);
-
-  /**
-   * Changes user settings of the web app identified by its manifestId. If the app was not
-   * installed, this command returns an error. Unset parameters will be ignored; unrecognized values
-   * will cause an error.
-   *
-   * <p>Unlike the ones defined in the manifest files of the web apps, these settings are provided
-   * by the browser and controlled by the users, they impact the way the browser handling the web
-   * apps.
-   *
-   * <p>See the comment of each parameter.
-   *
-   * @param manifestId
-   */
-  void changeAppUserSettings(@ParamName("manifestId") String manifestId);
-
-  /**
-   * Changes user settings of the web app identified by its manifestId. If the app was not
-   * installed, this command returns an error. Unset parameters will be ignored; unrecognized values
-   * will cause an error.
-   *
-   * <p>Unlike the ones defined in the manifest files of the web apps, these settings are provided
-   * by the browser and controlled by the users, they impact the way the browser handling the web
-   * apps.
-   *
-   * <p>See the comment of each parameter.
-   *
-   * @param manifestId
-   * @param linkCapturing If user allows the links clicked on by the user in the app's scope, or
-   *     extended scope if the manifest has scope extensions and the flags
-   *     `DesktopPWAsLinkCapturingWithScopeExtensions` and `WebAppEnableScopeExtensions` are
-   *     enabled.
-   *     <p>Note, the API does not support resetting the linkCapturing to the initial value,
-   *     uninstalling and installing the web app again will reset it.
-   *     <p>TODO(crbug.com/339453269): Setting this value on ChromeOS is not supported yet.
-   * @param displayMode
-   */
-  void changeAppUserSettings(
-      @ParamName("manifestId") String manifestId,
-      @Optional @ParamName("linkCapturing") Boolean linkCapturing,
-      @Optional @ParamName("displayMode") DisplayMode displayMode);
 }

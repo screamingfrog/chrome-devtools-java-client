@@ -49,12 +49,12 @@ public class PictureTile {
     this.y = y;
   }
 
-  /** Base64-encoded snapshot data. (Encoded as a base64 string when passed over JSON) */
+  /** Base64-encoded snapshot data. */
   public String getPicture() {
     return picture;
   }
 
-  /** Base64-encoded snapshot data. (Encoded as a base64 string when passed over JSON) */
+  /** Base64-encoded snapshot data. */
   public void setPicture(String picture) {
     this.picture = picture;
   }

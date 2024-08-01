@@ -140,7 +140,7 @@ public class MatchedStylesForNode {
   }
 
   /**
-   * A list of CSS @position-try rules matching this node, based on the position-try-fallbacks
+   * A list of CSS @position-try rules matching this node, based on the position-try-options
    * property.
    */
   public List<CSSPositionTryRule> getCssPositionTryRules() {
@@ -148,7 +148,7 @@ public class MatchedStylesForNode {
   }
 
   /**
-   * A list of CSS @position-try rules matching this node, based on the position-try-fallbacks
+   * A list of CSS @position-try rules matching this node, based on the position-try-options
    * property.
    */
   public void setCssPositionTryRules(List<CSSPositionTryRule> cssPositionTryRules) {

@@ -39,8 +39,6 @@ public class AttributionReportingTriggerRegistration {
 
   private List<AttributionReportingAggregatableValueEntry> aggregatableValues;
 
-  private Integer aggregatableFilteringIdMaxBytes;
-
   private Boolean debugReporting;
 
   @Optional private String aggregationCoordinatorOrigin;
@@ -98,14 +96,6 @@ public class AttributionReportingTriggerRegistration {
   public void setAggregatableValues(
       List<AttributionReportingAggregatableValueEntry> aggregatableValues) {
     this.aggregatableValues = aggregatableValues;
-  }
-
-  public Integer getAggregatableFilteringIdMaxBytes() {
-    return aggregatableFilteringIdMaxBytes;
-  }
-
-  public void setAggregatableFilteringIdMaxBytes(Integer aggregatableFilteringIdMaxBytes) {
-    this.aggregatableFilteringIdMaxBytes = aggregatableFilteringIdMaxBytes;
   }
 
   public Boolean getDebugReporting() {

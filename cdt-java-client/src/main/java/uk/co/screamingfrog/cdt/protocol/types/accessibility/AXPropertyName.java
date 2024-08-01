@@ -107,7 +107,5 @@ public enum AXPropertyName {
   @JsonProperty("labelledby")
   LABELLEDBY,
   @JsonProperty("owns")
-  OWNS,
-  @JsonProperty("url")
-  URL
+  OWNS
 }

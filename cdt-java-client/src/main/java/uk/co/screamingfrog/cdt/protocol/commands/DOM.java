@@ -744,31 +744,6 @@ public interface DOM {
   @ReturnTypeParameter(Integer.class)
   List<Integer> getQueryingDescendantsForContainer(@ParamName("nodeId") Integer nodeId);
 
-  /**
-   * Returns the target anchor element of the given anchor query according to
-   * https://www.w3.org/TR/css-anchor-position-1/#target.
-   *
-   * @param nodeId Id of the positioned element from which to find the anchor.
-   */
-  @Experimental
-  @Returns("nodeId")
-  Integer getAnchorElement(@ParamName("nodeId") Integer nodeId);
-
-  /**
-   * Returns the target anchor element of the given anchor query according to
-   * https://www.w3.org/TR/css-anchor-position-1/#target.
-   *
-   * @param nodeId Id of the positioned element from which to find the anchor.
-   * @param anchorSpecifier An optional anchor specifier, as defined in
-   *     https://www.w3.org/TR/css-anchor-position-1/#anchor-specifier. If not provided, it will
-   *     return the implicit anchor element for the given positioned element.
-   */
-  @Experimental
-  @Returns("nodeId")
-  Integer getAnchorElement(
-      @ParamName("nodeId") Integer nodeId,
-      @Optional @ParamName("anchorSpecifier") String anchorSpecifier);
-
   /** Fired when `Element`'s attribute is modified. */
   @EventName("attributeModified")
   EventListener onAttributeModified(EventHandler<AttributeModified> eventListener);

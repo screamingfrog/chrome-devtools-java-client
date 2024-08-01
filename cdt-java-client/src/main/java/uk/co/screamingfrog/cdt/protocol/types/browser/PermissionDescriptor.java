@@ -38,8 +38,6 @@ public class PermissionDescriptor {
 
   @Optional private Boolean allowWithoutSanitization;
 
-  @Optional private Boolean allowWithoutGesture;
-
   @Optional private Boolean panTiltZoom;
 
   /**
@@ -94,16 +92,6 @@ public class PermissionDescriptor {
   /** For "clipboard" permission, may specify allowWithoutSanitization. */
   public void setAllowWithoutSanitization(Boolean allowWithoutSanitization) {
     this.allowWithoutSanitization = allowWithoutSanitization;
-  }
-
-  /** For "fullscreen" permission, must specify allowWithoutGesture:true. */
-  public Boolean getAllowWithoutGesture() {
-    return allowWithoutGesture;
-  }
-
-  /** For "fullscreen" permission, must specify allowWithoutGesture:true. */
-  public void setAllowWithoutGesture(Boolean allowWithoutGesture) {
-    this.allowWithoutGesture = allowWithoutGesture;
   }
 
   /** For "camera" permission, may specify panTiltZoom. */

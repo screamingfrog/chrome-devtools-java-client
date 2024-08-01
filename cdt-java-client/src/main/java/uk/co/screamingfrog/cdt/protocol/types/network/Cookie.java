@@ -54,7 +54,7 @@ public class Cookie {
 
   @Experimental private Integer sourcePort;
 
-  @Experimental @Optional private CookiePartitionKey partitionKey;
+  @Experimental @Optional private String partitionKey;
 
   @Experimental @Optional private Boolean partitionKeyOpaque;
 
@@ -206,13 +206,19 @@ public class Cookie {
     this.sourcePort = sourcePort;
   }
 
-  /** Cookie partition key. */
-  public CookiePartitionKey getPartitionKey() {
+  /**
+   * Cookie partition key. The site of the top-level URL the browser was visiting at the start of
+   * the request to the endpoint that set the cookie.
+   */
+  public String getPartitionKey() {
     return partitionKey;
   }
 
-  /** Cookie partition key. */
-  public void setPartitionKey(CookiePartitionKey partitionKey) {
+  /**
+   * Cookie partition key. The site of the top-level URL the browser was visiting at the start of
+   * the request to the endpoint that set the cookie.
+   */
+  public void setPartitionKey(String partitionKey) {
     this.partitionKey = partitionKey;
   }
 

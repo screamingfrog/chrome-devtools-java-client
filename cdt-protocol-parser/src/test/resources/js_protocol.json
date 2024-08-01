@@ -559,7 +559,7 @@
                         },
                         {
                             "name": "bytecode",
-                            "description": "Wasm bytecode. (Encoded as a base64 string when passed over JSON)",
+                            "description": "Wasm bytecode.",
                             "optional": true,
                             "type": "string"
                         }
@@ -634,7 +634,7 @@
                     "returns": [
                         {
                             "name": "bytecode",
-                            "description": "Script source. (Encoded as a base64 string when passed over JSON)",
+                            "description": "Script source.",
                             "type": "string"
                         }
                     ]

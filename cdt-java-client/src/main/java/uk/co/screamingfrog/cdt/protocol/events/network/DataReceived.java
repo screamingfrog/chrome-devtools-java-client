@@ -76,12 +76,12 @@ public class DataReceived {
     this.encodedDataLength = encodedDataLength;
   }
 
-  /** Data that was received. (Encoded as a base64 string when passed over JSON) */
+  /** Data that was received. */
   public String getData() {
     return data;
   }
 
-  /** Data that was received. (Encoded as a base64 string when passed over JSON) */
+  /** Data that was received. */
   public void setData(String data) {
     this.data = data;
   }

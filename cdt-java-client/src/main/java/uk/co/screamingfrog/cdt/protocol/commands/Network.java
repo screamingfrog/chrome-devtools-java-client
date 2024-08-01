@@ -26,7 +26,6 @@ import uk.co.screamingfrog.cdt.protocol.events.network.DataReceived;
 import uk.co.screamingfrog.cdt.protocol.events.network.EventSourceMessageReceived;
 import uk.co.screamingfrog.cdt.protocol.events.network.LoadingFailed;
 import uk.co.screamingfrog.cdt.protocol.events.network.LoadingFinished;
-import uk.co.screamingfrog.cdt.protocol.events.network.PolicyUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.network.ReportingApiEndpointsChangedForOrigin;
 import uk.co.screamingfrog.cdt.protocol.events.network.ReportingApiReportAdded;
 import uk.co.screamingfrog.cdt.protocol.events.network.ReportingApiReportUpdated;
@@ -68,7 +67,6 @@ import uk.co.screamingfrog.cdt.protocol.types.network.ConnectionType;
 import uk.co.screamingfrog.cdt.protocol.types.network.ContentEncoding;
 import uk.co.screamingfrog.cdt.protocol.types.network.Cookie;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookieParam;
-import uk.co.screamingfrog.cdt.protocol.types.network.CookiePartitionKey;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookiePriority;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookieSameSite;
 import uk.co.screamingfrog.cdt.protocol.types.network.CookieSourceScheme;
@@ -146,7 +144,7 @@ public interface Network {
    *     not be set in response to an authChallenge.
    * @param rawResponse If set the requests completes using with the provided base64 encoded raw
    *     response, including HTTP status line and headers etc... Must not be set in response to an
-   *     authChallenge. (Encoded as a base64 string when passed over JSON)
+   *     authChallenge.
    * @param url If set the request url will be modified in a way that's not observable by page. Must
    *     not be set in response to an authChallenge.
    * @param method If set this allows the request method to be overridden. Must not be set in
@@ -186,14 +184,14 @@ public interface Network {
    * @param domain If specified, deletes only cookies with the exact domain.
    * @param path If specified, deletes only cookies with the exact path.
    * @param partitionKey If specified, deletes only cookies with the the given name and partitionKey
-   *     where all partition key attributes match the cookie partition key attribute.
+   *     where domain matches provided URL.
    */
   void deleteCookies(
       @ParamName("name") String name,
       @Optional @ParamName("url") String url,
       @Optional @ParamName("domain") String domain,
       @Optional @ParamName("path") String path,
-      @Experimental @Optional @ParamName("partitionKey") CookiePartitionKey partitionKey);
+      @Experimental @Optional @ParamName("partitionKey") String partitionKey);
 
   /** Disables network tracking, prevents network events from being sent to the client. */
   void disable();
@@ -425,8 +423,9 @@ public interface Network {
    *     unspecified port. An unspecified port value allows protocol clients to emulate legacy
    *     cookie scope for the port. This is a temporary ability and it will be removed in the
    *     future.
-   * @param partitionKey Cookie partition key. If not set, the cookie will be set as not
-   *     partitioned.
+   * @param partitionKey Cookie partition key. The site of the top-level URL the browser was
+   *     visiting at the start of the request to the endpoint that set the cookie. If not set, the
+   *     cookie will be set as not partitioned.
    */
   @Returns("success")
   Boolean setCookie(
@@ -443,7 +442,7 @@ public interface Network {
       @Experimental @Optional @ParamName("sameParty") Boolean sameParty,
       @Experimental @Optional @ParamName("sourceScheme") CookieSourceScheme sourceScheme,
       @Experimental @Optional @ParamName("sourcePort") Integer sourcePort,
-      @Experimental @Optional @ParamName("partitionKey") CookiePartitionKey partitionKey);
+      @Experimental @Optional @ParamName("partitionKey") String partitionKey);
 
   /**
    * Sets given cookies.
@@ -667,11 +666,6 @@ public interface Network {
   @EventName("trustTokenOperationDone")
   @Experimental
   EventListener onTrustTokenOperationDone(EventHandler<TrustTokenOperationDone> eventListener);
-
-  /** Fired once security policy has been updated. */
-  @EventName("policyUpdated")
-  @Experimental
-  EventListener onPolicyUpdated(EventHandler<PolicyUpdated> eventListener);
 
   /**
    * Fired once when parsing the .wbn file has succeeded. The event contains the information about

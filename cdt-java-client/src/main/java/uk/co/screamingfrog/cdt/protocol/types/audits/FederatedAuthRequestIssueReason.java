@@ -62,12 +62,8 @@ public enum FederatedAuthRequestIssueReason {
   CLIENT_METADATA_INVALID_RESPONSE,
   @JsonProperty("ClientMetadataInvalidContentType")
   CLIENT_METADATA_INVALID_CONTENT_TYPE,
-  @JsonProperty("IdpNotPotentiallyTrustworthy")
-  IDP_NOT_POTENTIALLY_TRUSTWORTHY,
   @JsonProperty("DisabledInSettings")
   DISABLED_IN_SETTINGS,
-  @JsonProperty("DisabledInFlags")
-  DISABLED_IN_FLAGS,
   @JsonProperty("ErrorFetchingSignin")
   ERROR_FETCHING_SIGNIN,
   @JsonProperty("InvalidSigninResponse")
@@ -111,11 +107,5 @@ public enum FederatedAuthRequestIssueReason {
   @JsonProperty("MissingTransientUserActivation")
   MISSING_TRANSIENT_USER_ACTIVATION,
   @JsonProperty("ReplacedByButtonMode")
-  REPLACED_BY_BUTTON_MODE,
-  @JsonProperty("InvalidFieldsSpecified")
-  INVALID_FIELDS_SPECIFIED,
-  @JsonProperty("RelyingPartyOriginIsOpaque")
-  RELYING_PARTY_ORIGIN_IS_OPAQUE,
-  @JsonProperty("TypeNotMatching")
-  TYPE_NOT_MATCHING
+  REPLACED_BY_BUTTON_MODE
 }

@@ -92,8 +92,7 @@ public interface Tracing {
    *     `ReturnAsStream` transfer mode (defaults to `none`)
    * @param traceConfig
    * @param perfettoConfig Base64-encoded serialized perfetto.protos.TraceConfig protobuf message
-   *     When specified, the parameters `categories`, `options`, `traceConfig` are ignored. (Encoded
-   *     as a base64 string when passed over JSON)
+   *     When specified, the parameters `categories`, `options`, `traceConfig` are ignored.
    * @param tracingBackend Backend type (defaults to `auto`)
    */
   void start(

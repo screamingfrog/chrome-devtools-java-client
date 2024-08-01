@@ -88,11 +88,10 @@ public interface Fetch {
    * @param responseHeaders Response headers.
    * @param binaryResponseHeaders Alternative way of specifying response headers as a \0-separated
    *     series of name: value pairs. Prefer the above method unless you need to represent some
-   *     non-UTF8 values that can't be transmitted over the protocol as text. (Encoded as a base64
-   *     string when passed over JSON)
+   *     non-UTF8 values that can't be transmitted over the protocol as text.
    * @param body A response body. If absent, original response body will be used if the request is
    *     intercepted at the response stage and empty body will be used if the request is intercepted
-   *     at the request stage. (Encoded as a base64 string when passed over JSON)
+   *     at the request stage.
    * @param responsePhrase A textual representation of responseCode. If absent, a standard phrase
    *     matching responseCode is used.
    */
@@ -117,8 +116,7 @@ public interface Fetch {
    * @param requestId An id the client received in requestPaused event.
    * @param url If set, the request url will be modified in a way that's not observable by page.
    * @param method If set, the request method is overridden.
-   * @param postData If set, overrides the post data in the request. (Encoded as a base64 string
-   *     when passed over JSON)
+   * @param postData If set, overrides the post data in the request.
    * @param headers If set, overrides the request headers. Note that the overrides do not extend to
    *     subsequent redirect hops, if a redirect happens. Another override may be applied to a
    *     different request produced by a redirect.
@@ -162,8 +160,7 @@ public interface Fetch {
    * @param responseHeaders Response headers. If absent, original response headers will be used.
    * @param binaryResponseHeaders Alternative way of specifying response headers as a \0-separated
    *     series of name: value pairs. Prefer the above method unless you need to represent some
-   *     non-UTF8 values that can't be transmitted over the protocol as text. (Encoded as a base64
-   *     string when passed over JSON)
+   *     non-UTF8 values that can't be transmitted over the protocol as text.
    */
   @Experimental
   void continueResponse(

@@ -97,10 +97,6 @@ public enum PermissionsPolicyFeature {
   COMPUTE_PRESSURE,
   @JsonProperty("cross-origin-isolated")
   CROSS_ORIGIN_ISOLATED,
-  @JsonProperty("deferred-fetch")
-  DEFERRED_FETCH,
-  @JsonProperty("digital-credentials-get")
-  DIGITAL_CREDENTIALS_GET,
   @JsonProperty("direct-sockets")
   DIRECT_SOCKETS,
   @JsonProperty("display-capture")

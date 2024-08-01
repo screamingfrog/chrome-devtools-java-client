@@ -29,18 +29,12 @@ public class PrintToPDF {
 
   @Experimental @Optional private String stream;
 
-  /**
-   * Base64-encoded pdf data. Empty if |returnAsStream| is specified. (Encoded as a base64 string
-   * when passed over JSON)
-   */
+  /** Base64-encoded pdf data. Empty if |returnAsStream| is specified. */
   public String getData() {
     return data;
   }
 
-  /**
-   * Base64-encoded pdf data. Empty if |returnAsStream| is specified. (Encoded as a base64 string
-   * when passed over JSON)
-   */
+  /** Base64-encoded pdf data. Empty if |returnAsStream| is specified. */
   public void setData(String data) {
     this.data = data;
   }

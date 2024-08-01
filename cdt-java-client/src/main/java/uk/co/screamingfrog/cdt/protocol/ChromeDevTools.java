@@ -43,7 +43,6 @@ import uk.co.screamingfrog.cdt.protocol.commands.EventBreakpoints;
 import uk.co.screamingfrog.cdt.protocol.commands.Extensions;
 import uk.co.screamingfrog.cdt.protocol.commands.FedCm;
 import uk.co.screamingfrog.cdt.protocol.commands.Fetch;
-import uk.co.screamingfrog.cdt.protocol.commands.FileSystem;
 import uk.co.screamingfrog.cdt.protocol.commands.HeadlessExperimental;
 import uk.co.screamingfrog.cdt.protocol.commands.HeapProfiler;
 import uk.co.screamingfrog.cdt.protocol.commands.IO;
@@ -153,9 +152,6 @@ public interface ChromeDevTools {
 
   /** Returns the IO command. */
   IO getIO();
-
-  /** Returns the FileSystem command. */
-  FileSystem getFileSystem();
 
   /** Returns the IndexedDB command. */
   IndexedDB getIndexedDB();
