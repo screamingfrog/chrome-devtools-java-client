@@ -220,7 +220,7 @@ public class ChromeLauncher implements AutoCloseable {
   @Override
   public void close() {
     if (chromeProcess != null && chromeProcess.isAlive()) {
-      LOGGER.info("Closing chrome process...");
+      LOGGER.info("Destroying Chrome process with pid: {}", chromeProcess.pid());
       chromeProcess.destroy();
 
       try {
@@ -229,7 +229,7 @@ public class ChromeLauncher implements AutoCloseable {
           chromeProcess.waitFor(configuration.getShutdownWaitTime(), TimeUnit.SECONDS);
         }
 
-        LOGGER.info("Chrome process closed.");
+        LOGGER.debug("Chrome process closed.");
       } catch (InterruptedException e) {
         LOGGER.error("Interrupted while waiting for chrome process to shutdown.", e);
 
@@ -304,7 +304,7 @@ public class ChromeLauncher implements AutoCloseable {
 
     try {
       chromeProcess = processLauncher.launch(chromeBinary.toString(), arguments);
-
+      LOGGER.info("Started Chrome process with pid: {}", chromeProcess.pid());
       return waitForDevToolsServer(chromeProcess);
     } catch (IOException e) {
       // Unsubscribe from registry on exceptions.
