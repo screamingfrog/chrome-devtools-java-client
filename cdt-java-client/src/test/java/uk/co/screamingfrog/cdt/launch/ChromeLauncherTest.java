@@ -197,6 +197,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
 
     final String trigger = "\r\n\r\nDevTools listening on ws://127.0.0.1:9123/";
     expect(process.getInputStream()).andReturn(new ByteArrayInputStream(trigger.getBytes()));
+    expect(process.pid()).andReturn(10L);
     expect(process.isAlive()).andReturn(true);
 
     Capture<List<String>> captureArguments = Capture.newInstance();
@@ -244,6 +245,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
     expect(process.waitFor(60, TimeUnit.SECONDS)).andReturn(true);
     expect(process.isAlive()).andReturn(true);
     expect(process.isAlive()).andReturn(false);
+    expect(process.pid()).andReturn(10L);
 
     shutdownHookRegistry.remove(anyObject());
 
@@ -285,6 +287,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
     Capture<List<String>> captureArguments = Capture.newInstance();
     expect(processLauncher.launch(eq("test-binary-path"), capture(captureArguments)))
         .andReturn(process);
+    expect(process.pid()).andReturn(10L);
     expect(process.isAlive()).andReturn(true);
 
     replayAll();
@@ -318,6 +321,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
     // Test closing
     resetAll();
 
+    expect(process.pid()).andReturn(10L);
     process.destroy();
     expect(process.waitFor(60, TimeUnit.SECONDS)).andReturn(true);
 
@@ -350,6 +354,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
 
     final String trigger = "\r\n\r\nDevTools listening on ws://127.0.0.1:9123/";
     expect(process.getInputStream()).andReturn(new ByteArrayInputStream(trigger.getBytes()));
+    expect(process.pid()).andReturn(10L);
     expect(process.isAlive()).andReturn(true);
 
     Capture<List<String>> captureArguments = Capture.newInstance();
@@ -389,7 +394,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
     expect(process.waitFor(60, TimeUnit.SECONDS)).andThrow(new InterruptedException());
 
     expect(process.destroyForcibly()).andReturn(process);
-
+    expect(process.pid()).andReturn(10L);
     expect(process.isAlive()).andReturn(true);
 
     shutdownHookRegistry.remove(anyObject());
@@ -410,6 +415,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
       throws IOException, InterruptedException, ChromeProcessTimeoutException {
     expect(environment.getEnv("CHROME_PATH")).andReturn("/test-binary-path");
     expect(processLauncher.isExecutable("/test-binary-path")).andReturn(true);
+    expect(process.pid()).andReturn(10L);
 
     shutdownHookRegistry.register(anyObject());
 
@@ -479,6 +485,8 @@ public class ChromeLauncherTest extends EasyMockSupport {
 
     expect(process.getInputStream()).andThrow(new RuntimeException("test exception"));
     expect(process.isAlive()).andReturn(true);
+    expect(process.pid()).andReturn(10L);
+    expect(process.pid()).andReturn(10L);
 
     Capture<List<String>> captureArguments = Capture.newInstance();
     expect(processLauncher.launch(eq("/test-binary-path"), capture(captureArguments)))
@@ -513,6 +521,8 @@ public class ChromeLauncherTest extends EasyMockSupport {
     final String trigger = "test\r\ntest";
     expect(process.getInputStream()).andReturn(new ByteArrayInputStream(trigger.getBytes()));
     expect(process.isAlive()).andReturn(true);
+    expect(process.pid()).andReturn(10L);
+    expect(process.pid()).andReturn(10L);
 
     Capture<List<String>> captureArguments = Capture.newInstance();
     expect(processLauncher.launch(eq("test-binary-path"), capture(captureArguments)))
@@ -571,6 +581,8 @@ public class ChromeLauncherTest extends EasyMockSupport {
     expect(process.waitFor(60, TimeUnit.SECONDS)).andReturn(false);
     expect(process.destroyForcibly()).andReturn(process);
     expect(process.waitFor(60, TimeUnit.SECONDS)).andReturn(true);
+    expect(process.pid()).andReturn(10L);
+    expect(process.pid()).andReturn(10L);
 
     Capture<Thread> removeCaptureShutdownThread = Capture.newInstance();
     shutdownHookRegistry.remove(capture(removeCaptureShutdownThread));
@@ -608,6 +620,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
     final String trigger = "\r\n\r\nDevTools listening on ws://127.0.0.1:9123/";
     expect(process.getInputStream()).andReturn(new ByteArrayInputStream(trigger.getBytes()));
 
+    expect(process.pid()).andReturn(10L);
     expect(process.isAlive()).andReturn(true);
 
     Capture<List<String>> captureArguments = Capture.newInstance();
@@ -640,6 +653,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
     final String trigger = "\r\n\r\nDevTools listening on ws://127.0.0.1:9123/";
     expect(process.getInputStream()).andReturn(new ByteArrayInputStream(trigger.getBytes()));
 
+    expect(process.pid()).andReturn(10L);
     expect(process.exitValue()).andReturn(123);
 
     Capture<List<String>> captureArguments = Capture.newInstance();
@@ -686,6 +700,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
     final String trigger =
         "first-line\r\nsecond-line\r\nDevTools listening on ws://127.0.0.1:9123/\r\nthird-line\r\nforth-line\r\n";
     expect(process.getInputStream()).andReturn(new ByteArrayInputStream(trigger.getBytes()));
+    expect(process.pid()).andReturn(10L);
 
     expect(processLauncher.launch(eq("/test-binary-path"), anyObject())).andReturn(process);
 
@@ -730,6 +745,7 @@ public class ChromeLauncherTest extends EasyMockSupport {
     final String trigger =
         "first-line\r\nsecond-line\r\nDevTools listening on ws://127.0.0.1:9123/\r\nthird-line\r\nforth-line\r\n";
     expect(process.getInputStream()).andReturn(new ByteArrayInputStream(trigger.getBytes()));
+    expect(process.pid()).andReturn(10L);
 
     expect(processLauncher.launch(eq("/test-binary-path"), anyObject())).andReturn(process);
 
