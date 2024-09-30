@@ -24,7 +24,6 @@ import static uk.co.screamingfrog.cdt.utils.ChromeDevToolsUtils.closeQuietly;
 import static uk.co.screamingfrog.cdt.utils.FilesUtils.deleteQuietly;
 import static uk.co.screamingfrog.cdt.utils.FilesUtils.randomTempDir;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
@@ -304,6 +303,13 @@ public class ChromeLauncher implements AutoCloseable {
 
     try {
       chromeProcess = processLauncher.launch(chromeBinary.toString(), arguments);
+
+      try {
+        Thread.sleep(TimeUnit.SECONDS.toMillis(10));
+      } catch (InterruptedException e) {
+        LOGGER.info("interupeted {}", e, e);
+      }
+
       LOGGER.info("Started Chrome process with pid: {}", chromeProcess.pid());
       return waitForDevToolsServer(chromeProcess);
     } catch (IOException e) {
@@ -332,37 +338,29 @@ public class ChromeLauncher implements AutoCloseable {
         new Thread(
             () -> {
               StringBuilder chromeOutputBuilder = new StringBuilder();
-              BufferedReader reader = null;
+              InputStreamReader reader = null;
               try {
-                reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                reader = new InputStreamReader(process.getInputStream());
 
-                // Wait for DevTools listening line and extract port number.
-                String line;
-                while ((line = reader.readLine()) != null) {
-                  CHROME_OUTPUT_LOGGER.debug(line);
+                LOGGER.info("Got reader");
 
-                  if (!port.isDone()) {
-                    Matcher matcher = DEVTOOLS_LISTENING_LINE_PATTERN.matcher(line);
-                    if (matcher.find()) {
-                      port.complete(Integer.parseInt(matcher.group(1)));
-                      if (!CHROME_OUTPUT_LOGGER.isDebugEnabled()) {
-                        // no need to keep reading, ending the thread
-                        break;
-                      }
+                StringBuilder line = new StringBuilder();
+                int c = reader.read();
 
-                      // no longer needed, clearing
-                      chromeOutputBuilder = null;
-                      chromeOutput.set(null);
-                    } else {
-                      if (chromeOutputBuilder.length() != 0) {
-                        chromeOutputBuilder.append(System.lineSeparator());
-                      }
-                      chromeOutputBuilder.append(line);
-                      chromeOutput.set(chromeOutputBuilder.toString());
-                    }
+                while (c != -1) {
+
+                  if (c == '\n') {
+                    handleLine(line.toString(), port, chromeOutput, chromeOutputBuilder);
+                    line = new StringBuilder();
+                  } else {
+                    line.append((char) c);
+                    LOGGER.info("line so far: [{}]", line.toString());
                   }
+                  c = reader.read();
                 }
               } catch (Exception e) {
+                LOGGER.info("excepton {}", e, e);
+
                 if (port.isDone()) {
                   LOGGER.debug("Error while reading Chrome process output.", e);
                 } else {
@@ -378,6 +376,9 @@ public class ChromeLauncher implements AutoCloseable {
     readLineThread.start();
 
     try {
+      LOGGER.info(
+          "Waiting {} seconds fro deve toosl to come up", configuration.getStartupWaitTime());
+      LOGGER.info("Config {} ", configuration);
       return port.get(configuration.getStartupWaitTime(), TimeUnit.SECONDS);
     } catch (TimeoutException e) {
       close(readLineThread);
@@ -395,6 +396,39 @@ public class ChromeLauncher implements AutoCloseable {
       close(readLineThread);
       // exception already logged before completeExceptionally
       throw new RuntimeException("Failed while waiting for dev tools server.", e);
+    }
+  }
+
+  private void handleLine(
+      final String line,
+      final CompletableFuture<Integer> port,
+      final AtomicReference<String> chromeOutput,
+      final StringBuilder chromeOutputBuilder) {
+
+    LOGGER.info("handleLine: [{}]", line);
+
+    CHROME_OUTPUT_LOGGER.debug(line);
+
+    if (!port.isDone()) {
+      LOGGER.info("Port not done");
+
+      Matcher matcher = DEVTOOLS_LISTENING_LINE_PATTERN.matcher(line);
+
+      if (matcher.find()) {
+        LOGGER.info("matcher found");
+        port.complete(Integer.parseInt(matcher.group(1)));
+
+        // no longer needed, clearing
+        chromeOutput.set(null);
+      } else {
+        LOGGER.info("matcher not found");
+
+        if (chromeOutputBuilder.length() != 0) {
+          chromeOutputBuilder.append(System.lineSeparator());
+        }
+        chromeOutputBuilder.append(line);
+        chromeOutput.set(chromeOutputBuilder.toString());
+      }
     }
   }
 
