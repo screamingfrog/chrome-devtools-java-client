@@ -33,6 +33,8 @@ public class CSSPositionTryRule {
 
   private CSSStyle style;
 
+  private Boolean active;
+
   /** The prelude dashed-ident name */
   public Value getName() {
     return name;
@@ -77,5 +79,13 @@ public class CSSPositionTryRule {
   /** Associated style declaration. */
   public void setStyle(CSSStyle style) {
     this.style = style;
+  }
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
   }
 }

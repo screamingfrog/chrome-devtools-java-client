@@ -46,6 +46,7 @@ import uk.co.screamingfrog.cdt.protocol.support.types.EventHandler;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.dom.BoxModel;
 import uk.co.screamingfrog.cdt.protocol.types.dom.CSSComputedStyleProperty;
+import uk.co.screamingfrog.cdt.protocol.types.dom.DetachedElementInfo;
 import uk.co.screamingfrog.cdt.protocol.types.dom.EnableIncludeWhitespace;
 import uk.co.screamingfrog.cdt.protocol.types.dom.FrameOwner;
 import uk.co.screamingfrog.cdt.protocol.types.dom.GetElementByRelationRelation;
@@ -658,6 +659,12 @@ public interface DOM {
   @Returns("path")
   String getFileInfo(@ParamName("objectId") String objectId);
 
+  /** Returns list of detached nodes */
+  @Experimental
+  @Returns("detachedNodes")
+  @ReturnTypeParameter(DetachedElementInfo.class)
+  List<DetachedElementInfo> getDetachedDomNodes();
+
   /**
    * Enables console to refer to the node with given id via $x (see Command Line API for more
    * details $x functions).
@@ -743,6 +750,31 @@ public interface DOM {
   @Returns("nodeIds")
   @ReturnTypeParameter(Integer.class)
   List<Integer> getQueryingDescendantsForContainer(@ParamName("nodeId") Integer nodeId);
+
+  /**
+   * Returns the target anchor element of the given anchor query according to
+   * https://www.w3.org/TR/css-anchor-position-1/#target.
+   *
+   * @param nodeId Id of the positioned element from which to find the anchor.
+   */
+  @Experimental
+  @Returns("nodeId")
+  Integer getAnchorElement(@ParamName("nodeId") Integer nodeId);
+
+  /**
+   * Returns the target anchor element of the given anchor query according to
+   * https://www.w3.org/TR/css-anchor-position-1/#target.
+   *
+   * @param nodeId Id of the positioned element from which to find the anchor.
+   * @param anchorSpecifier An optional anchor specifier, as defined in
+   *     https://www.w3.org/TR/css-anchor-position-1/#anchor-specifier. If not provided, it will
+   *     return the implicit anchor element for the given positioned element.
+   */
+  @Experimental
+  @Returns("nodeId")
+  Integer getAnchorElement(
+      @ParamName("nodeId") Integer nodeId,
+      @Optional @ParamName("anchorSpecifier") String anchorSpecifier);
 
   /** Fired when `Element`'s attribute is modified. */
   @EventName("attributeModified")

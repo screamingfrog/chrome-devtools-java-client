@@ -40,9 +40,9 @@ public class MatchedStylesForNode {
 
   @Optional private List<CSSKeyframesRule> cssKeyframesRules;
 
-  @Deprecated @Optional private List<CSSPositionFallbackRule> cssPositionFallbackRules;
-
   @Optional private List<CSSPositionTryRule> cssPositionTryRules;
+
+  @Optional private Integer activePositionFallbackIndex;
 
   @Optional private List<CSSPropertyRule> cssPropertyRules;
 
@@ -129,18 +129,8 @@ public class MatchedStylesForNode {
     this.cssKeyframesRules = cssKeyframesRules;
   }
 
-  /** A list of CSS position fallbacks matching this node. */
-  public List<CSSPositionFallbackRule> getCssPositionFallbackRules() {
-    return cssPositionFallbackRules;
-  }
-
-  /** A list of CSS position fallbacks matching this node. */
-  public void setCssPositionFallbackRules(List<CSSPositionFallbackRule> cssPositionFallbackRules) {
-    this.cssPositionFallbackRules = cssPositionFallbackRules;
-  }
-
   /**
-   * A list of CSS @position-try rules matching this node, based on the position-try-options
+   * A list of CSS @position-try rules matching this node, based on the position-try-fallbacks
    * property.
    */
   public List<CSSPositionTryRule> getCssPositionTryRules() {
@@ -148,11 +138,27 @@ public class MatchedStylesForNode {
   }
 
   /**
-   * A list of CSS @position-try rules matching this node, based on the position-try-options
+   * A list of CSS @position-try rules matching this node, based on the position-try-fallbacks
    * property.
    */
   public void setCssPositionTryRules(List<CSSPositionTryRule> cssPositionTryRules) {
     this.cssPositionTryRules = cssPositionTryRules;
+  }
+
+  /**
+   * Index of the active fallback in the applied position-try-fallback property, will not be set if
+   * there is no active position-try fallback.
+   */
+  public Integer getActivePositionFallbackIndex() {
+    return activePositionFallbackIndex;
+  }
+
+  /**
+   * Index of the active fallback in the applied position-try-fallback property, will not be set if
+   * there is no active position-try fallback.
+   */
+  public void setActivePositionFallbackIndex(Integer activePositionFallbackIndex) {
+    this.activePositionFallbackIndex = activePositionFallbackIndex;
   }
 
   /** A list of CSS at-property rules matching this node. */

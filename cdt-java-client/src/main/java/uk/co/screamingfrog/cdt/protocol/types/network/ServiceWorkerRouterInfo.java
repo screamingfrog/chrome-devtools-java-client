@@ -30,6 +30,8 @@ public class ServiceWorkerRouterInfo {
 
   @Optional private ServiceWorkerRouterSource matchedSourceType;
 
+  @Optional private ServiceWorkerRouterSource actualSourceType;
+
   /**
    * ID of the rule matched. If there is a matched rule, this field will be set, otherwiser no value
    * will be set.
@@ -60,5 +62,15 @@ public class ServiceWorkerRouterInfo {
    */
   public void setMatchedSourceType(ServiceWorkerRouterSource matchedSourceType) {
     this.matchedSourceType = matchedSourceType;
+  }
+
+  /** The actual router source used. */
+  public ServiceWorkerRouterSource getActualSourceType() {
+    return actualSourceType;
+  }
+
+  /** The actual router source used. */
+  public void setActualSourceType(ServiceWorkerRouterSource actualSourceType) {
+    this.actualSourceType = actualSourceType;
   }
 }

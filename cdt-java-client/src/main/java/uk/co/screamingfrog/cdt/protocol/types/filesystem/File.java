@@ -1,4 +1,4 @@
-package uk.co.screamingfrog.cdt.protocol.types.css;
+package uk.co.screamingfrog.cdt.protocol.types.filesystem;
 
 /*-
  * #%L
@@ -20,31 +20,49 @@ package uk.co.screamingfrog.cdt.protocol.types.css;
  * #L%
  */
 
-import java.util.List;
+public class File {
 
-/** CSS position-fallback rule representation. */
-@Deprecated
-public class CSSPositionFallbackRule {
+  private String name;
 
-  private Value name;
+  private Double lastModified;
 
-  private List<CSSTryRule> tryRules;
+  private Double size;
 
-  public Value getName() {
+  private String type;
+
+  public String getName() {
     return name;
   }
 
-  public void setName(Value name) {
+  public void setName(String name) {
     this.name = name;
   }
 
-  /** List of keyframes. */
-  public List<CSSTryRule> getTryRules() {
-    return tryRules;
+  /** Timestamp */
+  public Double getLastModified() {
+    return lastModified;
   }
 
-  /** List of keyframes. */
-  public void setTryRules(List<CSSTryRule> tryRules) {
-    this.tryRules = tryRules;
+  /** Timestamp */
+  public void setLastModified(Double lastModified) {
+    this.lastModified = lastModified;
+  }
+
+  /** Size in bytes */
+  public Double getSize() {
+    return size;
+  }
+
+  /** Size in bytes */
+  public void setSize(Double size) {
+    this.size = size;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 }

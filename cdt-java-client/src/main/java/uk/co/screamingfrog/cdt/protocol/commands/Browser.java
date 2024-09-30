@@ -254,7 +254,7 @@ public interface Browser {
    * Set dock tile details, platform-specific.
    *
    * @param badgeLabel
-   * @param image Png encoded image.
+   * @param image Png encoded image. (Encoded as a base64 string when passed over JSON)
    */
   @Experimental
   void setDockTile(

@@ -159,5 +159,11 @@ public enum PrerenderFinalStatus {
   @JsonProperty("JavaScriptInterfaceRemoved")
   JAVA_SCRIPT_INTERFACE_REMOVED,
   @JsonProperty("AllPrerenderingCanceled")
-  ALL_PRERENDERING_CANCELED
+  ALL_PRERENDERING_CANCELED,
+  @JsonProperty("WindowClosed")
+  WINDOW_CLOSED,
+  @JsonProperty("SlowNetwork")
+  SLOW_NETWORK,
+  @JsonProperty("OtherPrerenderedPageActivated")
+  OTHER_PRERENDERED_PAGE_ACTIVATED
 }

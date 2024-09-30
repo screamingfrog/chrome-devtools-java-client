@@ -21,6 +21,7 @@ package uk.co.screamingfrog.cdt.protocol.types.network;
  */
 
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
+import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 
 /** Timing information for the request. */
 public class ResourceTiming {
@@ -50,6 +51,10 @@ public class ResourceTiming {
   @Experimental private Double workerFetchStart;
 
   @Experimental private Double workerRespondWithSettled;
+
+  @Experimental @Optional private Double workerRouterEvaluationStart;
+
+  @Experimental @Optional private Double workerCacheLookupStart;
 
   private Double sendStart;
 
@@ -197,6 +202,26 @@ public class ResourceTiming {
   /** Settled fetch event respondWith promise. */
   public void setWorkerRespondWithSettled(Double workerRespondWithSettled) {
     this.workerRespondWithSettled = workerRespondWithSettled;
+  }
+
+  /** Started ServiceWorker static routing source evaluation. */
+  public Double getWorkerRouterEvaluationStart() {
+    return workerRouterEvaluationStart;
+  }
+
+  /** Started ServiceWorker static routing source evaluation. */
+  public void setWorkerRouterEvaluationStart(Double workerRouterEvaluationStart) {
+    this.workerRouterEvaluationStart = workerRouterEvaluationStart;
+  }
+
+  /** Started cache lookup when the source was evaluated to `cache`. */
+  public Double getWorkerCacheLookupStart() {
+    return workerCacheLookupStart;
+  }
+
+  /** Started cache lookup when the source was evaluated to `cache`. */
+  public void setWorkerCacheLookupStart(Double workerCacheLookupStart) {
+    this.workerCacheLookupStart = workerCacheLookupStart;
   }
 
   /** Started sending request. */

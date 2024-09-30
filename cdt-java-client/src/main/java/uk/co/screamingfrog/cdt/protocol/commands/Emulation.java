@@ -34,6 +34,9 @@ import uk.co.screamingfrog.cdt.protocol.types.emulation.DevicePosture;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.DisabledImageType;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.DisplayFeature;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.MediaFeature;
+import uk.co.screamingfrog.cdt.protocol.types.emulation.PressureMetadata;
+import uk.co.screamingfrog.cdt.protocol.types.emulation.PressureSource;
+import uk.co.screamingfrog.cdt.protocol.types.emulation.PressureState;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.ScreenOrientation;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.SensorMetadata;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.SensorReading;
@@ -297,6 +300,45 @@ public interface Emulation {
   @Experimental
   void setSensorOverrideReadings(
       @ParamName("type") SensorType type, @ParamName("reading") SensorReading reading);
+
+  /**
+   * Overrides a pressure source of a given type, as used by the Compute Pressure API, so that
+   * updates to PressureObserver.observe() are provided via setPressureStateOverride instead of
+   * being retrieved from platform-provided telemetry data.
+   *
+   * @param enabled
+   * @param source
+   */
+  @Experimental
+  void setPressureSourceOverrideEnabled(
+      @ParamName("enabled") Boolean enabled, @ParamName("source") PressureSource source);
+
+  /**
+   * Overrides a pressure source of a given type, as used by the Compute Pressure API, so that
+   * updates to PressureObserver.observe() are provided via setPressureStateOverride instead of
+   * being retrieved from platform-provided telemetry data.
+   *
+   * @param enabled
+   * @param source
+   * @param metadata
+   */
+  @Experimental
+  void setPressureSourceOverrideEnabled(
+      @ParamName("enabled") Boolean enabled,
+      @ParamName("source") PressureSource source,
+      @Optional @ParamName("metadata") PressureMetadata metadata);
+
+  /**
+   * Provides a given pressure state that will be processed and eventually be delivered to
+   * PressureObserver users. |source| must have been previously overridden by
+   * setPressureSourceOverrideEnabled.
+   *
+   * @param source
+   * @param state
+   */
+  @Experimental
+  void setPressureStateOverride(
+      @ParamName("source") PressureSource source, @ParamName("state") PressureState state);
 
   /**
    * Overrides the Idle state.

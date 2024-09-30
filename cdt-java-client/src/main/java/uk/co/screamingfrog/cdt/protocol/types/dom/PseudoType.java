@@ -52,8 +52,12 @@ public enum PseudoType {
   FIRST_LINE_INHERITED,
   @JsonProperty("scroll-marker")
   SCROLL_MARKER,
-  @JsonProperty("scroll-markers")
-  SCROLL_MARKERS,
+  @JsonProperty("scroll-marker-group")
+  SCROLL_MARKER_GROUP,
+  @JsonProperty("scroll-next-button")
+  SCROLL_NEXT_BUTTON,
+  @JsonProperty("scroll-prev-button")
+  SCROLL_PREV_BUTTON,
   @JsonProperty("scrollbar")
   SCROLLBAR,
   @JsonProperty("scrollbar-thumb")

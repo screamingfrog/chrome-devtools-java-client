@@ -25,6 +25,7 @@ import uk.co.screamingfrog.cdt.protocol.commands.Animation;
 import uk.co.screamingfrog.cdt.protocol.commands.Audits;
 import uk.co.screamingfrog.cdt.protocol.commands.Autofill;
 import uk.co.screamingfrog.cdt.protocol.commands.BackgroundService;
+import uk.co.screamingfrog.cdt.protocol.commands.BluetoothEmulation;
 import uk.co.screamingfrog.cdt.protocol.commands.Browser;
 import uk.co.screamingfrog.cdt.protocol.commands.CSS;
 import uk.co.screamingfrog.cdt.protocol.commands.CacheStorage;
@@ -43,6 +44,7 @@ import uk.co.screamingfrog.cdt.protocol.commands.EventBreakpoints;
 import uk.co.screamingfrog.cdt.protocol.commands.Extensions;
 import uk.co.screamingfrog.cdt.protocol.commands.FedCm;
 import uk.co.screamingfrog.cdt.protocol.commands.Fetch;
+import uk.co.screamingfrog.cdt.protocol.commands.FileSystem;
 import uk.co.screamingfrog.cdt.protocol.commands.HeadlessExperimental;
 import uk.co.screamingfrog.cdt.protocol.commands.HeapProfiler;
 import uk.co.screamingfrog.cdt.protocol.commands.IO;
@@ -153,6 +155,9 @@ public interface ChromeDevTools {
   /** Returns the IO command. */
   IO getIO();
 
+  /** Returns the FileSystem command. */
+  FileSystem getFileSystem();
+
   /** Returns the IndexedDB command. */
   IndexedDB getIndexedDB();
 
@@ -230,4 +235,7 @@ public interface ChromeDevTools {
 
   /** Returns the PWA command. */
   PWA getPWA();
+
+  /** Returns the BluetoothEmulation command. */
+  BluetoothEmulation getBluetoothEmulation();
 }

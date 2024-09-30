@@ -29,6 +29,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public enum PermissionsPolicyFeature {
   @JsonProperty("accelerometer")
   ACCELEROMETER,
+  @JsonProperty("all-screens-capture")
+  ALL_SCREENS_CAPTURE,
   @JsonProperty("ambient-light-sensor")
   AMBIENT_LIGHT_SENSOR,
   @JsonProperty("attribution-reporting")
@@ -97,6 +99,10 @@ public enum PermissionsPolicyFeature {
   COMPUTE_PRESSURE,
   @JsonProperty("cross-origin-isolated")
   CROSS_ORIGIN_ISOLATED,
+  @JsonProperty("deferred-fetch")
+  DEFERRED_FETCH,
+  @JsonProperty("digital-credentials-get")
+  DIGITAL_CREDENTIALS_GET,
   @JsonProperty("direct-sockets")
   DIRECT_SOCKETS,
   @JsonProperty("display-capture")
@@ -137,6 +143,8 @@ public enum PermissionsPolicyFeature {
   LOCAL_FONTS,
   @JsonProperty("magnetometer")
   MAGNETOMETER,
+  @JsonProperty("media-playback-while-not-visible")
+  MEDIA_PLAYBACK_WHILE_NOT_VISIBLE,
   @JsonProperty("microphone")
   MICROPHONE,
   @JsonProperty("midi")

@@ -23,8 +23,6 @@ package uk.co.screamingfrog.cdt.protocol.types.audits;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum GenericIssueErrorType {
-  @JsonProperty("CrossOriginPortalPostMessageError")
-  CROSS_ORIGIN_PORTAL_POST_MESSAGE_ERROR,
   @JsonProperty("FormLabelForNameError")
   FORM_LABEL_FOR_NAME_ERROR,
   @JsonProperty("FormDuplicateIdForInputError")

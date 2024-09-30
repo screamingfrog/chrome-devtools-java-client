@@ -55,6 +55,10 @@ public class AttributionReportingSourceRegistration {
 
   private AttributionReportingTriggerDataMatching triggerDataMatching;
 
+  private String destinationLimitPriority;
+
+  private AttributionReportingAggregatableDebugReportingConfig aggregatableDebugReportingConfig;
+
   public Double getTime() {
     return time;
   }
@@ -169,5 +173,23 @@ public class AttributionReportingSourceRegistration {
 
   public void setTriggerDataMatching(AttributionReportingTriggerDataMatching triggerDataMatching) {
     this.triggerDataMatching = triggerDataMatching;
+  }
+
+  public String getDestinationLimitPriority() {
+    return destinationLimitPriority;
+  }
+
+  public void setDestinationLimitPriority(String destinationLimitPriority) {
+    this.destinationLimitPriority = destinationLimitPriority;
+  }
+
+  public AttributionReportingAggregatableDebugReportingConfig
+      getAggregatableDebugReportingConfig() {
+    return aggregatableDebugReportingConfig;
+  }
+
+  public void setAggregatableDebugReportingConfig(
+      AttributionReportingAggregatableDebugReportingConfig aggregatableDebugReportingConfig) {
+    this.aggregatableDebugReportingConfig = aggregatableDebugReportingConfig;
   }
 }

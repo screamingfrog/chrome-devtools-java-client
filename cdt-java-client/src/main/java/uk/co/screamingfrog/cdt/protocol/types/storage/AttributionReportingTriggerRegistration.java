@@ -39,6 +39,8 @@ public class AttributionReportingTriggerRegistration {
 
   private List<AttributionReportingAggregatableValueEntry> aggregatableValues;
 
+  private Integer aggregatableFilteringIdMaxBytes;
+
   private Boolean debugReporting;
 
   @Optional private String aggregationCoordinatorOrigin;
@@ -46,6 +48,8 @@ public class AttributionReportingTriggerRegistration {
   private AttributionReportingSourceRegistrationTimeConfig sourceRegistrationTimeConfig;
 
   @Optional private String triggerContextId;
+
+  private AttributionReportingAggregatableDebugReportingConfig aggregatableDebugReportingConfig;
 
   public AttributionReportingFilterPair getFilters() {
     return filters;
@@ -98,6 +102,14 @@ public class AttributionReportingTriggerRegistration {
     this.aggregatableValues = aggregatableValues;
   }
 
+  public Integer getAggregatableFilteringIdMaxBytes() {
+    return aggregatableFilteringIdMaxBytes;
+  }
+
+  public void setAggregatableFilteringIdMaxBytes(Integer aggregatableFilteringIdMaxBytes) {
+    this.aggregatableFilteringIdMaxBytes = aggregatableFilteringIdMaxBytes;
+  }
+
   public Boolean getDebugReporting() {
     return debugReporting;
   }
@@ -129,5 +141,15 @@ public class AttributionReportingTriggerRegistration {
 
   public void setTriggerContextId(String triggerContextId) {
     this.triggerContextId = triggerContextId;
+  }
+
+  public AttributionReportingAggregatableDebugReportingConfig
+      getAggregatableDebugReportingConfig() {
+    return aggregatableDebugReportingConfig;
+  }
+
+  public void setAggregatableDebugReportingConfig(
+      AttributionReportingAggregatableDebugReportingConfig aggregatableDebugReportingConfig) {
+    this.aggregatableDebugReportingConfig = aggregatableDebugReportingConfig;
   }
 }

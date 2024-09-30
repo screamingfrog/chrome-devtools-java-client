@@ -135,7 +135,7 @@ public class TargetInfo {
 
   /**
    * Provides additional details for specific target types. For example, for the type of "page",
-   * this may be set to "portal" or "prerender".
+   * this may be set to "prerender".
    */
   public String getSubtype() {
     return subtype;
@@ -143,7 +143,7 @@ public class TargetInfo {
 
   /**
    * Provides additional details for specific target types. For example, for the type of "page",
-   * this may be set to "portal" or "prerender".
+   * this may be set to "prerender".
    */
   public void setSubtype(String subtype) {
     this.subtype = subtype;
