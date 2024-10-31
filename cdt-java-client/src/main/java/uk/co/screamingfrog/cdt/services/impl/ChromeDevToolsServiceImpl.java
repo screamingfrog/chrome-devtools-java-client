@@ -21,6 +21,8 @@ package uk.co.screamingfrog.cdt.services.impl;
  */
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.StreamReadConstraints;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,7 +30,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -63,8 +69,15 @@ public abstract class ChromeDevToolsServiceImpl
   private static final String METHOD_PROPERTY = "method";
   private static final String PARAMS_PROPERTY = "params";
 
+  private static final int MAX_PAGE_SIZE_BYTES = 100_000_000;
+  private static final JsonFactory factory =
+      JsonFactory.builder()
+          .streamReadConstraints(
+              StreamReadConstraints.builder().maxStringLength(MAX_PAGE_SIZE_BYTES).build())
+          .build();
+
   private static final ObjectMapper OBJECT_MAPPER =
-      new ObjectMapper()
+      new ObjectMapper(factory)
           .setSerializationInclusion(JsonInclude.Include.NON_NULL)
           .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
