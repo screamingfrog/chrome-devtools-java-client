@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.dom;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,8 @@ public enum PseudoType {
   MARKER,
   @JsonProperty("backdrop")
   BACKDROP,
+  @JsonProperty("column")
+  COLUMN,
   @JsonProperty("selection")
   SELECTION,
   @JsonProperty("search-text")
@@ -83,5 +85,17 @@ public enum PseudoType {
   @JsonProperty("view-transition-old")
   VIEW_TRANSITION_OLD,
   @JsonProperty("view-transition-new")
-  VIEW_TRANSITION_NEW
+  VIEW_TRANSITION_NEW,
+  @JsonProperty("placeholder")
+  PLACEHOLDER,
+  @JsonProperty("file-selector-button")
+  FILE_SELECTOR_BUTTON,
+  @JsonProperty("details-content")
+  DETAILS_CONTENT,
+  @JsonProperty("select-fallback-button")
+  SELECT_FALLBACK_BUTTON,
+  @JsonProperty("select-fallback-button-text")
+  SELECT_FALLBACK_BUTTON_TEXT,
+  @JsonProperty("picker")
+  PICKER
 }

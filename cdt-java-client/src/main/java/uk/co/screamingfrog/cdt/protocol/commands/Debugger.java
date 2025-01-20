@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -312,6 +312,16 @@ public interface Debugger {
   void setAsyncCallStackDepth(@ParamName("maxDepth") Integer maxDepth);
 
   /**
+   * Replace previous blackbox execution contexts with passed ones. Forces backend to skip
+   * stepping/pausing in scripts in these execution contexts. VM will try to leave blackboxed script
+   * by performing 'step in' several times, finally resorting to 'step out' if unsuccessful.
+   *
+   * @param uniqueIds Array of execution context unique ids for the debugger to ignore.
+   */
+  @Experimental
+  void setBlackboxExecutionContexts(@ParamName("uniqueIds") List<String> uniqueIds);
+
+  /**
    * Replace previous blackbox patterns with passed ones. Forces backend to skip stepping/pausing in
    * scripts with url matching one of the patterns. VM will try to leave blackboxed script by
    * performing 'step in' several times, finally resorting to 'step out' if unsuccessful.
@@ -320,6 +330,19 @@ public interface Debugger {
    */
   @Experimental
   void setBlackboxPatterns(@ParamName("patterns") List<String> patterns);
+
+  /**
+   * Replace previous blackbox patterns with passed ones. Forces backend to skip stepping/pausing in
+   * scripts with url matching one of the patterns. VM will try to leave blackboxed script by
+   * performing 'step in' several times, finally resorting to 'step out' if unsuccessful.
+   *
+   * @param patterns Array of regexps that will be used to check script url for blackbox state.
+   * @param skipAnonymous If true, also ignore scripts with no source url.
+   */
+  @Experimental
+  void setBlackboxPatterns(
+      @ParamName("patterns") List<String> patterns,
+      @Optional @ParamName("skipAnonymous") Boolean skipAnonymous);
 
   /**
    * Makes backend skip steps in the script in blackboxed ranges. VM will try leave blacklisted

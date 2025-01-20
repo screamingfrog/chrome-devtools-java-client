@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.audits;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,8 +110,8 @@ public enum FederatedAuthRequestIssueReason {
   NOT_SIGNED_IN_WITH_IDP,
   @JsonProperty("MissingTransientUserActivation")
   MISSING_TRANSIENT_USER_ACTIVATION,
-  @JsonProperty("ReplacedByButtonMode")
-  REPLACED_BY_BUTTON_MODE,
+  @JsonProperty("ReplacedByActiveMode")
+  REPLACED_BY_ACTIVE_MODE,
   @JsonProperty("InvalidFieldsSpecified")
   INVALID_FIELDS_SPECIFIED,
   @JsonProperty("RelyingPartyOriginIsOpaque")

@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.network;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,8 @@ public enum CookieExemptionReason {
   TPCD_METADATA,
   @JsonProperty("TPCDDeprecationTrial")
   TPCD_DEPRECATION_TRIAL,
+  @JsonProperty("TopLevelTPCDDeprecationTrial")
+  TOP_LEVEL_TPCD_DEPRECATION_TRIAL,
   @JsonProperty("TPCDHeuristics")
   TPCD_HEURISTICS,
   @JsonProperty("EnterprisePolicy")
@@ -42,8 +44,6 @@ public enum CookieExemptionReason {
   STORAGE_ACCESS,
   @JsonProperty("TopLevelStorageAccess")
   TOP_LEVEL_STORAGE_ACCESS,
-  @JsonProperty("CorsOptIn")
-  CORS_OPT_IN,
   @JsonProperty("Scheme")
   SCHEME
 }

@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.storage;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,6 +58,8 @@ public class AttributionReportingSourceRegistration {
   private String destinationLimitPriority;
 
   private AttributionReportingAggregatableDebugReportingConfig aggregatableDebugReportingConfig;
+
+  @Optional private AttributionScopesData scopesData;
 
   public Double getTime() {
     return time;
@@ -191,5 +193,13 @@ public class AttributionReportingSourceRegistration {
   public void setAggregatableDebugReportingConfig(
       AttributionReportingAggregatableDebugReportingConfig aggregatableDebugReportingConfig) {
     this.aggregatableDebugReportingConfig = aggregatableDebugReportingConfig;
+  }
+
+  public AttributionScopesData getScopesData() {
+    return scopesData;
+  }
+
+  public void setScopesData(AttributionScopesData scopesData) {
+    this.scopesData = scopesData;
   }
 }

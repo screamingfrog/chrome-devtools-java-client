@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,13 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #L%
  */
 
+import java.util.List;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.ParamName;
+import uk.co.screamingfrog.cdt.protocol.support.annotations.ReturnTypeParameter;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Returns;
+import uk.co.screamingfrog.cdt.protocol.types.memory.DOMCounter;
 import uk.co.screamingfrog.cdt.protocol.types.memory.DOMCounters;
 import uk.co.screamingfrog.cdt.protocol.types.memory.PressureLevel;
 import uk.co.screamingfrog.cdt.protocol.types.memory.SamplingProfile;
@@ -31,8 +34,18 @@ import uk.co.screamingfrog.cdt.protocol.types.memory.SamplingProfile;
 @Experimental
 public interface Memory {
 
+  /** Retruns current DOM object counters. */
   DOMCounters getDOMCounters();
 
+  /** Retruns DOM object counters after preparing renderer for leak detection. */
+  @Returns("counters")
+  @ReturnTypeParameter(DOMCounter.class)
+  List<DOMCounter> getDOMCountersForLeakDetection();
+
+  /**
+   * Prepares for leak detection by terminating workers, stopping spellcheckers, dropping
+   * non-essential internal caches, running garbage collections, etc.
+   */
   void prepareForLeakDetection();
 
   /** Simulate OomIntervention by purging V8 memory. */

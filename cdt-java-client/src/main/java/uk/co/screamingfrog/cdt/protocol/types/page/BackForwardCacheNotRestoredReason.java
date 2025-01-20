@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.page;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -266,6 +266,8 @@ public enum BackForwardCacheNotRestoredReason {
   CONTENT_MEDIA_SESSION_SERVICE,
   @JsonProperty("ContentScreenReader")
   CONTENT_SCREEN_READER,
+  @JsonProperty("ContentDiscarded")
+  CONTENT_DISCARDED,
   @JsonProperty("EmbedderPopupBlockerTabHelper")
   EMBEDDER_POPUP_BLOCKER_TAB_HELPER,
   @JsonProperty("EmbedderSafeBrowsingTriggeredPopupBlocker")
@@ -297,5 +299,7 @@ public enum BackForwardCacheNotRestoredReason {
   @JsonProperty("EmbedderExtensionSentMessageToCachedFrame")
   EMBEDDER_EXTENSION_SENT_MESSAGE_TO_CACHED_FRAME,
   @JsonProperty("RequestedByWebViewClient")
-  REQUESTED_BY_WEB_VIEW_CLIENT
+  REQUESTED_BY_WEB_VIEW_CLIENT,
+  @JsonProperty("PostMessageByWebViewClient")
+  POST_MESSAGE_BY_WEB_VIEW_CLIENT
 }

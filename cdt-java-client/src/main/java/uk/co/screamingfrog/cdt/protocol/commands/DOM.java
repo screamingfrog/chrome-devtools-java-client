@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import uk.co.screamingfrog.cdt.protocol.events.dom.DocumentUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.dom.InlineStyleInvalidated;
 import uk.co.screamingfrog.cdt.protocol.events.dom.PseudoElementAdded;
 import uk.co.screamingfrog.cdt.protocol.events.dom.PseudoElementRemoved;
+import uk.co.screamingfrog.cdt.protocol.events.dom.ScrollableFlagUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.dom.SetChildNodes;
 import uk.co.screamingfrog.cdt.protocol.events.dom.ShadowRootPopped;
 import uk.co.screamingfrog.cdt.protocol.events.dom.ShadowRootPushed;
@@ -823,6 +824,11 @@ public interface DOM {
   @EventName("topLayerElementsUpdated")
   @Experimental
   EventListener onTopLayerElementsUpdated(EventHandler<TopLayerElementsUpdated> eventListener);
+
+  /** Fired when a node's scrollability state changes. */
+  @EventName("scrollableFlagUpdated")
+  @Experimental
+  EventListener onScrollableFlagUpdated(EventHandler<ScrollableFlagUpdated> eventListener);
 
   /** Called when a pseudo element is removed from an element. */
   @EventName("pseudoElementRemoved")

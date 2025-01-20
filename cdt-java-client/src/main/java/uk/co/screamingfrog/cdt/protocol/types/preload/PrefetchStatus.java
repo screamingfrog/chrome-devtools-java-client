@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.preload;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,8 +39,6 @@ public enum PrefetchStatus {
   PREFETCH_FAILED_NET_ERROR,
   @JsonProperty("PrefetchFailedNon2XX")
   PREFETCH_FAILED_NON_2XX,
-  @JsonProperty("PrefetchFailedPerPageLimitExceeded")
-  PREFETCH_FAILED_PER_PAGE_LIMIT_EXCEEDED,
   @JsonProperty("PrefetchEvictedAfterCandidateRemoved")
   PREFETCH_EVICTED_AFTER_CANDIDATE_REMOVED,
   @JsonProperty("PrefetchEvictedForNewerPrefetch")

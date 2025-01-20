@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.storage;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,8 +47,12 @@ public enum AttributionReportingSourceRegistrationResult {
   REPORTING_ORIGINS_PER_SITE_LIMIT_REACHED,
   @JsonProperty("exceedsMaxChannelCapacity")
   EXCEEDS_MAX_CHANNEL_CAPACITY,
+  @JsonProperty("exceedsMaxScopesChannelCapacity")
+  EXCEEDS_MAX_SCOPES_CHANNEL_CAPACITY,
   @JsonProperty("exceedsMaxTriggerStateCardinality")
   EXCEEDS_MAX_TRIGGER_STATE_CARDINALITY,
+  @JsonProperty("exceedsMaxEventStatesLimit")
+  EXCEEDS_MAX_EVENT_STATES_LIMIT,
   @JsonProperty("destinationPerDayReportingLimitReached")
   DESTINATION_PER_DAY_REPORTING_LIMIT_REACHED
 }

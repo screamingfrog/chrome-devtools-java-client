@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ import uk.co.screamingfrog.cdt.protocol.events.page.FrameResized;
 import uk.co.screamingfrog.cdt.protocol.events.page.FrameScheduledNavigation;
 import uk.co.screamingfrog.cdt.protocol.events.page.FrameStartedLoading;
 import uk.co.screamingfrog.cdt.protocol.events.page.FrameStoppedLoading;
+import uk.co.screamingfrog.cdt.protocol.events.page.FrameSubtreeWillBeDetached;
 import uk.co.screamingfrog.cdt.protocol.events.page.InterstitialHidden;
 import uk.co.screamingfrog.cdt.protocol.events.page.InterstitialShown;
 import uk.co.screamingfrog.cdt.protocol.events.page.JavascriptDialogClosed;
@@ -707,6 +708,15 @@ public interface Page {
   /** Fired when frame has been detached from its parent. */
   @EventName("frameDetached")
   EventListener onFrameDetached(EventHandler<FrameDetached> eventListener);
+
+  /**
+   * Fired before frame subtree is detached. Emitted before any frame of the subtree is actually
+   * detached.
+   */
+  @EventName("frameSubtreeWillBeDetached")
+  @Experimental
+  EventListener onFrameSubtreeWillBeDetached(
+      EventHandler<FrameSubtreeWillBeDetached> eventListener);
 
   /**
    * Fired once navigation of the frame has completed. Frame is now associated with the new loader.

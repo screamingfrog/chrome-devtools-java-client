@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.webauthn;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,10 @@ public class Credential {
   @Optional private Boolean backupEligibility;
 
   @Optional private Boolean backupState;
+
+  @Optional private String userName;
+
+  @Optional private String userDisplayName;
 
   public String getCredentialId() {
     return credentialId;
@@ -164,5 +168,37 @@ public class Credential {
    */
   public void setBackupState(Boolean backupState) {
     this.backupState = backupState;
+  }
+
+  /**
+   * The credential's user.name property. Equivalent to empty if not set.
+   * https://w3c.github.io/webauthn/#dom-publickeycredentialentity-name
+   */
+  public String getUserName() {
+    return userName;
+  }
+
+  /**
+   * The credential's user.name property. Equivalent to empty if not set.
+   * https://w3c.github.io/webauthn/#dom-publickeycredentialentity-name
+   */
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
+
+  /**
+   * The credential's user.displayName property. Equivalent to empty if not set.
+   * https://w3c.github.io/webauthn/#dom-publickeycredentialuserentity-displayname
+   */
+  public String getUserDisplayName() {
+    return userDisplayName;
+  }
+
+  /**
+   * The credential's user.displayName property. Equivalent to empty if not set.
+   * https://w3c.github.io/webauthn/#dom-publickeycredentialuserentity-displayname
+   */
+  public void setUserDisplayName(String userDisplayName) {
+    this.userDisplayName = userDisplayName;
   }
 }

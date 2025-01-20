@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.events.debugger;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ package uk.co.screamingfrog.cdt.protocol.events.debugger;
  * #L%
  */
 
+import java.util.List;
 import java.util.Map;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
@@ -67,7 +68,7 @@ public class ScriptParsed {
 
   @Experimental @Optional private ScriptLanguage scriptLanguage;
 
-  @Experimental @Optional private DebugSymbols debugSymbols;
+  @Experimental @Optional private List<DebugSymbols> debugSymbols;
 
   @Experimental @Optional private String embedderName;
 
@@ -247,13 +248,13 @@ public class ScriptParsed {
     this.scriptLanguage = scriptLanguage;
   }
 
-  /** If the scriptLanguage is WebASsembly, the source of debug symbols for the module. */
-  public DebugSymbols getDebugSymbols() {
+  /** If the scriptLanguage is WebAssembly, the source of debug symbols for the module. */
+  public List<DebugSymbols> getDebugSymbols() {
     return debugSymbols;
   }
 
-  /** If the scriptLanguage is WebASsembly, the source of debug symbols for the module. */
-  public void setDebugSymbols(DebugSymbols debugSymbols) {
+  /** If the scriptLanguage is WebAssembly, the source of debug symbols for the module. */
+  public void setDebugSymbols(List<DebugSymbols> debugSymbols) {
     this.debugSymbols = debugSymbols;
   }
 

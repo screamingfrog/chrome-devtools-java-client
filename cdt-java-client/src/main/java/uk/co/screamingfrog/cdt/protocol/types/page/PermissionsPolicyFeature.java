@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.page;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -97,6 +97,8 @@ public enum PermissionsPolicyFeature {
   CLIPBOARD_WRITE,
   @JsonProperty("compute-pressure")
   COMPUTE_PRESSURE,
+  @JsonProperty("controlled-frame")
+  CONTROLLED_FRAME,
   @JsonProperty("cross-origin-isolated")
   CROSS_ORIGIN_ISOLATED,
   @JsonProperty("deferred-fetch")
@@ -105,6 +107,8 @@ public enum PermissionsPolicyFeature {
   DIGITAL_CREDENTIALS_GET,
   @JsonProperty("direct-sockets")
   DIRECT_SOCKETS,
+  @JsonProperty("direct-sockets-private")
+  DIRECT_SOCKETS_PRIVATE,
   @JsonProperty("display-capture")
   DISPLAY_CAPTURE,
   @JsonProperty("document-domain")
@@ -155,6 +159,8 @@ public enum PermissionsPolicyFeature {
   PAYMENT,
   @JsonProperty("picture-in-picture")
   PICTURE_IN_PICTURE,
+  @JsonProperty("popins")
+  POPINS,
   @JsonProperty("private-aggregation")
   PRIVATE_AGGREGATION,
   @JsonProperty("private-state-token-issuance")
@@ -195,6 +201,8 @@ public enum PermissionsPolicyFeature {
   USB_UNRESTRICTED,
   @JsonProperty("vertical-scroll")
   VERTICAL_SCROLL,
+  @JsonProperty("web-app-installation")
+  WEB_APP_INSTALLATION,
   @JsonProperty("web-printing")
   WEB_PRINTING,
   @JsonProperty("web-share")

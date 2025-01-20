@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.types.audits;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,5 +46,9 @@ public enum CookieWarningReason {
   @JsonProperty("WarnThirdPartyPhaseout")
   WARN_THIRD_PARTY_PHASEOUT,
   @JsonProperty("WarnCrossSiteRedirectDowngradeChangesInclusion")
-  WARN_CROSS_SITE_REDIRECT_DOWNGRADE_CHANGES_INCLUSION
+  WARN_CROSS_SITE_REDIRECT_DOWNGRADE_CHANGES_INCLUSION,
+  @JsonProperty("WarnDeprecationTrialMetadata")
+  WARN_DEPRECATION_TRIAL_METADATA,
+  @JsonProperty("WarnThirdPartyCookieHeuristic")
+  WARN_THIRD_PARTY_COOKIE_HEURISTIC
 }

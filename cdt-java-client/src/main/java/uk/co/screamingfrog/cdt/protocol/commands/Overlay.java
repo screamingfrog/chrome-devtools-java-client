@@ -4,7 +4,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2024 Kenan Klisura
+ * Copyright (C) 2018 - 2025 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -336,10 +336,11 @@ public interface Overlay {
   void setShowHitTestBorders(@ParamName("show") Boolean show);
 
   /**
-   * Request that backend shows an overlay with web vital metrics.
+   * Deprecated, no longer has any effect.
    *
    * @param show
    */
+  @Deprecated
   void setShowWebVitals(@ParamName("show") Boolean show);
 
   /**
