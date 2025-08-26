@@ -47,6 +47,8 @@ public enum InspectorIssueCode {
   ATTRIBUTION_REPORTING_ISSUE,
   @JsonProperty("QuirksModeIssue")
   QUIRKS_MODE_ISSUE,
+  @JsonProperty("PartitioningBlobURLIssue")
+  PARTITIONING_BLOB_URL_ISSUE,
   @JsonProperty("NavigatorUserAgentIssue")
   NAVIGATOR_USER_AGENT_ISSUE,
   @JsonProperty("GenericIssue")
@@ -68,5 +70,11 @@ public enum InspectorIssueCode {
   @JsonProperty("PropertyRuleIssue")
   PROPERTY_RULE_ISSUE,
   @JsonProperty("SharedDictionaryIssue")
-  SHARED_DICTIONARY_ISSUE
+  SHARED_DICTIONARY_ISSUE,
+  @JsonProperty("SelectElementAccessibilityIssue")
+  SELECT_ELEMENT_ACCESSIBILITY_ISSUE,
+  @JsonProperty("SRIMessageSignatureIssue")
+  SRI_MESSAGE_SIGNATURE_ISSUE,
+  @JsonProperty("UserReidentificationIssue")
+  USER_REIDENTIFICATION_ISSUE
 }

@@ -549,8 +549,12 @@ public interface Debugger {
    */
   void stepOver(@Experimental @Optional @ParamName("skipList") List<LocationRange> skipList);
 
-  /** Fired when breakpoint is resolved to an actual script and location. */
+  /**
+   * Fired when breakpoint is resolved to an actual script and location. Deprecated in favor of
+   * `resolvedBreakpoints` in the `scriptParsed` event.
+   */
   @EventName("breakpointResolved")
+  @Deprecated
   EventListener onBreakpointResolved(EventHandler<BreakpointResolved> eventListener);
 
   /**

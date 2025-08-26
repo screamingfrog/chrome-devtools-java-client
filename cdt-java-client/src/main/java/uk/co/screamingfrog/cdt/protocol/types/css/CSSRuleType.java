@@ -38,5 +38,7 @@ public enum CSSRuleType {
   @JsonProperty("ScopeRule")
   SCOPE_RULE,
   @JsonProperty("StyleRule")
-  STYLE_RULE
+  STYLE_RULE,
+  @JsonProperty("StartingStyleRule")
+  STARTING_STYLE_RULE
 }

@@ -51,5 +51,7 @@ public enum TrustTokenOperationDoneStatus {
   @JsonProperty("UnknownError")
   UNKNOWN_ERROR,
   @JsonProperty("FulfilledLocally")
-  FULFILLED_LOCALLY
+  FULFILLED_LOCALLY,
+  @JsonProperty("SiteIssuerLimit")
+  SITE_ISSUER_LIMIT
 }

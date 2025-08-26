@@ -45,6 +45,8 @@ public class CookieIssueDetails {
 
   @Optional private AffectedRequest request;
 
+  @Optional private CookieIssueInsight insight;
+
   /**
    * If AffectedCookie is not set then rawCookieLine contains the raw Set-Cookie header string. This
    * hints at a problem where the cookie line is syntactically or semantically malformed in a way
@@ -125,5 +127,15 @@ public class CookieIssueDetails {
 
   public void setRequest(AffectedRequest request) {
     this.request = request;
+  }
+
+  /** The recommended solution to the issue. */
+  public CookieIssueInsight getInsight() {
+    return insight;
+  }
+
+  /** The recommended solution to the issue. */
+  public void setInsight(CookieIssueInsight insight) {
+    this.insight = insight;
   }
 }

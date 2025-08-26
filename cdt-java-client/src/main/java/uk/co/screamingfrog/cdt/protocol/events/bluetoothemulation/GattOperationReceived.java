@@ -1,4 +1,4 @@
-package uk.co.screamingfrog.cdt.protocol.types.database;
+package uk.co.screamingfrog.cdt.protocol.events.bluetoothemulation;
 
 /*-
  * #%L
@@ -20,30 +20,28 @@ package uk.co.screamingfrog.cdt.protocol.types.database;
  * #L%
  */
 
-/** Database error. */
-public class Error {
+import uk.co.screamingfrog.cdt.protocol.types.bluetoothemulation.GATTOperationType;
 
-  private String message;
+/** Event for when a GATT operation of |type| to the peripheral with |address| happened. */
+public class GattOperationReceived {
 
-  private Integer code;
+  private String address;
 
-  /** Error message. */
-  public String getMessage() {
-    return message;
+  private GATTOperationType type;
+
+  public String getAddress() {
+    return address;
   }
 
-  /** Error message. */
-  public void setMessage(String message) {
-    this.message = message;
+  public void setAddress(String address) {
+    this.address = address;
   }
 
-  /** Error code. */
-  public Integer getCode() {
-    return code;
+  public GATTOperationType getType() {
+    return type;
   }
 
-  /** Error code. */
-  public void setCode(Integer code) {
-    this.code = code;
+  public void setType(GATTOperationType type) {
+    this.type = type;
   }
 }

@@ -31,7 +31,9 @@ public class AttributionReportingSourceRegistration {
 
   private Integer expiry;
 
-  private List<AttributionReportingTriggerSpec> triggerSpecs;
+  private List<Double> triggerData;
+
+  private AttributionReportingEventReportWindows eventReportWindows;
 
   private Integer aggregatableReportWindow;
 
@@ -61,6 +63,14 @@ public class AttributionReportingSourceRegistration {
 
   @Optional private AttributionScopesData scopesData;
 
+  private Integer maxEventLevelReports;
+
+  private List<AttributionReportingNamedBudgetDef> namedBudgets;
+
+  private Boolean debugReporting;
+
+  private Double eventLevelEpsilon;
+
   public Double getTime() {
     return time;
   }
@@ -79,12 +89,22 @@ public class AttributionReportingSourceRegistration {
     this.expiry = expiry;
   }
 
-  public List<AttributionReportingTriggerSpec> getTriggerSpecs() {
-    return triggerSpecs;
+  /** number instead of integer because not all uint32 can be represented by int */
+  public List<Double> getTriggerData() {
+    return triggerData;
   }
 
-  public void setTriggerSpecs(List<AttributionReportingTriggerSpec> triggerSpecs) {
-    this.triggerSpecs = triggerSpecs;
+  /** number instead of integer because not all uint32 can be represented by int */
+  public void setTriggerData(List<Double> triggerData) {
+    this.triggerData = triggerData;
+  }
+
+  public AttributionReportingEventReportWindows getEventReportWindows() {
+    return eventReportWindows;
+  }
+
+  public void setEventReportWindows(AttributionReportingEventReportWindows eventReportWindows) {
+    this.eventReportWindows = eventReportWindows;
   }
 
   /** duration in seconds */
@@ -201,5 +221,37 @@ public class AttributionReportingSourceRegistration {
 
   public void setScopesData(AttributionScopesData scopesData) {
     this.scopesData = scopesData;
+  }
+
+  public Integer getMaxEventLevelReports() {
+    return maxEventLevelReports;
+  }
+
+  public void setMaxEventLevelReports(Integer maxEventLevelReports) {
+    this.maxEventLevelReports = maxEventLevelReports;
+  }
+
+  public List<AttributionReportingNamedBudgetDef> getNamedBudgets() {
+    return namedBudgets;
+  }
+
+  public void setNamedBudgets(List<AttributionReportingNamedBudgetDef> namedBudgets) {
+    this.namedBudgets = namedBudgets;
+  }
+
+  public Boolean getDebugReporting() {
+    return debugReporting;
+  }
+
+  public void setDebugReporting(Boolean debugReporting) {
+    this.debugReporting = debugReporting;
+  }
+
+  public Double getEventLevelEpsilon() {
+    return eventLevelEpsilon;
+  }
+
+  public void setEventLevelEpsilon(Double eventLevelEpsilon) {
+    this.eventLevelEpsilon = eventLevelEpsilon;
   }
 }

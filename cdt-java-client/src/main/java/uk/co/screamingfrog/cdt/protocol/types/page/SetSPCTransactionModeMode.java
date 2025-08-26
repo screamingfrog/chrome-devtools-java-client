@@ -1,4 +1,4 @@
-package uk.co.screamingfrog.cdt.protocol.events.database;
+package uk.co.screamingfrog.cdt.protocol.types.page;
 
 /*-
  * #%L
@@ -20,17 +20,17 @@ package uk.co.screamingfrog.cdt.protocol.events.database;
  * #L%
  */
 
-import uk.co.screamingfrog.cdt.protocol.types.database.Database;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AddDatabase {
-
-  private Database database;
-
-  public Database getDatabase() {
-    return database;
-  }
-
-  public void setDatabase(Database database) {
-    this.database = database;
-  }
+public enum SetSPCTransactionModeMode {
+  @JsonProperty("none")
+  NONE,
+  @JsonProperty("autoAccept")
+  AUTO_ACCEPT,
+  @JsonProperty("autoChooseToAuthAnotherWay")
+  AUTO_CHOOSE_TO_AUTH_ANOTHER_WAY,
+  @JsonProperty("autoReject")
+  AUTO_REJECT,
+  @JsonProperty("autoOptOut")
+  AUTO_OPT_OUT
 }

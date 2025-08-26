@@ -28,10 +28,14 @@ public enum PseudoType {
   FIRST_LINE,
   @JsonProperty("first-letter")
   FIRST_LETTER,
+  @JsonProperty("checkmark")
+  CHECKMARK,
   @JsonProperty("before")
   BEFORE,
   @JsonProperty("after")
   AFTER,
+  @JsonProperty("picker-icon")
+  PICKER_ICON,
   @JsonProperty("marker")
   MARKER,
   @JsonProperty("backdrop")
@@ -56,10 +60,8 @@ public enum PseudoType {
   SCROLL_MARKER,
   @JsonProperty("scroll-marker-group")
   SCROLL_MARKER_GROUP,
-  @JsonProperty("scroll-next-button")
-  SCROLL_NEXT_BUTTON,
-  @JsonProperty("scroll-prev-button")
-  SCROLL_PREV_BUTTON,
+  @JsonProperty("scroll-button")
+  SCROLL_BUTTON,
   @JsonProperty("scrollbar")
   SCROLLBAR,
   @JsonProperty("scrollbar-thumb")
@@ -82,6 +84,8 @@ public enum PseudoType {
   VIEW_TRANSITION_GROUP,
   @JsonProperty("view-transition-image-pair")
   VIEW_TRANSITION_IMAGE_PAIR,
+  @JsonProperty("view-transition-group-children")
+  VIEW_TRANSITION_GROUP_CHILDREN,
   @JsonProperty("view-transition-old")
   VIEW_TRANSITION_OLD,
   @JsonProperty("view-transition-new")
@@ -92,10 +96,8 @@ public enum PseudoType {
   FILE_SELECTOR_BUTTON,
   @JsonProperty("details-content")
   DETAILS_CONTENT,
-  @JsonProperty("select-fallback-button")
-  SELECT_FALLBACK_BUTTON,
-  @JsonProperty("select-fallback-button-text")
-  SELECT_FALLBACK_BUTTON_TEXT,
   @JsonProperty("picker")
-  PICKER
+  PICKER,
+  @JsonProperty("permission-icon")
+  PERMISSION_ICON
 }

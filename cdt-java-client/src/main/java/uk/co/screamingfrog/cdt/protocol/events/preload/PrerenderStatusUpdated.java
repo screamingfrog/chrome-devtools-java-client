@@ -32,6 +32,8 @@ public class PrerenderStatusUpdated {
 
   private PreloadingAttemptKey key;
 
+  private String pipelineId;
+
   private PreloadingStatus status;
 
   @Optional private PrerenderFinalStatus prerenderStatus;
@@ -46,6 +48,14 @@ public class PrerenderStatusUpdated {
 
   public void setKey(PreloadingAttemptKey key) {
     this.key = key;
+  }
+
+  public String getPipelineId() {
+    return pipelineId;
+  }
+
+  public void setPipelineId(String pipelineId) {
+    this.pipelineId = pipelineId;
   }
 
   public PreloadingStatus getStatus() {

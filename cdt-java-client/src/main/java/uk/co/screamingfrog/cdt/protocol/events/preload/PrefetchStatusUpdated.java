@@ -29,6 +29,8 @@ public class PrefetchStatusUpdated {
 
   private PreloadingAttemptKey key;
 
+  private String pipelineId;
+
   private String initiatingFrameId;
 
   private String prefetchUrl;
@@ -45,6 +47,14 @@ public class PrefetchStatusUpdated {
 
   public void setKey(PreloadingAttemptKey key) {
     this.key = key;
+  }
+
+  public String getPipelineId() {
+    return pipelineId;
+  }
+
+  public void setPipelineId(String pipelineId) {
+    this.pipelineId = pipelineId;
   }
 
   /** The frame id of the frame initiating prefetch. */

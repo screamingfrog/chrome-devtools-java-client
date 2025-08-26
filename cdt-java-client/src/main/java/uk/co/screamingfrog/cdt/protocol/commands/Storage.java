@@ -22,8 +22,10 @@ package uk.co.screamingfrog.cdt.protocol.commands;
 
 import java.util.List;
 import java.util.Map;
+import uk.co.screamingfrog.cdt.protocol.events.storage.AttributionReportingReportSent;
 import uk.co.screamingfrog.cdt.protocol.events.storage.AttributionReportingSourceRegistered;
 import uk.co.screamingfrog.cdt.protocol.events.storage.AttributionReportingTriggerRegistered;
+import uk.co.screamingfrog.cdt.protocol.events.storage.AttributionReportingVerboseDebugReportSent;
 import uk.co.screamingfrog.cdt.protocol.events.storage.CacheStorageContentUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.storage.CacheStorageListUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.storage.IndexedDBContentUpdated;
@@ -32,6 +34,7 @@ import uk.co.screamingfrog.cdt.protocol.events.storage.InterestGroupAccessed;
 import uk.co.screamingfrog.cdt.protocol.events.storage.InterestGroupAuctionEventOccurred;
 import uk.co.screamingfrog.cdt.protocol.events.storage.InterestGroupAuctionNetworkRequestCreated;
 import uk.co.screamingfrog.cdt.protocol.events.storage.SharedStorageAccessed;
+import uk.co.screamingfrog.cdt.protocol.events.storage.SharedStorageWorkletOperationExecutionFinished;
 import uk.co.screamingfrog.cdt.protocol.events.storage.StorageBucketCreatedOrUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.storage.StorageBucketDeleted;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.EventName;
@@ -389,6 +392,31 @@ public interface Storage {
   @ReturnTypeParameter(RelatedWebsiteSet.class)
   List<RelatedWebsiteSet> getRelatedWebsiteSets();
 
+  /**
+   * Returns the list of URLs from a page and its embedded resources that match existing grace
+   * period URL pattern rules.
+   * https://developers.google.com/privacy-sandbox/cookies/temporary-exceptions/grace-period
+   *
+   * @param firstPartyUrl The URL of the page currently being visited.
+   * @param thirdPartyUrls The list of embedded resource URLs from the page.
+   */
+  @Experimental
+  @Returns("matchedUrls")
+  @ReturnTypeParameter(String.class)
+  List<String> getAffectedUrlsForThirdPartyCookieMetadata(
+      @ParamName("firstPartyUrl") String firstPartyUrl,
+      @ParamName("thirdPartyUrls") List<String> thirdPartyUrls);
+
+  /**
+   * @param owner
+   * @param name
+   * @param hashes
+   */
+  void setProtectedAudienceKAnonymity(
+      @ParamName("owner") String owner,
+      @ParamName("name") String name,
+      @ParamName("hashes") List<String> hashes);
+
   /** A cache's contents have been modified. */
   @EventName("cacheStorageContentUpdated")
   EventListener onCacheStorageContentUpdated(
@@ -434,6 +462,14 @@ public interface Storage {
   @EventName("sharedStorageAccessed")
   EventListener onSharedStorageAccessed(EventHandler<SharedStorageAccessed> eventListener);
 
+  /**
+   * A shared storage run or selectURL operation finished its execution. The following parameters
+   * are included in all events.
+   */
+  @EventName("sharedStorageWorkletOperationExecutionFinished")
+  EventListener onSharedStorageWorkletOperationExecutionFinished(
+      EventHandler<SharedStorageWorkletOperationExecutionFinished> eventListener);
+
   @EventName("storageBucketCreatedOrUpdated")
   EventListener onStorageBucketCreatedOrUpdated(
       EventHandler<StorageBucketCreatedOrUpdated> eventListener);
@@ -450,4 +486,14 @@ public interface Storage {
   @Experimental
   EventListener onAttributionReportingTriggerRegistered(
       EventHandler<AttributionReportingTriggerRegistered> eventListener);
+
+  @EventName("attributionReportingReportSent")
+  @Experimental
+  EventListener onAttributionReportingReportSent(
+      EventHandler<AttributionReportingReportSent> eventListener);
+
+  @EventName("attributionReportingVerboseDebugReportSent")
+  @Experimental
+  EventListener onAttributionReportingVerboseDebugReportSent(
+      EventHandler<AttributionReportingVerboseDebugReportSent> eventListener);
 }

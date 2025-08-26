@@ -45,6 +45,8 @@ public class ScriptFailedToParse {
 
   private String hash;
 
+  private String buildId;
+
   @Optional private Map<String, Object> executionContextAuxData;
 
   @Optional private String sourceMapURL;
@@ -141,6 +143,22 @@ public class ScriptFailedToParse {
   /** Content hash of the script, SHA-256. */
   public void setHash(String hash) {
     this.hash = hash;
+  }
+
+  /**
+   * For Wasm modules, the content of the `build_id` custom section. For JavaScript the `debugId`
+   * magic comment.
+   */
+  public String getBuildId() {
+    return buildId;
+  }
+
+  /**
+   * For Wasm modules, the content of the `build_id` custom section. For JavaScript the `debugId`
+   * magic comment.
+   */
+  public void setBuildId(String buildId) {
+    this.buildId = buildId;
   }
 
   /**

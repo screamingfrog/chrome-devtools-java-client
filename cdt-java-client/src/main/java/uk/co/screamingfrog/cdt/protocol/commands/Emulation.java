@@ -37,6 +37,7 @@ import uk.co.screamingfrog.cdt.protocol.types.emulation.MediaFeature;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.PressureMetadata;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.PressureSource;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.PressureState;
+import uk.co.screamingfrog.cdt.protocol.types.emulation.SafeAreaInsets;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.ScreenOrientation;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.SensorMetadata;
 import uk.co.screamingfrog.cdt.protocol.types.emulation.SensorReading;
@@ -109,6 +110,15 @@ public interface Emulation {
   void setDefaultBackgroundColorOverride(@Optional @ParamName("color") RGBA color);
 
   /**
+   * Overrides the values for env(safe-area-inset-*) and env(safe-area-max-inset-*). Unset values
+   * will cause the respective variables to be undefined, even if previously overridden.
+   *
+   * @param insets
+   */
+  @Experimental
+  void setSafeAreaInsetsOverride(@ParamName("insets") SafeAreaInsets insets);
+
+  /**
    * Overrides the values of device screen dimensions (window.screen.width, window.screen.height,
    * window.innerWidth, window.innerHeight, and "device-width"/"device-height"-related CSS media
    * query results).
@@ -150,7 +160,7 @@ public interface Emulation {
    *     viewport change is not observed by the page, e.g. viewport-relative elements do not change
    *     positions.
    * @param displayFeature If set, the display feature of a multi-segment screen. If not set,
-   *     multi-segment support is turned-off.
+   *     multi-segment support is turned-off. Deprecated, use Emulation.setDisplayFeaturesOverride.
    * @param devicePosture If set, the posture of a foldable device. If not set the posture is set to
    *     continuous. Deprecated, use Emulation.setDevicePostureOverride.
    */
@@ -167,7 +177,8 @@ public interface Emulation {
       @Experimental @Optional @ParamName("dontSetVisibleSize") Boolean dontSetVisibleSize,
       @Optional @ParamName("screenOrientation") ScreenOrientation screenOrientation,
       @Experimental @Optional @ParamName("viewport") Viewport viewport,
-      @Experimental @Optional @ParamName("displayFeature") DisplayFeature displayFeature,
+      @Deprecated @Experimental @Optional @ParamName("displayFeature")
+          DisplayFeature displayFeature,
       @Deprecated @Experimental @Optional @ParamName("devicePosture") DevicePosture devicePosture);
 
   /**
@@ -186,6 +197,23 @@ public interface Emulation {
    */
   @Experimental
   void clearDevicePostureOverride();
+
+  /**
+   * Start using the given display features to pupulate the Viewport Segments API. This override can
+   * also be set in setDeviceMetricsOverride().
+   *
+   * @param features
+   */
+  @Experimental
+  void setDisplayFeaturesOverride(@ParamName("features") List<DisplayFeature> features);
+
+  /**
+   * Clears the display features override set with either setDeviceMetricsOverride() or
+   * setDisplayFeaturesOverride() and starts using display features from the platform again. Does
+   * nothing if no override is set.
+   */
+  @Experimental
+  void clearDisplayFeaturesOverride();
 
   /**
    * @param hidden Whether scrollbars should be always hidden.
@@ -235,24 +263,42 @@ public interface Emulation {
    */
   void setEmulatedVisionDeficiency(@ParamName("type") SetEmulatedVisionDeficiencyType type);
 
+  /** Emulates the given OS text scale. */
+  void setEmulatedOSTextScale();
+
   /**
-   * Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position
-   * unavailable.
+   * Emulates the given OS text scale.
+   *
+   * @param scale
+   */
+  void setEmulatedOSTextScale(@Optional @ParamName("scale") Double scale);
+
+  /**
+   * Overrides the Geolocation Position or Error. Omitting latitude, longitude or accuracy emulates
+   * position unavailable.
    */
   void setGeolocationOverride();
 
   /**
-   * Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position
-   * unavailable.
+   * Overrides the Geolocation Position or Error. Omitting latitude, longitude or accuracy emulates
+   * position unavailable.
    *
    * @param latitude Mock latitude
    * @param longitude Mock longitude
    * @param accuracy Mock accuracy
+   * @param altitude Mock altitude
+   * @param altitudeAccuracy Mock altitudeAccuracy
+   * @param heading Mock heading
+   * @param speed Mock speed
    */
   void setGeolocationOverride(
       @Optional @ParamName("latitude") Double latitude,
       @Optional @ParamName("longitude") Double longitude,
-      @Optional @ParamName("accuracy") Double accuracy);
+      @Optional @ParamName("accuracy") Double accuracy,
+      @Optional @ParamName("altitude") Double altitude,
+      @Optional @ParamName("altitudeAccuracy") Double altitudeAccuracy,
+      @Optional @ParamName("heading") Double heading,
+      @Optional @ParamName("speed") Double speed);
 
   /**
    * @param type
@@ -329,9 +375,9 @@ public interface Emulation {
       @Optional @ParamName("metadata") PressureMetadata metadata);
 
   /**
-   * Provides a given pressure state that will be processed and eventually be delivered to
-   * PressureObserver users. |source| must have been previously overridden by
-   * setPressureSourceOverrideEnabled.
+   * TODO: OBSOLETE: To remove when setPressureDataOverride is merged. Provides a given pressure
+   * state that will be processed and eventually be delivered to PressureObserver users. |source|
+   * must have been previously overridden by setPressureSourceOverrideEnabled.
    *
    * @param source
    * @param state
@@ -339,6 +385,33 @@ public interface Emulation {
   @Experimental
   void setPressureStateOverride(
       @ParamName("source") PressureSource source, @ParamName("state") PressureState state);
+
+  /**
+   * Provides a given pressure data set that will be processed and eventually be delivered to
+   * PressureObserver users. |source| must have been previously overridden by
+   * setPressureSourceOverrideEnabled.
+   *
+   * @param source
+   * @param state
+   */
+  @Experimental
+  void setPressureDataOverride(
+      @ParamName("source") PressureSource source, @ParamName("state") PressureState state);
+
+  /**
+   * Provides a given pressure data set that will be processed and eventually be delivered to
+   * PressureObserver users. |source| must have been previously overridden by
+   * setPressureSourceOverrideEnabled.
+   *
+   * @param source
+   * @param state
+   * @param ownContributionEstimate
+   */
+  @Experimental
+  void setPressureDataOverride(
+      @ParamName("source") PressureSource source,
+      @ParamName("state") PressureState state,
+      @Optional @ParamName("ownContributionEstimate") Double ownContributionEstimate);
 
   /**
    * Overrides the Idle state.
@@ -503,6 +576,16 @@ public interface Emulation {
    */
   @Experimental
   void setAutomationOverride(@ParamName("enabled") Boolean enabled);
+
+  /**
+   * Allows overriding the difference between the small and large viewport sizes, which determine
+   * the value of the `svh` and `lvh` unit, respectively. Only supported for top-level frames.
+   *
+   * @param difference This will cause an element of size 100svh to be `difference` pixels smaller
+   *     than an element of size 100lvh.
+   */
+  @Experimental
+  void setSmallViewportHeightDifferenceOverride(@ParamName("difference") Integer difference);
 
   /**
    * Notification sent after the virtual time budget for the current VirtualTimePolicy has run out.

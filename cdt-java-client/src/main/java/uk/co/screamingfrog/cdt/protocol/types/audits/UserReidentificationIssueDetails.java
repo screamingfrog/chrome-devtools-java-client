@@ -1,4 +1,4 @@
-package uk.co.screamingfrog.cdt.protocol.types.database;
+package uk.co.screamingfrog.cdt.protocol.types.audits;
 
 /*-
  * #%L
@@ -20,38 +20,30 @@ package uk.co.screamingfrog.cdt.protocol.types.database;
  * #L%
  */
 
-import java.util.List;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 
-public class ExecuteSQL {
+/** This issue warns about uses of APIs that may be considered misuse to re-identify users. */
+public class UserReidentificationIssueDetails {
 
-  @Optional private List<String> columnNames;
+  private UserReidentificationIssueType type;
 
-  @Optional private List<Object> values;
+  @Optional private AffectedRequest request;
 
-  @Optional private Error sqlError;
-
-  public List<String> getColumnNames() {
-    return columnNames;
+  public UserReidentificationIssueType getType() {
+    return type;
   }
 
-  public void setColumnNames(List<String> columnNames) {
-    this.columnNames = columnNames;
+  public void setType(UserReidentificationIssueType type) {
+    this.type = type;
   }
 
-  public List<Object> getValues() {
-    return values;
+  /** Applies to BlockedFrameNavigation and BlockedSubresource issue types. */
+  public AffectedRequest getRequest() {
+    return request;
   }
 
-  public void setValues(List<Object> values) {
-    this.values = values;
-  }
-
-  public Error getSqlError() {
-    return sqlError;
-  }
-
-  public void setSqlError(Error sqlError) {
-    this.sqlError = sqlError;
+  /** Applies to BlockedFrameNavigation and BlockedSubresource issue types. */
+  public void setRequest(AffectedRequest request) {
+    this.request = request;
   }
 }

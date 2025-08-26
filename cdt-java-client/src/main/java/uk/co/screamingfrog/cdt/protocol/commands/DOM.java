@@ -714,8 +714,9 @@ public interface DOM {
 
   /**
    * Returns the query container of the given node based on container query conditions:
-   * containerName, physical, and logical axes. If no axes are provided, the style container is
-   * returned, which is the direct parent or the closest element with a matching container-name.
+   * containerName, physical and logical axes, and whether it queries scroll-state. If no axes are
+   * provided and queriesScrollState is false, the style container is returned, which is the direct
+   * parent or the closest element with a matching container-name.
    *
    * @param nodeId
    */
@@ -725,13 +726,15 @@ public interface DOM {
 
   /**
    * Returns the query container of the given node based on container query conditions:
-   * containerName, physical, and logical axes. If no axes are provided, the style container is
-   * returned, which is the direct parent or the closest element with a matching container-name.
+   * containerName, physical and logical axes, and whether it queries scroll-state. If no axes are
+   * provided and queriesScrollState is false, the style container is returned, which is the direct
+   * parent or the closest element with a matching container-name.
    *
    * @param nodeId
    * @param containerName
    * @param physicalAxes
    * @param logicalAxes
+   * @param queriesScrollState
    */
   @Experimental
   @Returns("nodeId")
@@ -739,7 +742,8 @@ public interface DOM {
       @ParamName("nodeId") Integer nodeId,
       @Optional @ParamName("containerName") String containerName,
       @Optional @ParamName("physicalAxes") PhysicalAxes physicalAxes,
-      @Optional @ParamName("logicalAxes") LogicalAxes logicalAxes);
+      @Optional @ParamName("logicalAxes") LogicalAxes logicalAxes,
+      @Optional @ParamName("queriesScrollState") Boolean queriesScrollState);
 
   /**
    * Returns the descendants of a container query container that have container queries against this

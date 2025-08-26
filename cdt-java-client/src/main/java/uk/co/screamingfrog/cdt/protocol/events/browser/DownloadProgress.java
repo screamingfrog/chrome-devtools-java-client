@@ -21,6 +21,7 @@ package uk.co.screamingfrog.cdt.protocol.events.browser;
  */
 
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
+import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 
 /** Fired when download makes progress. Last call has |done| == true. */
 @Experimental
@@ -33,6 +34,8 @@ public class DownloadProgress {
   private Double receivedBytes;
 
   private DownloadProgressState state;
+
+  @Experimental @Optional private String filePath;
 
   /** Global unique identifier of the download. */
   public String getGuid() {
@@ -72,5 +75,21 @@ public class DownloadProgress {
   /** Download status. */
   public void setState(DownloadProgressState state) {
     this.state = state;
+  }
+
+  /**
+   * If download is "completed", provides the path of the downloaded file. Depending on the
+   * platform, it is not guaranteed to be set, nor the file is guaranteed to exist.
+   */
+  public String getFilePath() {
+    return filePath;
+  }
+
+  /**
+   * If download is "completed", provides the path of the downloaded file. Depending on the
+   * platform, it is not guaranteed to be set, nor the file is guaranteed to exist.
+   */
+  public void setFilePath(String filePath) {
+    this.filePath = filePath;
   }
 }

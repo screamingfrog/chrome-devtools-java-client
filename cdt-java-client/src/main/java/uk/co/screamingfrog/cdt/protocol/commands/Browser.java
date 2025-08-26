@@ -37,6 +37,7 @@ import uk.co.screamingfrog.cdt.protocol.types.browser.Histogram;
 import uk.co.screamingfrog.cdt.protocol.types.browser.PermissionDescriptor;
 import uk.co.screamingfrog.cdt.protocol.types.browser.PermissionSetting;
 import uk.co.screamingfrog.cdt.protocol.types.browser.PermissionType;
+import uk.co.screamingfrog.cdt.protocol.types.browser.PrivacySandboxAPI;
 import uk.co.screamingfrog.cdt.protocol.types.browser.SetDownloadBehaviorBehavior;
 import uk.co.screamingfrog.cdt.protocol.types.browser.Version;
 import uk.co.screamingfrog.cdt.protocol.types.browser.WindowForTarget;
@@ -276,6 +277,37 @@ public interface Browser {
    * @param url
    */
   void addPrivacySandboxEnrollmentOverride(@ParamName("url") String url);
+
+  /**
+   * Configures encryption keys used with a given privacy sandbox API to talk to a trusted
+   * coordinator. Since this is intended for test automation only, coordinatorOrigin must be a .test
+   * domain. No existing coordinator configuration for the origin may exist.
+   *
+   * @param api
+   * @param coordinatorOrigin
+   * @param keyConfig
+   */
+  void addPrivacySandboxCoordinatorKeyConfig(
+      @ParamName("api") PrivacySandboxAPI api,
+      @ParamName("coordinatorOrigin") String coordinatorOrigin,
+      @ParamName("keyConfig") String keyConfig);
+
+  /**
+   * Configures encryption keys used with a given privacy sandbox API to talk to a trusted
+   * coordinator. Since this is intended for test automation only, coordinatorOrigin must be a .test
+   * domain. No existing coordinator configuration for the origin may exist.
+   *
+   * @param api
+   * @param coordinatorOrigin
+   * @param keyConfig
+   * @param browserContextId BrowserContext to perform the action in. When omitted, default browser
+   *     context is used.
+   */
+  void addPrivacySandboxCoordinatorKeyConfig(
+      @ParamName("api") PrivacySandboxAPI api,
+      @ParamName("coordinatorOrigin") String coordinatorOrigin,
+      @ParamName("keyConfig") String keyConfig,
+      @Optional @ParamName("browserContextId") String browserContextId);
 
   /** Fired when page is about to start a download. */
   @EventName("downloadWillBegin")

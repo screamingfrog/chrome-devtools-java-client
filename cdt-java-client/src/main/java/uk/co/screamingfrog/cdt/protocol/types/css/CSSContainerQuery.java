@@ -41,6 +41,8 @@ public class CSSContainerQuery {
 
   @Optional private LogicalAxes logicalAxes;
 
+  @Optional private Boolean queriesScrollState;
+
   /** Container query text. */
   public String getText() {
     return text;
@@ -99,5 +101,15 @@ public class CSSContainerQuery {
   /** Optional logical axes queried for the container. */
   public void setLogicalAxes(LogicalAxes logicalAxes) {
     this.logicalAxes = logicalAxes;
+  }
+
+  /** true if the query contains scroll-state() queries. */
+  public Boolean getQueriesScrollState() {
+    return queriesScrollState;
+  }
+
+  /** true if the query contains scroll-state() queries. */
+  public void setQueriesScrollState(Boolean queriesScrollState) {
+    this.queriesScrollState = queriesScrollState;
   }
 }

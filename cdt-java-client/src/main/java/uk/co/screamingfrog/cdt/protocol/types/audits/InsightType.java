@@ -1,4 +1,4 @@
-package uk.co.screamingfrog.cdt.protocol.types.page;
+package uk.co.screamingfrog.cdt.protocol.types.audits;
 
 /*-
  * #%L
@@ -22,14 +22,12 @@ package uk.co.screamingfrog.cdt.protocol.types.page;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Enum of possible auto-response for permission / prompt dialogs. */
-public enum AutoResponseMode {
-  @JsonProperty("none")
-  NONE,
-  @JsonProperty("autoAccept")
-  AUTO_ACCEPT,
-  @JsonProperty("autoReject")
-  AUTO_REJECT,
-  @JsonProperty("autoOptOut")
-  AUTO_OPT_OUT
+/** Represents the category of insight that a cookie issue falls under. */
+public enum InsightType {
+  @JsonProperty("GitHubResource")
+  GIT_HUB_RESOURCE,
+  @JsonProperty("GracePeriod")
+  GRACE_PERIOD,
+  @JsonProperty("Heuristics")
+  HEURISTICS
 }

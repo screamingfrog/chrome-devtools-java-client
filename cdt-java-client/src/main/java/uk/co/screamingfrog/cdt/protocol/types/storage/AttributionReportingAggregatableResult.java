@@ -39,6 +39,8 @@ public enum AttributionReportingAggregatableResult {
   NO_HISTOGRAMS,
   @JsonProperty("insufficientBudget")
   INSUFFICIENT_BUDGET,
+  @JsonProperty("insufficientNamedBudget")
+  INSUFFICIENT_NAMED_BUDGET,
   @JsonProperty("noMatchingSourceFilterData")
   NO_MATCHING_SOURCE_FILTER_DATA,
   @JsonProperty("notRegistered")

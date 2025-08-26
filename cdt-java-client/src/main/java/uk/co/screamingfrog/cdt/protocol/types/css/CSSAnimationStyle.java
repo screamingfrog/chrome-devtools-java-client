@@ -1,4 +1,4 @@
-package uk.co.screamingfrog.cdt.protocol.types.database;
+package uk.co.screamingfrog.cdt.protocol.types.css;
 
 /*-
  * #%L
@@ -20,54 +20,32 @@ package uk.co.screamingfrog.cdt.protocol.types.database;
  * #L%
  */
 
-/** Database object. */
-public class Database {
+import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 
-  private String id;
+/** CSS style coming from animations with the name of the animation. */
+public class CSSAnimationStyle {
 
-  private String domain;
+  @Optional private String name;
 
-  private String name;
+  private CSSStyle style;
 
-  private String version;
-
-  /** Database ID. */
-  public String getId() {
-    return id;
-  }
-
-  /** Database ID. */
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  /** Database domain. */
-  public String getDomain() {
-    return domain;
-  }
-
-  /** Database domain. */
-  public void setDomain(String domain) {
-    this.domain = domain;
-  }
-
-  /** Database name. */
+  /** The name of the animation. */
   public String getName() {
     return name;
   }
 
-  /** Database name. */
+  /** The name of the animation. */
   public void setName(String name) {
     this.name = name;
   }
 
-  /** Database version. */
-  public String getVersion() {
-    return version;
+  /** The style coming from the animation. */
+  public CSSStyle getStyle() {
+    return style;
   }
 
-  /** Database version. */
-  public void setVersion(String version) {
-    this.version = version;
+  /** The style coming from the animation. */
+  public void setStyle(CSSStyle style) {
+    this.style = style;
   }
 }

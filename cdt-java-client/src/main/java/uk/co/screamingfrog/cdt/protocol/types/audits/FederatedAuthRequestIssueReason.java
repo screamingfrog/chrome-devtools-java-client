@@ -117,5 +117,11 @@ public enum FederatedAuthRequestIssueReason {
   @JsonProperty("RelyingPartyOriginIsOpaque")
   RELYING_PARTY_ORIGIN_IS_OPAQUE,
   @JsonProperty("TypeNotMatching")
-  TYPE_NOT_MATCHING
+  TYPE_NOT_MATCHING,
+  @JsonProperty("UiDismissedNoEmbargo")
+  UI_DISMISSED_NO_EMBARGO,
+  @JsonProperty("CorsError")
+  CORS_ERROR,
+  @JsonProperty("SuppressedBySegmentationPlatform")
+  SUPPRESSED_BY_SEGMENTATION_PLATFORM
 }

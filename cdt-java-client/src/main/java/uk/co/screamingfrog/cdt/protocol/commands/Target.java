@@ -39,6 +39,7 @@ import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.target.FilterEntry;
 import uk.co.screamingfrog.cdt.protocol.types.target.RemoteLocation;
 import uk.co.screamingfrog.cdt.protocol.types.target.TargetInfo;
+import uk.co.screamingfrog.cdt.protocol.types.target.WindowState;
 
 /** Supports additional targets discovery and allows to attach to them. */
 public interface Target {
@@ -110,11 +111,14 @@ public interface Target {
    *
    * @param targetId
    * @param bindingName Binding name, 'cdp' if not specified.
+   * @param inheritPermissions If true, inherits the current root session's permissions (default:
+   *     false).
    */
   @Experimental
   void exposeDevToolsProtocol(
       @ParamName("targetId") String targetId,
-      @Optional @ParamName("bindingName") String bindingName);
+      @Optional @ParamName("bindingName") String bindingName,
+      @Optional @ParamName("inheritPermissions") Boolean inheritPermissions);
 
   /**
    * Creates a new empty BrowserContext. Similar to an incognito profile but you can have more than
@@ -160,26 +164,39 @@ public interface Target {
    *
    * @param url The initial URL the page will be navigated to. An empty string indicates
    *     about:blank.
-   * @param width Frame width in DIP (headless chrome only).
-   * @param height Frame height in DIP (headless chrome only).
+   * @param left Frame left origin in DIP (requires newWindow to be true or headless shell).
+   * @param top Frame top origin in DIP (requires newWindow to be true or headless shell).
+   * @param width Frame width in DIP (requires newWindow to be true or headless shell).
+   * @param height Frame height in DIP (requires newWindow to be true or headless shell).
+   * @param windowState Frame window state (requires newWindow to be true or headless shell).
+   *     Default is normal.
    * @param browserContextId The browser context to create the page in.
    * @param enableBeginFrameControl Whether BeginFrames for this target will be controlled via
-   *     DevTools (headless chrome only, not supported on MacOS yet, false by default).
-   * @param newWindow Whether to create a new Window or Tab (chrome-only, false by default).
-   * @param background Whether to create the target in background or foreground (chrome-only, false
-   *     by default).
+   *     DevTools (headless shell only, not supported on MacOS yet, false by default).
+   * @param newWindow Whether to create a new Window or Tab (false by default, not supported by
+   *     headless shell).
+   * @param background Whether to create the target in background or foreground (false by default,
+   *     not supported by headless shell).
    * @param forTab Whether to create the target of type "tab".
+   * @param hidden Whether to create a hidden target. The hidden target is observable via protocol,
+   *     but not present in the tab UI strip. Cannot be created with `forTab: true`, `newWindow:
+   *     true` or `background: false`. The life-time of the tab is limited to the life-time of the
+   *     session.
    */
   @Returns("targetId")
   String createTarget(
       @ParamName("url") String url,
+      @Experimental @Optional @ParamName("left") Integer left,
+      @Experimental @Optional @ParamName("top") Integer top,
       @Optional @ParamName("width") Integer width,
       @Optional @ParamName("height") Integer height,
+      @Optional @ParamName("windowState") WindowState windowState,
       @Experimental @Optional @ParamName("browserContextId") String browserContextId,
       @Experimental @Optional @ParamName("enableBeginFrameControl") Boolean enableBeginFrameControl,
       @Optional @ParamName("newWindow") Boolean newWindow,
       @Optional @ParamName("background") Boolean background,
-      @Experimental @Optional @ParamName("forTab") Boolean forTab);
+      @Experimental @Optional @ParamName("forTab") Boolean forTab,
+      @Experimental @Optional @ParamName("hidden") Boolean hidden);
 
   /** Detaches session with given id. */
   void detachFromTarget();
@@ -257,10 +274,12 @@ public interface Target {
       @Deprecated @Optional @ParamName("targetId") String targetId);
 
   /**
-   * Controls whether to automatically attach to new targets which are considered to be related to
-   * this one. When turned on, attaches to all existing related targets as well. When turned off,
-   * automatically detaches from all currently attached targets. This also clears all targets added
-   * by `autoAttachRelated` from the list of targets to watch for creation of related targets.
+   * Controls whether to automatically attach to new targets which are considered to be directly
+   * related to this one (for example, iframes or workers). When turned on, attaches to all existing
+   * related targets as well. When turned off, automatically detaches from all currently attached
+   * targets. This also clears all targets added by `autoAttachRelated` from the list of targets to
+   * watch for creation of related targets. You might want to call this recursively for
+   * auto-attached targets to attach to all available targets.
    *
    * @param autoAttach Whether to auto-attach to related targets.
    * @param waitForDebuggerOnStart Whether to pause new targets when attaching to them. Use
@@ -271,10 +290,12 @@ public interface Target {
       @ParamName("waitForDebuggerOnStart") Boolean waitForDebuggerOnStart);
 
   /**
-   * Controls whether to automatically attach to new targets which are considered to be related to
-   * this one. When turned on, attaches to all existing related targets as well. When turned off,
-   * automatically detaches from all currently attached targets. This also clears all targets added
-   * by `autoAttachRelated` from the list of targets to watch for creation of related targets.
+   * Controls whether to automatically attach to new targets which are considered to be directly
+   * related to this one (for example, iframes or workers). When turned on, attaches to all existing
+   * related targets as well. When turned off, automatically detaches from all currently attached
+   * targets. This also clears all targets added by `autoAttachRelated` from the list of targets to
+   * watch for creation of related targets. You might want to call this recursively for
+   * auto-attached targets to attach to all available targets.
    *
    * @param autoAttach Whether to auto-attach to related targets.
    * @param waitForDebuggerOnStart Whether to pause new targets when attaching to them. Use

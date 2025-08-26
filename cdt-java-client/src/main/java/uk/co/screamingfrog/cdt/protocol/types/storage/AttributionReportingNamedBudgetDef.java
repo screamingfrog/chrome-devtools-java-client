@@ -20,31 +20,28 @@ package uk.co.screamingfrog.cdt.protocol.types.storage;
  * #L%
  */
 
-import java.util.List;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 
 @Experimental
-public class AttributionReportingTriggerSpec {
+public class AttributionReportingNamedBudgetDef {
 
-  private List<Double> triggerData;
+  private String name;
 
-  private AttributionReportingEventReportWindows eventReportWindows;
+  private Integer budget;
 
-  /** number instead of integer because not all uint32 can be represented by int */
-  public List<Double> getTriggerData() {
-    return triggerData;
+  public String getName() {
+    return name;
   }
 
-  /** number instead of integer because not all uint32 can be represented by int */
-  public void setTriggerData(List<Double> triggerData) {
-    this.triggerData = triggerData;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public AttributionReportingEventReportWindows getEventReportWindows() {
-    return eventReportWindows;
+  public Integer getBudget() {
+    return budget;
   }
 
-  public void setEventReportWindows(AttributionReportingEventReportWindows eventReportWindows) {
-    this.eventReportWindows = eventReportWindows;
+  public void setBudget(Integer budget) {
+    this.budget = budget;
   }
 }

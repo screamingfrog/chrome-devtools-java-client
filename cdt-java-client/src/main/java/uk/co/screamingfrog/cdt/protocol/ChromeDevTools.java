@@ -35,7 +35,6 @@ import uk.co.screamingfrog.cdt.protocol.commands.DOM;
 import uk.co.screamingfrog.cdt.protocol.commands.DOMDebugger;
 import uk.co.screamingfrog.cdt.protocol.commands.DOMSnapshot;
 import uk.co.screamingfrog.cdt.protocol.commands.DOMStorage;
-import uk.co.screamingfrog.cdt.protocol.commands.Database;
 import uk.co.screamingfrog.cdt.protocol.commands.Debugger;
 import uk.co.screamingfrog.cdt.protocol.commands.DeviceAccess;
 import uk.co.screamingfrog.cdt.protocol.commands.DeviceOrientation;
@@ -139,9 +138,6 @@ public interface ChromeDevTools {
 
   /** Returns the DOMStorage command. */
   DOMStorage getDOMStorage();
-
-  /** Returns the Database command. */
-  Database getDatabase();
 
   /** Returns the DeviceOrientation command. */
   DeviceOrientation getDeviceOrientation();

@@ -40,5 +40,9 @@ public enum CookieExclusionReason {
   @JsonProperty("ExcludeThirdPartyCookieBlockedInFirstPartySet")
   EXCLUDE_THIRD_PARTY_COOKIE_BLOCKED_IN_FIRST_PARTY_SET,
   @JsonProperty("ExcludeThirdPartyPhaseout")
-  EXCLUDE_THIRD_PARTY_PHASEOUT
+  EXCLUDE_THIRD_PARTY_PHASEOUT,
+  @JsonProperty("ExcludePortMismatch")
+  EXCLUDE_PORT_MISMATCH,
+  @JsonProperty("ExcludeSchemeMismatch")
+  EXCLUDE_SCHEME_MISMATCH
 }

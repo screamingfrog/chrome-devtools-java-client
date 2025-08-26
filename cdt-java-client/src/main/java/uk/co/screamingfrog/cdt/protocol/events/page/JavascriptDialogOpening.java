@@ -20,6 +20,7 @@ package uk.co.screamingfrog.cdt.protocol.events.page;
  * #L%
  */
 
+import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.types.page.DialogType;
 
@@ -30,6 +31,8 @@ import uk.co.screamingfrog.cdt.protocol.types.page.DialogType;
 public class JavascriptDialogOpening {
 
   private String url;
+
+  @Experimental private String frameId;
 
   private String message;
 
@@ -47,6 +50,16 @@ public class JavascriptDialogOpening {
   /** Frame url. */
   public void setUrl(String url) {
     this.url = url;
+  }
+
+  /** Frame id. */
+  public String getFrameId() {
+    return frameId;
+  }
+
+  /** Frame id. */
+  public void setFrameId(String frameId) {
+    this.frameId = frameId;
   }
 
   /** Message that will be displayed by the dialog. */

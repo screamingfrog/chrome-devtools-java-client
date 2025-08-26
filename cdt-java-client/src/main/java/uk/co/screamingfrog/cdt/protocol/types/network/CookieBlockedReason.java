@@ -55,5 +55,11 @@ public enum CookieBlockedReason {
   @JsonProperty("SamePartyFromCrossPartyContext")
   SAME_PARTY_FROM_CROSS_PARTY_CONTEXT,
   @JsonProperty("NameValuePairExceedsMaxSize")
-  NAME_VALUE_PAIR_EXCEEDS_MAX_SIZE
+  NAME_VALUE_PAIR_EXCEEDS_MAX_SIZE,
+  @JsonProperty("PortMismatch")
+  PORT_MISMATCH,
+  @JsonProperty("SchemeMismatch")
+  SCHEME_MISMATCH,
+  @JsonProperty("AnonymousContext")
+  ANONYMOUS_CONTEXT
 }

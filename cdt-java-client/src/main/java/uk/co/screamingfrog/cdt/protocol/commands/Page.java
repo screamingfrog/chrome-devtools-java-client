@@ -36,6 +36,7 @@ import uk.co.screamingfrog.cdt.protocol.events.page.FrameRequestedNavigation;
 import uk.co.screamingfrog.cdt.protocol.events.page.FrameResized;
 import uk.co.screamingfrog.cdt.protocol.events.page.FrameScheduledNavigation;
 import uk.co.screamingfrog.cdt.protocol.events.page.FrameStartedLoading;
+import uk.co.screamingfrog.cdt.protocol.events.page.FrameStartedNavigating;
 import uk.co.screamingfrog.cdt.protocol.events.page.FrameStoppedLoading;
 import uk.co.screamingfrog.cdt.protocol.events.page.FrameSubtreeWillBeDetached;
 import uk.co.screamingfrog.cdt.protocol.events.page.InterstitialHidden;
@@ -57,10 +58,9 @@ import uk.co.screamingfrog.cdt.protocol.support.annotations.Returns;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventHandler;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
 import uk.co.screamingfrog.cdt.protocol.types.debugger.SearchMatch;
-import uk.co.screamingfrog.cdt.protocol.types.page.AdScriptId;
+import uk.co.screamingfrog.cdt.protocol.types.page.AdScriptAncestry;
 import uk.co.screamingfrog.cdt.protocol.types.page.AppId;
 import uk.co.screamingfrog.cdt.protocol.types.page.AppManifest;
-import uk.co.screamingfrog.cdt.protocol.types.page.AutoResponseMode;
 import uk.co.screamingfrog.cdt.protocol.types.page.CaptureScreenshotFormat;
 import uk.co.screamingfrog.cdt.protocol.types.page.CaptureSnapshotFormat;
 import uk.co.screamingfrog.cdt.protocol.types.page.CompilationCacheParams;
@@ -80,6 +80,8 @@ import uk.co.screamingfrog.cdt.protocol.types.page.ReferrerPolicy;
 import uk.co.screamingfrog.cdt.protocol.types.page.ResourceContent;
 import uk.co.screamingfrog.cdt.protocol.types.page.ScriptFontFamilies;
 import uk.co.screamingfrog.cdt.protocol.types.page.SetDownloadBehaviorBehavior;
+import uk.co.screamingfrog.cdt.protocol.types.page.SetRPHRegistrationModeMode;
+import uk.co.screamingfrog.cdt.protocol.types.page.SetSPCTransactionModeMode;
 import uk.co.screamingfrog.cdt.protocol.types.page.SetWebLifecycleStateState;
 import uk.co.screamingfrog.cdt.protocol.types.page.StartScreencastFormat;
 import uk.co.screamingfrog.cdt.protocol.types.page.TransitionType;
@@ -200,6 +202,17 @@ public interface Page {
   void enable();
 
   /**
+   * Enables page domain notifications.
+   *
+   * @param enableFileChooserOpenedEvent If true, the `Page.fileChooserOpened` event will be emitted
+   *     regardless of the state set by `Page.setInterceptFileChooserDialog` command (default:
+   *     false).
+   */
+  void enable(
+      @Experimental @Optional @ParamName("enableFileChooserOpenedEvent")
+          Boolean enableFileChooserOpenedEvent);
+
+  /**
    * Gets the processed manifest for this current document. This API always waits for the manifest
    * to be loaded. If manifestId is provided, and it does not match the manifest of the current
    * document, this API errors out. If there is not a loaded page, this API errors out immediately.
@@ -240,8 +253,8 @@ public interface Page {
    * @param frameId
    */
   @Experimental
-  @Returns("adScriptId")
-  AdScriptId getAdScriptId(@ParamName("frameId") String frameId);
+  @Returns("adScriptAncestry")
+  AdScriptAncestry getAdScriptAncestry(@ParamName("frameId") String frameId);
 
   /** Returns present frame tree structure. */
   @Returns("frameTree")
@@ -632,7 +645,7 @@ public interface Page {
    * @param mode
    */
   @Experimental
-  void setSPCTransactionMode(@ParamName("mode") AutoResponseMode mode);
+  void setSPCTransactionMode(@ParamName("mode") SetSPCTransactionModeMode mode);
 
   /**
    * Extensions for Custom Handlers API:
@@ -641,7 +654,7 @@ public interface Page {
    * @param mode
    */
   @Experimental
-  void setRPHRegistrationMode(@ParamName("mode") AutoResponseMode mode);
+  void setRPHRegistrationMode(@ParamName("mode") SetRPHRegistrationModeMode mode);
 
   /**
    * Generates a report for testing.
@@ -673,6 +686,19 @@ public interface Page {
    * @param enabled
    */
   void setInterceptFileChooserDialog(@ParamName("enabled") Boolean enabled);
+
+  /**
+   * Intercept file chooser requests and transfer control to protocol clients. When file chooser
+   * interception is enabled, native file chooser dialog is not shown. Instead, a protocol event
+   * `Page.fileChooserOpened` is emitted.
+   *
+   * @param enabled
+   * @param cancel If true, cancels the dialog by emitting relevant events (if any) in addition to
+   *     not showing it if the interception is enabled (default: false).
+   */
+  void setInterceptFileChooserDialog(
+      @ParamName("enabled") Boolean enabled,
+      @Experimental @Optional @ParamName("cancel") Boolean cancel);
 
   /**
    * Enable/disable prerendering manually.
@@ -732,6 +758,17 @@ public interface Page {
   @EventName("frameResized")
   @Experimental
   EventListener onFrameResized(EventHandler<FrameResized> eventListener);
+
+  /**
+   * Fired when a navigation starts. This event is fired for both renderer-initiated and
+   * browser-initiated navigations. For renderer-initiated navigations, the event is fired after
+   * `frameRequestedNavigation`. Navigation may still be cancelled after the event is issued.
+   * Multiple events can be fired for a single navigation, for example, when a same-document
+   * navigation becomes a cross-document navigation (such as in the case of a frameset).
+   */
+  @EventName("frameStartedNavigating")
+  @Experimental
+  EventListener onFrameStartedNavigating(EventHandler<FrameStartedNavigating> eventListener);
 
   /**
    * Fired when a renderer-initiated navigation is requested. Navigation may still be cancelled
@@ -796,7 +833,10 @@ public interface Page {
   @EventName("javascriptDialogOpening")
   EventListener onJavascriptDialogOpening(EventHandler<JavascriptDialogOpening> eventListener);
 
-  /** Fired for top level page lifecycle events such as navigation, load, paint, etc. */
+  /**
+   * Fired for lifecycle events (navigation, load, paint, etc) in the current target (including
+   * local frames).
+   */
   @EventName("lifecycleEvent")
   EventListener onLifecycleEvent(EventHandler<LifecycleEvent> eventListener);
 

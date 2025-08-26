@@ -29,6 +29,8 @@ public enum ContentSecurityPolicyViolationType {
   K_EVAL_VIOLATION,
   @JsonProperty("kURLViolation")
   K_URL_VIOLATION,
+  @JsonProperty("kSRIViolation")
+  K_SRI_VIOLATION,
   @JsonProperty("kTrustedTypesSinkViolation")
   K_TRUSTED_TYPES_SINK_VIOLATION,
   @JsonProperty("kTrustedTypesPolicyViolation")

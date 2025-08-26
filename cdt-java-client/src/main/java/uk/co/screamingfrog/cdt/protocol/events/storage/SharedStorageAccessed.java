@@ -20,8 +20,9 @@ package uk.co.screamingfrog.cdt.protocol.events.storage;
  * #L%
  */
 
+import uk.co.screamingfrog.cdt.protocol.types.storage.SharedStorageAccessMethod;
 import uk.co.screamingfrog.cdt.protocol.types.storage.SharedStorageAccessParams;
-import uk.co.screamingfrog.cdt.protocol.types.storage.SharedStorageAccessType;
+import uk.co.screamingfrog.cdt.protocol.types.storage.SharedStorageAccessScope;
 
 /**
  * Shared storage was accessed by the associated page. The following parameters are included in all
@@ -31,11 +32,15 @@ public class SharedStorageAccessed {
 
   private Double accessTime;
 
-  private SharedStorageAccessType type;
+  private SharedStorageAccessScope scope;
+
+  private SharedStorageAccessMethod method;
 
   private String mainFrameId;
 
   private String ownerOrigin;
+
+  private String ownerSite;
 
   private SharedStorageAccessParams params;
 
@@ -49,14 +54,24 @@ public class SharedStorageAccessed {
     this.accessTime = accessTime;
   }
 
-  /** Enum value indicating the Shared Storage API method invoked. */
-  public SharedStorageAccessType getType() {
-    return type;
+  /** Enum value indicating the access scope. */
+  public SharedStorageAccessScope getScope() {
+    return scope;
+  }
+
+  /** Enum value indicating the access scope. */
+  public void setScope(SharedStorageAccessScope scope) {
+    this.scope = scope;
   }
 
   /** Enum value indicating the Shared Storage API method invoked. */
-  public void setType(SharedStorageAccessType type) {
-    this.type = type;
+  public SharedStorageAccessMethod getMethod() {
+    return method;
+  }
+
+  /** Enum value indicating the Shared Storage API method invoked. */
+  public void setMethod(SharedStorageAccessMethod method) {
+    this.method = method;
   }
 
   /** DevTools Frame Token for the primary frame tree's root. */
@@ -69,14 +84,24 @@ public class SharedStorageAccessed {
     this.mainFrameId = mainFrameId;
   }
 
-  /** Serialized origin for the context that invoked the Shared Storage API. */
+  /** Serialization of the origin owning the Shared Storage data. */
   public String getOwnerOrigin() {
     return ownerOrigin;
   }
 
-  /** Serialized origin for the context that invoked the Shared Storage API. */
+  /** Serialization of the origin owning the Shared Storage data. */
   public void setOwnerOrigin(String ownerOrigin) {
     this.ownerOrigin = ownerOrigin;
+  }
+
+  /** Serialization of the site owning the Shared Storage data. */
+  public String getOwnerSite() {
+    return ownerSite;
+  }
+
+  /** Serialization of the site owning the Shared Storage data. */
+  public void setOwnerSite(String ownerSite) {
+    this.ownerSite = ownerSite;
   }
 
   /**

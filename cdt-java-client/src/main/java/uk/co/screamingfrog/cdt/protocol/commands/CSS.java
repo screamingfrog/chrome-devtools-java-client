@@ -21,6 +21,7 @@ package uk.co.screamingfrog.cdt.protocol.commands;
  */
 
 import java.util.List;
+import uk.co.screamingfrog.cdt.protocol.events.css.ComputedStyleUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.css.FontsUpdated;
 import uk.co.screamingfrog.cdt.protocol.events.css.MediaQueryResultChanged;
 import uk.co.screamingfrog.cdt.protocol.events.css.StyleSheetAdded;
@@ -34,11 +35,13 @@ import uk.co.screamingfrog.cdt.protocol.support.annotations.ReturnTypeParameter;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Returns;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventHandler;
 import uk.co.screamingfrog.cdt.protocol.support.types.EventListener;
+import uk.co.screamingfrog.cdt.protocol.types.css.AnimatedStylesForNode;
 import uk.co.screamingfrog.cdt.protocol.types.css.BackgroundColors;
 import uk.co.screamingfrog.cdt.protocol.types.css.CSSComputedStyleProperty;
 import uk.co.screamingfrog.cdt.protocol.types.css.CSSContainerQuery;
 import uk.co.screamingfrog.cdt.protocol.types.css.CSSLayerData;
 import uk.co.screamingfrog.cdt.protocol.types.css.CSSMedia;
+import uk.co.screamingfrog.cdt.protocol.types.css.CSSProperty;
 import uk.co.screamingfrog.cdt.protocol.types.css.CSSRule;
 import uk.co.screamingfrog.cdt.protocol.types.css.CSSScope;
 import uk.co.screamingfrog.cdt.protocol.types.css.CSSStyle;
@@ -52,6 +55,7 @@ import uk.co.screamingfrog.cdt.protocol.types.css.SourceRange;
 import uk.co.screamingfrog.cdt.protocol.types.css.StyleDeclarationEdit;
 import uk.co.screamingfrog.cdt.protocol.types.css.TakeCoverageDelta;
 import uk.co.screamingfrog.cdt.protocol.types.css.Value;
+import uk.co.screamingfrog.cdt.protocol.types.dom.PseudoType;
 
 /**
  * This domain exposes CSS read/write operations. All CSS objects (stylesheets, rules, and styles)
@@ -115,6 +119,18 @@ public interface CSS {
   @Returns("styleSheetId")
   String createStyleSheet(@ParamName("frameId") String frameId);
 
+  /**
+   * Creates a new special "via-inspector" stylesheet in the frame with given `frameId`.
+   *
+   * @param frameId Identifier of the frame where "via-inspector" stylesheet should be created.
+   * @param force If true, creates a new stylesheet for every call. If false, returns a stylesheet
+   *     previously created by a call with force=false for the frame's document if it exists or
+   *     creates a new stylesheet (default: false).
+   */
+  @Returns("styleSheetId")
+  String createStyleSheet(
+      @ParamName("frameId") String frameId, @Optional @ParamName("force") Boolean force);
+
   /** Disables the CSS agent for the given page. */
   void disable();
 
@@ -136,6 +152,14 @@ public interface CSS {
       @ParamName("forcedPseudoClasses") List<String> forcedPseudoClasses);
 
   /**
+   * Ensures that the given node is in its starting-style state.
+   *
+   * @param nodeId The element id for which to force the starting-style state.
+   * @param forced Boolean indicating if this is on or off.
+   */
+  void forceStartingStyle(@ParamName("nodeId") Integer nodeId, @ParamName("forced") Boolean forced);
+
+  /**
    * @param nodeId Id of the node to get background colors for.
    */
   BackgroundColors getBackgroundColors(@ParamName("nodeId") Integer nodeId);
@@ -150,12 +174,77 @@ public interface CSS {
   List<CSSComputedStyleProperty> getComputedStyleForNode(@ParamName("nodeId") Integer nodeId);
 
   /**
+   * Resolve the specified values in the context of the provided element. For example, a value of
+   * '1em' is evaluated according to the computed 'font-size' of the element and a value 'calc(1px +
+   * 2px)' will be resolved to '3px'. If the `propertyName` was specified the `values` are resolved
+   * as if they were property's declaration. If a value cannot be parsed according to the provided
+   * property syntax, the value is parsed using combined syntax as if null `propertyName` was
+   * provided. If the value cannot be resolved even then, return the provided value without any
+   * changes.
+   *
+   * @param values Substitution functions (var()/env()/attr()) and cascade-dependent keywords
+   *     (revert/revert-layer) do not work.
+   * @param nodeId Id of the node in whose context the expression is evaluated
+   */
+  @Experimental
+  @Returns("results")
+  @ReturnTypeParameter(String.class)
+  List<String> resolveValues(
+      @ParamName("values") List<String> values, @ParamName("nodeId") Integer nodeId);
+
+  /**
+   * Resolve the specified values in the context of the provided element. For example, a value of
+   * '1em' is evaluated according to the computed 'font-size' of the element and a value 'calc(1px +
+   * 2px)' will be resolved to '3px'. If the `propertyName` was specified the `values` are resolved
+   * as if they were property's declaration. If a value cannot be parsed according to the provided
+   * property syntax, the value is parsed using combined syntax as if null `propertyName` was
+   * provided. If the value cannot be resolved even then, return the provided value without any
+   * changes.
+   *
+   * @param values Substitution functions (var()/env()/attr()) and cascade-dependent keywords
+   *     (revert/revert-layer) do not work.
+   * @param nodeId Id of the node in whose context the expression is evaluated
+   * @param propertyName Only longhands and custom property names are accepted.
+   * @param pseudoType Pseudo element type, only works for pseudo elements that generate elements in
+   *     the tree, such as ::before and ::after.
+   * @param pseudoIdentifier Pseudo element custom ident.
+   */
+  @Experimental
+  @Returns("results")
+  @ReturnTypeParameter(String.class)
+  List<String> resolveValues(
+      @ParamName("values") List<String> values,
+      @ParamName("nodeId") Integer nodeId,
+      @Optional @ParamName("propertyName") String propertyName,
+      @Optional @ParamName("pseudoType") PseudoType pseudoType,
+      @Optional @ParamName("pseudoIdentifier") String pseudoIdentifier);
+
+  /**
+   * @param shorthandName
+   * @param value
+   */
+  @Experimental
+  @Returns("longhandProperties")
+  @ReturnTypeParameter(CSSProperty.class)
+  List<CSSProperty> getLonghandProperties(
+      @ParamName("shorthandName") String shorthandName, @ParamName("value") String value);
+
+  /**
    * Returns the styles defined inline (explicitly in the "style" attribute and implicitly, using
    * DOM attributes) for a DOM node identified by `nodeId`.
    *
    * @param nodeId
    */
   InlineStylesForNode getInlineStylesForNode(@ParamName("nodeId") Integer nodeId);
+
+  /**
+   * Returns the styles coming from animations & transitions including the animation & transition
+   * styles coming from inheritance chain.
+   *
+   * @param nodeId
+   */
+  @Experimental
+  AnimatedStylesForNode getAnimatedStylesForNode(@ParamName("nodeId") Integer nodeId);
 
   /**
    * Returns requested styles for a DOM node identified by `nodeId`.
@@ -212,6 +301,26 @@ public interface CSS {
   List<SourceRange> getLocationForSelector(
       @ParamName("styleSheetId") String styleSheetId,
       @ParamName("selectorText") String selectorText);
+
+  /**
+   * Starts tracking the given node for the computed style updates and whenever the computed style
+   * is updated for node, it queues a `computedStyleUpdated` event with throttling. There can only
+   * be 1 node tracked for computed style updates so passing a new node id removes tracking from the
+   * previous node. Pass `undefined` to disable tracking.
+   */
+  @Experimental
+  void trackComputedStyleUpdatesForNode();
+
+  /**
+   * Starts tracking the given node for the computed style updates and whenever the computed style
+   * is updated for node, it queues a `computedStyleUpdated` event with throttling. There can only
+   * be 1 node tracked for computed style updates so passing a new node id removes tracking from the
+   * previous node. Pass `undefined` to disable tracking.
+   *
+   * @param nodeId
+   */
+  @Experimental
+  void trackComputedStyleUpdatesForNode(@Optional @ParamName("nodeId") Integer nodeId);
 
   /**
    * Starts tracking the given computed styles for updates. The specified array of properties
@@ -425,4 +534,8 @@ public interface CSS {
   /** Fired whenever an active document stylesheet is removed. */
   @EventName("styleSheetRemoved")
   EventListener onStyleSheetRemoved(EventHandler<StyleSheetRemoved> eventListener);
+
+  @EventName("computedStyleUpdated")
+  @Experimental
+  EventListener onComputedStyleUpdated(EventHandler<ComputedStyleUpdated> eventListener);
 }

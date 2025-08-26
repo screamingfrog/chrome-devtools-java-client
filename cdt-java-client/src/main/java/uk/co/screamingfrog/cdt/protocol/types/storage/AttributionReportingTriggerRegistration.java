@@ -53,6 +53,8 @@ public class AttributionReportingTriggerRegistration {
 
   private List<String> scopes;
 
+  private List<AttributionReportingNamedBudgetCandidate> namedBudgets;
+
   public AttributionReportingFilterPair getFilters() {
     return filters;
   }
@@ -161,5 +163,13 @@ public class AttributionReportingTriggerRegistration {
 
   public void setScopes(List<String> scopes) {
     this.scopes = scopes;
+  }
+
+  public List<AttributionReportingNamedBudgetCandidate> getNamedBudgets() {
+    return namedBudgets;
+  }
+
+  public void setNamedBudgets(List<AttributionReportingNamedBudgetCandidate> namedBudgets) {
+    this.namedBudgets = namedBudgets;
   }
 }

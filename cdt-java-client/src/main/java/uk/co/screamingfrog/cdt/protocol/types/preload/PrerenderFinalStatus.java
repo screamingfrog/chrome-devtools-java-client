@@ -36,8 +36,6 @@ public enum PrerenderFinalStatus {
   INVALID_SCHEME_NAVIGATION,
   @JsonProperty("NavigationRequestBlockedByCsp")
   NAVIGATION_REQUEST_BLOCKED_BY_CSP,
-  @JsonProperty("MainFrameNavigation")
-  MAIN_FRAME_NAVIGATION,
   @JsonProperty("MojoBinderPolicy")
   MOJO_BINDER_POLICY,
   @JsonProperty("RendererProcessCrashed")
@@ -169,5 +167,7 @@ public enum PrerenderFinalStatus {
   @JsonProperty("V8OptimizerDisabled")
   V_8OPTIMIZER_DISABLED,
   @JsonProperty("PrerenderFailedDuringPrefetch")
-  PRERENDER_FAILED_DURING_PREFETCH
+  PRERENDER_FAILED_DURING_PREFETCH,
+  @JsonProperty("BrowsingDataRemoved")
+  BROWSING_DATA_REMOVED
 }

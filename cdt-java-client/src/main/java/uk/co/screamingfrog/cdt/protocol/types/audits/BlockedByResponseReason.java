@@ -40,5 +40,7 @@ public enum BlockedByResponseReason {
   @JsonProperty("CorpNotSameOriginAfterDefaultedToSameOriginByCoepAndDip")
   CORP_NOT_SAME_ORIGIN_AFTER_DEFAULTED_TO_SAME_ORIGIN_BY_COEP_AND_DIP,
   @JsonProperty("CorpNotSameSite")
-  CORP_NOT_SAME_SITE
+  CORP_NOT_SAME_SITE,
+  @JsonProperty("SRIMessageSignatureMismatch")
+  SRI_MESSAGE_SIGNATURE_MISMATCH
 }

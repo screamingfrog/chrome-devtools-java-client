@@ -25,6 +25,7 @@ import java.util.Map;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Optional;
 import uk.co.screamingfrog.cdt.protocol.types.debugger.DebugSymbols;
+import uk.co.screamingfrog.cdt.protocol.types.debugger.ResolvedBreakpoint;
 import uk.co.screamingfrog.cdt.protocol.types.debugger.ScriptLanguage;
 import uk.co.screamingfrog.cdt.protocol.types.runtime.StackTrace;
 
@@ -50,6 +51,8 @@ public class ScriptParsed {
 
   private String hash;
 
+  private String buildId;
+
   @Optional private Map<String, Object> executionContextAuxData;
 
   @Experimental @Optional private Boolean isLiveEdit;
@@ -71,6 +74,8 @@ public class ScriptParsed {
   @Experimental @Optional private List<DebugSymbols> debugSymbols;
 
   @Experimental @Optional private String embedderName;
+
+  @Experimental @Optional private List<ResolvedBreakpoint> resolvedBreakpoints;
 
   /** Identifier of the script parsed. */
   public String getScriptId() {
@@ -150,6 +155,22 @@ public class ScriptParsed {
   /** Content hash of the script, SHA-256. */
   public void setHash(String hash) {
     this.hash = hash;
+  }
+
+  /**
+   * For Wasm modules, the content of the `build_id` custom section. For JavaScript the `debugId`
+   * magic comment.
+   */
+  public String getBuildId() {
+    return buildId;
+  }
+
+  /**
+   * For Wasm modules, the content of the `build_id` custom section. For JavaScript the `debugId`
+   * magic comment.
+   */
+  public void setBuildId(String buildId) {
+    this.buildId = buildId;
   }
 
   /**
@@ -266,5 +287,23 @@ public class ScriptParsed {
   /** The name the embedder supplied for this script. */
   public void setEmbedderName(String embedderName) {
     this.embedderName = embedderName;
+  }
+
+  /**
+   * The list of set breakpoints in this script if calls to `setBreakpointByUrl` matches this
+   * script's URL or hash. Clients that use this list can ignore the `breakpointResolved` event.
+   * They are equivalent.
+   */
+  public List<ResolvedBreakpoint> getResolvedBreakpoints() {
+    return resolvedBreakpoints;
+  }
+
+  /**
+   * The list of set breakpoints in this script if calls to `setBreakpointByUrl` matches this
+   * script's URL or hash. Clients that use this list can ignore the `breakpointResolved` event.
+   * They are equivalent.
+   */
+  public void setResolvedBreakpoints(List<ResolvedBreakpoint> resolvedBreakpoints) {
+    this.resolvedBreakpoints = resolvedBreakpoints;
   }
 }

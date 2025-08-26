@@ -44,6 +44,15 @@ public interface Extensions {
   String loadUnpacked(@ParamName("path") String path);
 
   /**
+   * Uninstalls an unpacked extension (others not supported) from the profile. Available if the
+   * client is connected using the --remote-debugging-pipe flag and the
+   * --enable-unsafe-extension-debugging.
+   *
+   * @param id Extension id.
+   */
+  void uninstall(@ParamName("id") String id);
+
+  /**
    * Gets data from extension storage in the given `storageArea`. If `keys` is specified, these are
    * used to filter the result.
    *

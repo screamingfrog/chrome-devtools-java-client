@@ -43,6 +43,8 @@ public class Frame {
 
   private String securityOrigin;
 
+  @Experimental @Optional private SecurityOriginDetails securityOriginDetails;
+
   private String mimeType;
 
   @Experimental @Optional private String unreachableUrl;
@@ -141,6 +143,16 @@ public class Frame {
   /** Frame document's security origin. */
   public void setSecurityOrigin(String securityOrigin) {
     this.securityOrigin = securityOrigin;
+  }
+
+  /** Additional details about the frame document's security origin. */
+  public SecurityOriginDetails getSecurityOriginDetails() {
+    return securityOriginDetails;
+  }
+
+  /** Additional details about the frame document's security origin. */
+  public void setSecurityOriginDetails(SecurityOriginDetails securityOriginDetails) {
+    this.securityOriginDetails = securityOriginDetails;
   }
 
   /** Frame document's mimeType as determined by the browser. */

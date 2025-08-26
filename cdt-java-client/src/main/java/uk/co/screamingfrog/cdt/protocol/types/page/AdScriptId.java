@@ -22,7 +22,7 @@ package uk.co.screamingfrog.cdt.protocol.types.page;
 
 import uk.co.screamingfrog.cdt.protocol.support.annotations.Experimental;
 
-/** Identifies the bottom-most script which caused the frame to be labelled as an ad. */
+/** Identifies the script which caused a script or frame to be labelled as an ad. */
 @Experimental
 public class AdScriptId {
 
@@ -30,22 +30,22 @@ public class AdScriptId {
 
   private String debuggerId;
 
-  /** Script Id of the bottom-most script which caused the frame to be labelled as an ad. */
+  /** Script Id of the script which caused a script or frame to be labelled as an ad. */
   public String getScriptId() {
     return scriptId;
   }
 
-  /** Script Id of the bottom-most script which caused the frame to be labelled as an ad. */
+  /** Script Id of the script which caused a script or frame to be labelled as an ad. */
   public void setScriptId(String scriptId) {
     this.scriptId = scriptId;
   }
 
-  /** Id of adScriptId's debugger. */
+  /** Id of scriptId's debugger. */
   public String getDebuggerId() {
     return debuggerId;
   }
 
-  /** Id of adScriptId's debugger. */
+  /** Id of scriptId's debugger. */
   public void setDebuggerId(String debuggerId) {
     this.debuggerId = debuggerId;
   }

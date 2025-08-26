@@ -48,6 +48,8 @@ public class InspectorIssueDetails {
 
   @Optional private QuirksModeIssueDetails quirksModeIssueDetails;
 
+  @Optional private PartitioningBlobURLIssueDetails partitioningBlobURLIssueDetails;
+
   @Deprecated @Optional private NavigatorUserAgentIssueDetails navigatorUserAgentIssueDetails;
 
   @Optional private GenericIssueDetails genericIssueDetails;
@@ -70,6 +72,12 @@ public class InspectorIssueDetails {
   private FederatedAuthUserInfoRequestIssueDetails federatedAuthUserInfoRequestIssueDetails;
 
   @Optional private SharedDictionaryIssueDetails sharedDictionaryIssueDetails;
+
+  @Optional private SelectElementAccessibilityIssueDetails selectElementAccessibilityIssueDetails;
+
+  @Optional private SRIMessageSignatureIssueDetails sriMessageSignatureIssueDetails;
+
+  @Optional private UserReidentificationIssueDetails userReidentificationIssueDetails;
 
   public CookieIssueDetails getCookieIssueDetails() {
     return cookieIssueDetails;
@@ -154,6 +162,15 @@ public class InspectorIssueDetails {
 
   public void setQuirksModeIssueDetails(QuirksModeIssueDetails quirksModeIssueDetails) {
     this.quirksModeIssueDetails = quirksModeIssueDetails;
+  }
+
+  public PartitioningBlobURLIssueDetails getPartitioningBlobURLIssueDetails() {
+    return partitioningBlobURLIssueDetails;
+  }
+
+  public void setPartitioningBlobURLIssueDetails(
+      PartitioningBlobURLIssueDetails partitioningBlobURLIssueDetails) {
+    this.partitioningBlobURLIssueDetails = partitioningBlobURLIssueDetails;
   }
 
   public NavigatorUserAgentIssueDetails getNavigatorUserAgentIssueDetails() {
@@ -248,5 +265,32 @@ public class InspectorIssueDetails {
   public void setSharedDictionaryIssueDetails(
       SharedDictionaryIssueDetails sharedDictionaryIssueDetails) {
     this.sharedDictionaryIssueDetails = sharedDictionaryIssueDetails;
+  }
+
+  public SelectElementAccessibilityIssueDetails getSelectElementAccessibilityIssueDetails() {
+    return selectElementAccessibilityIssueDetails;
+  }
+
+  public void setSelectElementAccessibilityIssueDetails(
+      SelectElementAccessibilityIssueDetails selectElementAccessibilityIssueDetails) {
+    this.selectElementAccessibilityIssueDetails = selectElementAccessibilityIssueDetails;
+  }
+
+  public SRIMessageSignatureIssueDetails getSriMessageSignatureIssueDetails() {
+    return sriMessageSignatureIssueDetails;
+  }
+
+  public void setSriMessageSignatureIssueDetails(
+      SRIMessageSignatureIssueDetails sriMessageSignatureIssueDetails) {
+    this.sriMessageSignatureIssueDetails = sriMessageSignatureIssueDetails;
+  }
+
+  public UserReidentificationIssueDetails getUserReidentificationIssueDetails() {
+    return userReidentificationIssueDetails;
+  }
+
+  public void setUserReidentificationIssueDetails(
+      UserReidentificationIssueDetails userReidentificationIssueDetails) {
+    this.userReidentificationIssueDetails = userReidentificationIssueDetails;
   }
 }

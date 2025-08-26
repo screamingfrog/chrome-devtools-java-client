@@ -23,14 +23,18 @@ package uk.co.screamingfrog.cdt.protocol.types.browser;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum PermissionType {
-  @JsonProperty("accessibilityEvents")
-  ACCESSIBILITY_EVENTS,
+  @JsonProperty("ar")
+  AR,
   @JsonProperty("audioCapture")
   AUDIO_CAPTURE,
-  @JsonProperty("backgroundSync")
-  BACKGROUND_SYNC,
+  @JsonProperty("automaticFullscreen")
+  AUTOMATIC_FULLSCREEN,
   @JsonProperty("backgroundFetch")
   BACKGROUND_FETCH,
+  @JsonProperty("backgroundSync")
+  BACKGROUND_SYNC,
+  @JsonProperty("cameraPanTiltZoom")
+  CAMERA_PAN_TILT_ZOOM,
   @JsonProperty("capturedSurfaceControl")
   CAPTURED_SURFACE_CONTROL,
   @JsonProperty("clipboardReadWrite")
@@ -41,14 +45,18 @@ public enum PermissionType {
   DISPLAY_CAPTURE,
   @JsonProperty("durableStorage")
   DURABLE_STORAGE,
-  @JsonProperty("flash")
-  FLASH,
   @JsonProperty("geolocation")
   GEOLOCATION,
+  @JsonProperty("handTracking")
+  HAND_TRACKING,
   @JsonProperty("idleDetection")
   IDLE_DETECTION,
+  @JsonProperty("keyboardLock")
+  KEYBOARD_LOCK,
   @JsonProperty("localFonts")
   LOCAL_FONTS,
+  @JsonProperty("localNetworkAccess")
+  LOCAL_NETWORK_ACCESS,
   @JsonProperty("midi")
   MIDI,
   @JsonProperty("midiSysex")
@@ -61,26 +69,32 @@ public enum PermissionType {
   PAYMENT_HANDLER,
   @JsonProperty("periodicBackgroundSync")
   PERIODIC_BACKGROUND_SYNC,
+  @JsonProperty("pointerLock")
+  POINTER_LOCK,
   @JsonProperty("protectedMediaIdentifier")
   PROTECTED_MEDIA_IDENTIFIER,
   @JsonProperty("sensors")
   SENSORS,
-  @JsonProperty("storageAccess")
-  STORAGE_ACCESS,
+  @JsonProperty("smartCard")
+  SMART_CARD,
   @JsonProperty("speakerSelection")
   SPEAKER_SELECTION,
+  @JsonProperty("storageAccess")
+  STORAGE_ACCESS,
   @JsonProperty("topLevelStorageAccess")
   TOP_LEVEL_STORAGE_ACCESS,
   @JsonProperty("videoCapture")
   VIDEO_CAPTURE,
-  @JsonProperty("videoCapturePanTiltZoom")
-  VIDEO_CAPTURE_PAN_TILT_ZOOM,
+  @JsonProperty("vr")
+  VR,
   @JsonProperty("wakeLockScreen")
   WAKE_LOCK_SCREEN,
   @JsonProperty("wakeLockSystem")
   WAKE_LOCK_SYSTEM,
   @JsonProperty("webAppInstallation")
   WEB_APP_INSTALLATION,
+  @JsonProperty("webPrinting")
+  WEB_PRINTING,
   @JsonProperty("windowManagement")
   WINDOW_MANAGEMENT
 }

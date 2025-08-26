@@ -45,12 +45,12 @@ public class TraceConfig {
 
   @Experimental @Optional private Map<String, Object> memoryDumpConfig;
 
-  /** Controls how the trace buffer stores data. */
+  /** Controls how the trace buffer stores data. The default is `recordUntilFull`. */
   public TraceConfigRecordMode getRecordMode() {
     return recordMode;
   }
 
-  /** Controls how the trace buffer stores data. */
+  /** Controls how the trace buffer stores data. The default is `recordUntilFull`. */
   public void setRecordMode(TraceConfigRecordMode recordMode) {
     this.recordMode = recordMode;
   }

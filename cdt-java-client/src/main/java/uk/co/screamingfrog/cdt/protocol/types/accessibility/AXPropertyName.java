@@ -30,6 +30,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * elements other than parent/child/sibling.
  */
 public enum AXPropertyName {
+  @JsonProperty("actions")
+  ACTIONS,
   @JsonProperty("busy")
   BUSY,
   @JsonProperty("disabled")

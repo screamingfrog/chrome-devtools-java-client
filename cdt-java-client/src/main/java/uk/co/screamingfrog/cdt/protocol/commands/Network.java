@@ -23,6 +23,18 @@ package uk.co.screamingfrog.cdt.protocol.commands;
 import java.util.List;
 import java.util.Map;
 import uk.co.screamingfrog.cdt.protocol.events.network.DataReceived;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectTCPSocketAborted;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectTCPSocketChunkReceived;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectTCPSocketChunkSent;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectTCPSocketClosed;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectTCPSocketCreated;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectTCPSocketOpened;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectUDPSocketAborted;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectUDPSocketChunkReceived;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectUDPSocketChunkSent;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectUDPSocketClosed;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectUDPSocketCreated;
+import uk.co.screamingfrog.cdt.protocol.events.network.DirectUDPSocketOpened;
 import uk.co.screamingfrog.cdt.protocol.events.network.EventSourceMessageReceived;
 import uk.co.screamingfrog.cdt.protocol.events.network.LoadingFailed;
 import uk.co.screamingfrog.cdt.protocol.events.network.LoadingFinished;
@@ -252,11 +264,15 @@ public interface Network {
    *     payloads (XHRs, etc).
    * @param maxPostDataSize Longest post body size (in bytes) that would be included in
    *     requestWillBeSent notification
+   * @param reportDirectSocketTraffic Whether DirectSocket chunk send/receive events should be
+   *     reported.
    */
   void enable(
       @Experimental @Optional @ParamName("maxTotalBufferSize") Integer maxTotalBufferSize,
       @Experimental @Optional @ParamName("maxResourceBufferSize") Integer maxResourceBufferSize,
-      @Optional @ParamName("maxPostDataSize") Integer maxPostDataSize);
+      @Optional @ParamName("maxPostDataSize") Integer maxPostDataSize,
+      @Experimental @Optional @ParamName("reportDirectSocketTraffic")
+          Boolean reportDirectSocketTraffic);
 
   /**
    * Returns all browser cookies. Depending on the backend support, will return detailed cookie
@@ -538,6 +554,22 @@ public interface Network {
       @ParamName("url") String url,
       @ParamName("options") LoadNetworkResourceOptions options);
 
+  /**
+   * Sets Controls for third-party cookie access Page reload is required before the new cookie
+   * behavior will be observed
+   *
+   * @param enableThirdPartyCookieRestriction Whether 3pc restriction is enabled.
+   * @param disableThirdPartyCookieMetadata Whether 3pc grace period exception should be enabled;
+   *     false by default.
+   * @param disableThirdPartyCookieHeuristics Whether 3pc heuristics exceptions should be enabled;
+   *     false by default.
+   */
+  @Experimental
+  void setCookieControls(
+      @ParamName("enableThirdPartyCookieRestriction") Boolean enableThirdPartyCookieRestriction,
+      @ParamName("disableThirdPartyCookieMetadata") Boolean disableThirdPartyCookieMetadata,
+      @ParamName("disableThirdPartyCookieHeuristics") Boolean disableThirdPartyCookieHeuristics);
+
   /** Fired when data chunk was received over the network. */
   @EventName("dataReceived")
   EventListener onDataReceived(EventHandler<DataReceived> eventListener);
@@ -628,6 +660,68 @@ public interface Network {
   /** Fired when WebTransport is disposed. */
   @EventName("webTransportClosed")
   EventListener onWebTransportClosed(EventHandler<WebTransportClosed> eventListener);
+
+  /** Fired upon direct_socket.TCPSocket creation. */
+  @EventName("directTCPSocketCreated")
+  @Experimental
+  EventListener onDirectTCPSocketCreated(EventHandler<DirectTCPSocketCreated> eventListener);
+
+  /** Fired when direct_socket.TCPSocket connection is opened. */
+  @EventName("directTCPSocketOpened")
+  @Experimental
+  EventListener onDirectTCPSocketOpened(EventHandler<DirectTCPSocketOpened> eventListener);
+
+  /** Fired when direct_socket.TCPSocket is aborted. */
+  @EventName("directTCPSocketAborted")
+  @Experimental
+  EventListener onDirectTCPSocketAborted(EventHandler<DirectTCPSocketAborted> eventListener);
+
+  /** Fired when direct_socket.TCPSocket is closed. */
+  @EventName("directTCPSocketClosed")
+  @Experimental
+  EventListener onDirectTCPSocketClosed(EventHandler<DirectTCPSocketClosed> eventListener);
+
+  /** Fired when data is sent to tcp direct socket stream. */
+  @EventName("directTCPSocketChunkSent")
+  @Experimental
+  EventListener onDirectTCPSocketChunkSent(EventHandler<DirectTCPSocketChunkSent> eventListener);
+
+  /** Fired when data is received from tcp direct socket stream. */
+  @EventName("directTCPSocketChunkReceived")
+  @Experimental
+  EventListener onDirectTCPSocketChunkReceived(
+      EventHandler<DirectTCPSocketChunkReceived> eventListener);
+
+  /** Fired upon direct_socket.UDPSocket creation. */
+  @EventName("directUDPSocketCreated")
+  @Experimental
+  EventListener onDirectUDPSocketCreated(EventHandler<DirectUDPSocketCreated> eventListener);
+
+  /** Fired when direct_socket.UDPSocket connection is opened. */
+  @EventName("directUDPSocketOpened")
+  @Experimental
+  EventListener onDirectUDPSocketOpened(EventHandler<DirectUDPSocketOpened> eventListener);
+
+  /** Fired when direct_socket.UDPSocket is aborted. */
+  @EventName("directUDPSocketAborted")
+  @Experimental
+  EventListener onDirectUDPSocketAborted(EventHandler<DirectUDPSocketAborted> eventListener);
+
+  /** Fired when direct_socket.UDPSocket is closed. */
+  @EventName("directUDPSocketClosed")
+  @Experimental
+  EventListener onDirectUDPSocketClosed(EventHandler<DirectUDPSocketClosed> eventListener);
+
+  /** Fired when message is sent to udp direct socket stream. */
+  @EventName("directUDPSocketChunkSent")
+  @Experimental
+  EventListener onDirectUDPSocketChunkSent(EventHandler<DirectUDPSocketChunkSent> eventListener);
+
+  /** Fired when message is received from udp direct socket stream. */
+  @EventName("directUDPSocketChunkReceived")
+  @Experimental
+  EventListener onDirectUDPSocketChunkReceived(
+      EventHandler<DirectUDPSocketChunkReceived> eventListener);
 
   /**
    * Fired when additional information about a requestWillBeSent event is available from the network

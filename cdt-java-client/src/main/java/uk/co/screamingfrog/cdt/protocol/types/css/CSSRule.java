@@ -49,6 +49,8 @@ public class CSSRule {
 
   @Experimental @Optional private List<CSSRuleType> ruleTypes;
 
+  @Experimental @Optional private List<CSSStartingStyle> startingStyles;
+
   /**
    * The css style sheet identifier (absent for user agent stylesheet and user-specified stylesheet
    * rules) this rule came from.
@@ -193,5 +195,21 @@ public class CSSRule {
   /** The array keeps the types of ancestor CSSRules from the innermost going outwards. */
   public void setRuleTypes(List<CSSRuleType> ruleTypes) {
     this.ruleTypes = ruleTypes;
+  }
+
+  /**
+   * @starting-style CSS at-rule array. The array enumerates @starting-style at-rules starting with
+   *     the innermost one, going outwards.
+   */
+  public List<CSSStartingStyle> getStartingStyles() {
+    return startingStyles;
+  }
+
+  /**
+   * @starting-style CSS at-rule array. The array enumerates @starting-style at-rules starting with
+   *     the innermost one, going outwards.
+   */
+  public void setStartingStyles(List<CSSStartingStyle> startingStyles) {
+    this.startingStyles = startingStyles;
   }
 }

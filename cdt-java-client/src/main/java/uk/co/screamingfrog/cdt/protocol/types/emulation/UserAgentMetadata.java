@@ -51,6 +51,8 @@ public class UserAgentMetadata {
 
   @Optional private Boolean wow64;
 
+  @Optional private List<String> formFactors;
+
   /** Brands appearing in Sec-CH-UA. */
   public List<UserAgentBrandVersion> getBrands() {
     return brands;
@@ -133,5 +135,21 @@ public class UserAgentMetadata {
 
   public void setWow64(Boolean wow64) {
     this.wow64 = wow64;
+  }
+
+  /**
+   * Used to specify User Agent form-factor values. See
+   * https://wicg.github.io/ua-client-hints/#sec-ch-ua-form-factors
+   */
+  public List<String> getFormFactors() {
+    return formFactors;
+  }
+
+  /**
+   * Used to specify User Agent form-factor values. See
+   * https://wicg.github.io/ua-client-hints/#sec-ch-ua-form-factors
+   */
+  public void setFormFactors(List<String> formFactors) {
+    this.formFactors = formFactors;
   }
 }

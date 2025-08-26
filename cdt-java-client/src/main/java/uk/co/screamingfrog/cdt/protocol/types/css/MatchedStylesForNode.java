@@ -52,6 +52,8 @@ public class MatchedStylesForNode {
 
   @Experimental @Optional private Integer parentLayoutNodeId;
 
+  @Experimental @Optional private List<CSSFunctionRule> cssFunctionRules;
+
   /** Inline style for the specified DOM node. */
   public CSSStyle getInlineStyle() {
     return inlineStyle;
@@ -199,5 +201,15 @@ public class MatchedStylesForNode {
   /** Id of the first parent element that does not have display: contents. */
   public void setParentLayoutNodeId(Integer parentLayoutNodeId) {
     this.parentLayoutNodeId = parentLayoutNodeId;
+  }
+
+  /** A list of CSS at-function rules referenced by styles of this node. */
+  public List<CSSFunctionRule> getCssFunctionRules() {
+    return cssFunctionRules;
+  }
+
+  /** A list of CSS at-function rules referenced by styles of this node. */
+  public void setCssFunctionRules(List<CSSFunctionRule> cssFunctionRules) {
+    this.cssFunctionRules = cssFunctionRules;
   }
 }

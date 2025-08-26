@@ -24,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * All Permissions Policy features. This enum should match the one defined in
- * third_party/blink/renderer/core/permissions_policy/permissions_policy_features.json5.
+ * services/network/public/cpp/permissions_policy/permissions_policy_features.json5.
+ * LINT.IfChange(PermissionsPolicyFeature)
  */
 public enum PermissionsPolicyFeature {
   @JsonProperty("accelerometer")
@@ -69,6 +70,8 @@ public enum PermissionsPolicyFeature {
   CH_UA_ARCH,
   @JsonProperty("ch-ua-bitness")
   CH_UA_BITNESS,
+  @JsonProperty("ch-ua-high-entropy-values")
+  CH_UA_HIGH_ENTROPY_VALUES,
   @JsonProperty("ch-ua-platform")
   CH_UA_PLATFORM,
   @JsonProperty("ch-ua-model")
@@ -103,6 +106,10 @@ public enum PermissionsPolicyFeature {
   CROSS_ORIGIN_ISOLATED,
   @JsonProperty("deferred-fetch")
   DEFERRED_FETCH,
+  @JsonProperty("deferred-fetch-minimal")
+  DEFERRED_FETCH_MINIMAL,
+  @JsonProperty("device-attributes")
+  DEVICE_ATTRIBUTES,
   @JsonProperty("digital-credentials-get")
   DIGITAL_CREDENTIALS_GET,
   @JsonProperty("direct-sockets")
@@ -119,6 +126,8 @@ public enum PermissionsPolicyFeature {
   EXECUTION_WHILE_OUT_OF_VIEWPORT,
   @JsonProperty("execution-while-not-rendered")
   EXECUTION_WHILE_NOT_RENDERED,
+  @JsonProperty("fenced-unpartitioned-storage-read")
+  FENCED_UNPARTITIONED_STORAGE_READ,
   @JsonProperty("focus-without-user-activation")
   FOCUS_WITHOUT_USER_ACTIVATION,
   @JsonProperty("fullscreen")
@@ -143,8 +152,14 @@ public enum PermissionsPolicyFeature {
   JOIN_AD_INTEREST_GROUP,
   @JsonProperty("keyboard-map")
   KEYBOARD_MAP,
+  @JsonProperty("language-detector")
+  LANGUAGE_DETECTOR,
+  @JsonProperty("language-model")
+  LANGUAGE_MODEL,
   @JsonProperty("local-fonts")
   LOCAL_FONTS,
+  @JsonProperty("local-network-access")
+  LOCAL_NETWORK_ACCESS,
   @JsonProperty("magnetometer")
   MAGNETOMETER,
   @JsonProperty("media-playback-while-not-visible")
@@ -153,6 +168,8 @@ public enum PermissionsPolicyFeature {
   MICROPHONE,
   @JsonProperty("midi")
   MIDI,
+  @JsonProperty("on-device-speech-recognition")
+  ON_DEVICE_SPEECH_RECOGNITION,
   @JsonProperty("otp-credentials")
   OTP_CREDENTIALS,
   @JsonProperty("payment")
@@ -171,6 +188,10 @@ public enum PermissionsPolicyFeature {
   PUBLICKEY_CREDENTIALS_CREATE,
   @JsonProperty("publickey-credentials-get")
   PUBLICKEY_CREDENTIALS_GET,
+  @JsonProperty("record-ad-auction-events")
+  RECORD_AD_AUCTION_EVENTS,
+  @JsonProperty("rewriter")
+  REWRITER,
   @JsonProperty("run-ad-auction")
   RUN_AD_AUCTION,
   @JsonProperty("screen-wake-lock")
@@ -191,8 +212,12 @@ public enum PermissionsPolicyFeature {
   STORAGE_ACCESS,
   @JsonProperty("sub-apps")
   SUB_APPS,
+  @JsonProperty("summarizer")
+  SUMMARIZER,
   @JsonProperty("sync-xhr")
   SYNC_XHR,
+  @JsonProperty("translator")
+  TRANSLATOR,
   @JsonProperty("unload")
   UNLOAD,
   @JsonProperty("usb")
@@ -209,6 +234,8 @@ public enum PermissionsPolicyFeature {
   WEB_SHARE,
   @JsonProperty("window-management")
   WINDOW_MANAGEMENT,
+  @JsonProperty("writer")
+  WRITER,
   @JsonProperty("xr-spatial-tracking")
   XR_SPATIAL_TRACKING
 }

@@ -25,5 +25,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /** Type of relation to get. */
 public enum GetElementByRelationRelation {
   @JsonProperty("PopoverTarget")
-  POPOVER_TARGET
+  POPOVER_TARGET,
+  @JsonProperty("InterestTarget")
+  INTEREST_TARGET,
+  @JsonProperty("CommandFor")
+  COMMAND_FOR
 }

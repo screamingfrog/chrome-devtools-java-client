@@ -20,7 +20,10 @@ package uk.co.screamingfrog.cdt.protocol.events.page;
  * #L%
  */
 
-/** Fired for top level page lifecycle events such as navigation, load, paint, etc. */
+/**
+ * Fired for lifecycle events (navigation, load, paint, etc) in the current target (including local
+ * frames).
+ */
 public class LifecycleEvent {
 
   private String frameId;
